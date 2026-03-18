@@ -1,3 +1,11 @@
+# Result Executive Summary of Experimental Data on Genesys Latency using Notifications (WebSocket)
+-> https://github.com/noel-nosse_wwg/notifications-spike/blob/main/docs/executive_summary.md
+
+
+
+-----
+
+
 # Genesys Cloud Transcript Recorder
 
 Real-time conversation transcript recorder for Genesys Cloud contact center.
