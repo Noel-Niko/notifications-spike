@@ -226,14 +226,51 @@ This is less clean (ambient noise) but works without any virtual audio device co
 
 ## What This Measures
 
+The **true latency** captures the full Genesys transcription pipeline — from the moment words are spoken to when the transcribed text arrives at our application:
+
+```
+Speaker's voice
+  → [1] Genesys captures audio from the call (VoIP/WebRTC stream)
+  → [2] Genesys STT engine (r2d2) processes the audio into text
+  → [3] Genesys endpointing decides the utterance is complete (isFinal=true)
+  → [4] WebSocket notification delivered to notifications-spike
+```
+
+### Pipeline Stages
+
+**Stage 1 — Audio Capture**: Genesys receives the raw audio stream from the call. This includes network transport from the caller's phone/WebRTC client to Genesys Cloud infrastructure.
+
+**Stage 2 — STT Processing**: The Genesys r2d2 engine converts audio to text. This includes acoustic model inference, language model scoring, and word-level confidence/timing computation.
+
+**Stage 3 — Endpointing**: Genesys holds partial transcripts until it determines the speaker has finished an utterance. This is the biggest variable — Genesys may combine multiple sentences into a single `isFinal=true` event, adding wait time but producing more complete transcripts. Deepgram typically endpoints faster (300ms silence threshold), which is why it splits utterances that Genesys combines.
+
+**Stage 4 — WebSocket Delivery**: The final transcript event is pushed through the Genesys notifications API WebSocket channel to notifications-spike. This includes serialization, routing through Genesys infrastructure, and network latency to your machine.
+
+### Formula
+
 ```
 True Latency = genesys_receivedAt - deepgram_audio_wall_clock_end
 ```
 
 | Component | Source | Meaning |
-|-----------|--------|---------|
-| `deepgram_audio_wall_clock_end` | poc-deepgram | Wall-clock time when words were spoken (ground truth) |
-| `genesys_receivedAt` | notifications-spike | Wall-clock time when Genesys transcription event arrived |
-| **True Latency** | Correlation tool | Full Genesys pipeline: audio capture + STT processing + WebSocket delivery |
+|---|---|---|
+| `deepgram_audio_wall_clock_end` | poc-deepgram | Wall-clock time when the last word was spoken (ground truth via BlackHole audio capture) |
+| `genesys_receivedAt` | notifications-spike | Wall-clock time when the Genesys transcription event arrived via WebSocket |
+| **True Latency** | Correlation tool | Sum of all 4 stages above |
 
-Both apps use `time.time()` on the same machine — no clock sync issues.
+Both apps use `time.time()` on the same machine — no clock synchronization issues.
+
+### Interpreting Results
+
+- **Latency under 1s**: Excellent — Genesys pipeline is fast for this utterance
+- **Latency 1-2s**: Typical — most of the delay is likely endpointing (Stage 3)
+- **Latency 2-5s**: Genesys likely combined multiple sentences into one final event, adding endpointing delay
+- **Latency over 5s**: Investigate — could indicate Genesys infrastructure delays or very long utterances
+
+The correlation tool matches utterances between systems using fuzzy text similarity. A similarity score of 1.0 means exact match; scores below 0.55 are rejected. Partial matches (0.55-0.85) often indicate Genesys combined multiple Deepgram utterances into one event.
+
+### Tips for Longer Test Calls
+
+- **2+ minutes of active conversation** gives enough utterances for meaningful p50/p95/p99 statistics
+- **Both speakers talking** produces INTERNAL (agent) and EXTERNAL (customer) channel data for comparison
+- **Natural pauses between sentences** help both systems endpoint similarly, improving match rates

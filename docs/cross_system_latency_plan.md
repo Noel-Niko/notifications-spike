@@ -182,7 +182,7 @@ Or use the Jupyter notebook for interactive analysis.
 - [x] **Step 3**: Add `session_id` to poc-deepgram sessions
 - [x] **Step 4**: Build correlation script (`scripts/correlate_latency.py`) in notifications-spike (19 tests passing)
 - [x] **Step 5**: Build analysis notebook (`notebooks/cross_system_latency.ipynb`) in notifications-spike
-- [ ] **Step 6**: Test with a live call and validate results
+- [x] **Step 6**: Test with a live call — audio routing verified (Chrome for Genesys, BlackHole for poc-deepgram), transcription confirmed in poc-deepgram UI. Latency correlation pending.
 - [x] **Step 7**: Document operational workflow in README
 
 ---
