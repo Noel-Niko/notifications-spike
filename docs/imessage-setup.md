@@ -110,6 +110,35 @@ This creates the chat thread that the scripts will use.
 chmod +x ~/.claude/skills/imessage-notify/*.sh
 ```
 
+### 6. Whitelist Commands (CRITICAL FOR PHONE MODE)
+
+**⚠️ IMPORTANT:** Without this step, phone mode will be blocked by IDE approval prompts!
+
+Run the whitelist helper script:
+
+```bash
+~/.claude/skills/imessage-notify/whitelist_commands.sh
+```
+
+This script explains that you need to:
+- **Approve commands on first use** - When Claude Code asks "Do you want to proceed?" for notify.sh, click "Yes"
+- The approval is **remembered for all future uses**
+- After first approval, phone mode works seamlessly without IDE interruptions
+
+**Why this matters:**
+- In phone mode, Claude sends approvals via `notify.sh`
+- If bash commands require IDE approval, you'll see "Do you want to proceed?" in the IDE
+- This defeats the purpose of phone mode (you're back in the IDE!)
+- After first approval, the command is whitelisted and phone mode works perfectly
+
+**Alternative (Pre-approve in plan mode):**
+When using plan mode, include in your allowedPrompts:
+```
+allowedPrompts: [
+  {tool: "Bash", prompt: "iMessage notifications"}
+]
+```
+
 ## Testing the Setup
 
 ### Test 1: Send a message (fire-and-forget)
@@ -216,24 +245,53 @@ The system supports multiple Claude Code sessions (in different repos) simultane
 
 ## Troubleshooting
 
+### Messages send successfully but you don't receive them
+
+**This was a known bug - now fixed!** The scripts now include:
+- Proper escaping of special characters (quotes, backslashes)
+- Validation that Messages app is running before sending
+- Comprehensive error checking with helpful diagnostics
+- Non-zero exit codes on failures
+
+If you still don't receive messages:
+1. Check RECIPIENT is correct in **both** `send.sh` and `read.sh`
+2. Verify Messages app is signed into iMessage
+3. Send a manual test message to yourself in Messages app first
+4. Check iMessage service status: https://www.apple.com/support/systemstatus/
+
+### "ERROR: Messages app is not running"
+- Open `/System/Applications/Messages.app`
+- Sign in to iMessage (Messages > Settings > iMessage)
+- Verify your Apple ID is active and connected
+
+### "ERROR: Failed to send iMessage via AppleScript"
+
+The script will show specific troubleshooting steps:
+1. Check Messages is signed in: Messages > Settings > iMessage
+2. Verify you have an existing conversation with yourself
+3. Try sending a manual test message in Messages app
+4. Run FDA check: `~/.claude/skills/imessage-notify/check_fda.sh`
+
 ### "TIMEOUT: No reply received"
-- Check that you replied to the correct phone number/email
+- Check that you replied to the correct iMessage conversation
+- Look for the message tag: `[repo-name|REQ-abc123]`
 - Verify the RECIPIENT matches in both `send.sh` and `read.sh`
-- Ensure you have an active iMessage conversation with yourself
+- Ensure you have cellular/WiFi connectivity
 
 ### "Unable to read chat.db"
 - Run `~/.claude/skills/imessage-notify/check_fda.sh`
 - Grant Full Disk Access to your terminal app
 - **Completely quit and restart** your terminal app (required!)
+- Verify the path exists: `ls ~/Library/Messages/chat.db`
 
-### Messages not appearing
-- Check Messages app is signed into iMessage
-- Verify you have internet connectivity
-- Try sending a manual test message to yourself first
+### Special characters in messages causing issues
 
-### Wrong recipient receiving messages
-- Double-check RECIPIENT value in both `send.sh` and `read.sh`
-- Ensure you updated BOTH files with the same value
+**This is now fixed!** The scripts properly escape:
+- Quotes (`"` and `'`)
+- Backslashes (`\`)
+- Other AppleScript special characters
+
+Messages with quotes, newlines, or complex formatting should now work correctly.
 
 ## Architecture Notes
 

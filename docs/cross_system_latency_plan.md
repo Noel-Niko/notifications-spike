@@ -184,6 +184,9 @@ Or use the Jupyter notebook for interactive analysis.
 - [x] **Step 5**: Build analysis notebook (`notebooks/cross_system_latency.ipynb`) in notifications-spike
 - [x] **Step 6**: Test with a live call — audio routing verified (Chrome for Genesys, BlackHole for poc-deepgram), transcription confirmed in poc-deepgram UI. Latency correlation pending.
 - [x] **Step 7**: Document operational workflow in README
+- [x] **Step 8**: Conduct 6 movie monologue test calls (Maleficent, Cyrano de Bergerac, Glengarry Glen Ross, Iron Man, To Kill a Mockingbird, Shawshank Redemption) — 94 matched pairs, 225 Deepgram utterances, 130 Genesys events
+- [x] **Step 9**: Build executive summary (`docs/executive_summary.md`) with 3-way comparison table (Deepgram AudioHook proxy / Genesys self-reported / Genesys ground truth), all from same 6 test calls, plus footnote comparing to 147 production calls
+- [x] **Step 10**: Notebook Module 6 computes Genesys self-reported latency from the 6 test JSONL files using anchor-event method, enabling apples-to-apples 3-way comparison
 
 ---
 

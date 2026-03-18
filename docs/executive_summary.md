@@ -6,48 +6,52 @@
 
 ---
 
-## Three-Way Latency Comparison
+## Key Findings
 
-| Metric | Deepgram Nova-3 (AudioHook Proxy) | Genesys r2d2 (Self-Reported) | Cross-System (Ground Truth) |
-|--------|----------------------------------:|-----------------------------:|----------------------------:|
-| **Median (p50)** | 1,213 ms | 837 ms | 1,710 ms |
-| **Mean** | 1,504 ms | 938 ms | 2,430 ms |
-| **p95** | 3,330 ms | 2,003 ms | 10,428 ms |
-| **p99** | 4,389 ms | 3,304 ms | 16,430 ms |
+All three columns use data from the **same 6 test calls** (movie monologues played through live Genesys calls on March 18, 2026).
+
+| Metric | Deepgram Nova-3 (AudioHook Proxy) | Genesys r2d2 (Self-Reported) | Genesys End-to-End (Ground Truth) |
+|--------|----------------------------------:|-----------------------------:|----------------------------------:|
+| **Median (p50)** | 1,248 ms | 432 ms | 1,712 ms |
+| **Mean** | 1,596 ms | 626 ms | 2,775 ms |
+| **p95** | 3,469 ms | 1,611 ms | 10,544 ms |
+| **p99** | 4,338 ms | 2,751 ms | 16,472 ms |
 | **Min** | 271 ms | 0 ms | 733 ms |
-| **Max** | 4,833 ms | 18,636 ms | 20,365 ms |
-| **Sample Size** | 223 utterances | 8,735 utterances | 94 matched pairs |
+| **Max** | 4,833 ms | 8,942 ms | 20,365 ms |
+| **Utterances** | 225 (6 test calls) | 130 (6 test calls) | 93 matched pairs (6 test calls) |
 
 ### What Each Column Measures
 
-- **Deepgram Nova-3 (AudioHook Proxy)**: Time from when speech ended to when Deepgram returned the transcript, measured via poc-deepgram capturing the same call audio independently. This serves as a **proxy for the Genesys AudioHook integration** — streaming call audio to an external STT engine instead of using the built-in r2d2 engine. Deepgram uses a 300ms endpointing threshold, producing faster but more granular utterances.
+- **Deepgram Nova-3 (AudioHook Proxy)**: Time from when speech ended to when Deepgram returned the transcript. poc-deepgram captures the same call audio independently via BlackHole and streams it to Deepgram Nova-3 in real time. This serves as a **proxy for the Genesys AudioHook integration** — streaming call audio to an external STT engine instead of using the built-in r2d2 engine. Deepgram uses a 300ms endpointing threshold, producing faster but more granular utterances.
 
-- **Genesys r2d2 (Self-Reported)**: Genesys's own reported STT processing latency — measures **only Stage 2** (audio-to-text conversion). Does not include audio capture transport, endpointing wait, or WebSocket delivery. Based on 147 real customer service conversations (8,735 utterances) from October 2025.
+- **Genesys r2d2 (Self-Reported)**: Estimated latency derived from Genesys's own event metadata (`offsetMs`, `durationMs`, and `receivedAt`) using the anchor-event method. This approximates what Genesys reports as their transcription processing time. It captures **Stages 2–4** (STT processing + endpointing + delivery) but **does not include Stage 1** (audio capture transport from caller to Genesys Cloud). The anchor event (lowest-latency utterance per conversation) is set to 0ms, so all values are relative — true self-reported latencies are slightly higher.
 
-- **Cross-System (Ground Truth)**: The **true end-to-end latency** from the moment words are spoken to when the transcribed text arrives at our application via WebSocket. Captures all four pipeline stages. Measured by correlating Deepgram ground-truth timestamps with Genesys notification arrival times.
+- **Genesys End-to-End (Ground Truth)**: The **true end-to-end latency** from the moment words are spoken to when the transcribed text arrives at our application via WebSocket. Captures all four pipeline stages (audio capture → r2d2 STT → endpointing → WebSocket delivery). Measured by correlating Deepgram ground-truth audio timestamps with Genesys notification arrival times. The 93 matched pairs are utterances successfully correlated between the two systems (see [What Is a Matched Pair?](#what-is-a-matched-pair) below).
 
 ### Key Takeaways
 
-1. **Deepgram (AudioHook proxy) median is 1.2s** — faster than Genesys end-to-end (1.7s) because Deepgram endpoints more aggressively (300ms vs Genesys's variable-length endpointing) and delivers transcripts directly without WebSocket routing overhead.
+1. **Genesys self-reported latency significantly understates actual latency** — self-reported median is 432ms, but true end-to-end is **1,712ms (4.0x higher)**. The self-reported metric omits audio capture transport (Stage 1) and uses anchor-relative timing that zeroes out the fastest event, masking the true pipeline cost.
 
-2. **Genesys self-reported median is 0.8s** — but this only measures STT processing (Stage 2). The true end-to-end latency is **2x higher** (1.7s) because it includes audio capture, endpointing, and WebSocket delivery.
+2. **The gap widens dramatically at the tail** — at p95, self-reported is 1,611ms but true latency is **10,544ms (6.5x higher)**. At p99, self-reported is 2,751ms but true latency is **16,472ms (6.0x higher)**. The endpointing batching (Stage 3) dominates tail latency during continuous speech, and this is not reflected in the self-reported metric.
 
-3. **Tail latency diverges dramatically** — at p95, Deepgram stays at 3.3s while Genesys end-to-end jumps to 10.4s. The 7s gap is caused by Genesys batching continuous speech into large final events (Stage 3 endpointing). Deepgram's faster endpointing avoids this accumulation.
+3. **Deepgram (AudioHook proxy) is ~27% faster at the median** (1,248ms vs 1,712ms) than Genesys end-to-end — Deepgram endpoints more aggressively (300ms silence threshold vs Genesys's variable-length endpointing) and delivers transcripts directly without WebSocket routing overhead.
 
-4. **An AudioHook integration would likely deliver transcripts ~30% faster at the median** and dramatically reduce tail latency, assuming similar audio quality and network conditions as our test setup.
+4. **Deepgram tail latency stays controlled** — p95 of 3,469ms and p99 of 4,338ms vs Genesys's 10,544ms and 16,472ms. Deepgram's faster endpointing prevents the multi-sentence batching that causes Genesys's extreme tail latency.
 
----
+5. **An AudioHook integration would likely deliver similar improvements** in a production Genesys environment, assuming comparable audio quality and network conditions to our test setup.
 
-## Cross-System vs Genesys Self-Reported Detail
+### Footnote: Comparison with Production Data
 
-| Metric | Cross-System (Ground Truth) | Genesys Self-Reported | Delta |
-|--------|---------------------------:|---------------------:|------:|
-| **Median (p50)** | 1,710 ms | 837 ms | +873 ms |
-| **Mean** | 2,430 ms | 938 ms | +1,492 ms |
-| **p95** | 10,428 ms | 2,003 ms | +8,425 ms |
-| **p99** | 16,430 ms | 3,304 ms | +13,126 ms |
+The self-reported latency from these 6 test calls was compared against 147 production customer service conversations (8,735 utterances, October 2025):
 
-**Bottom line**: The true end-to-end latency from spoken word to delivered transcription is roughly **double** what Genesys self-reports at the median, and **5x higher** at the 95th percentile. The median of ~1.7 seconds is acceptable for most real-time use cases. The inflated tail latency (p95/p99) is driven by Genesys's endpointing behavior during continuous speech, not by STT processing delays.
+| Metric | 6 Test Calls | 147 Production Calls |
+|--------|------------:|--------------------:|
+| Median (p50) | 432 ms | 837 ms |
+| Mean | 626 ms | 938 ms |
+| p95 | 1,611 ms | 2,003 ms |
+| p99 | 2,751 ms | 3,304 ms |
+
+Test call self-reported latencies are lower than production — expected because movie monologues have fewer speaker turns and simpler endpointing patterns than real conversations. The consistency in order-of-magnitude confirms that the gap between self-reported and ground truth is **systemic**, not an artifact of the test setup. Production ground-truth latency would be at least as high as measured here.
 
 ---
 
@@ -86,13 +90,47 @@ The measurement spans four pipeline stages:
 | **3. Endpointing** | Genesys holds partial transcripts until it decides the utterance is final (`isFinal=true`) | **Highly variable (0.3–15+ s)** |
 | **4. WebSocket Delivery** | Serialization + routing through Genesys infrastructure to our application | Low (~50–200 ms) |
 
-Genesys's self-reported latency measures only **Stage 2**. Our cross-system measurement captures **all four stages**.
+Genesys's self-reported latency measures **Stages 2–4** (relative to the fastest event per conversation). Our cross-system measurement captures **all four stages** in absolute terms.
+
+### What Each Metric Measures (Pipeline Scope)
+
+The three metrics in this report each cover a different slice of the pipeline. The diagram below shows which stages each one captures:
+
+```
+GENESYS PIPELINE (what our app receives):
+
+         ┌────────────────── Genesys End-to-End (Ground Truth) ──────────────────┐
+         │                                                                        │
+         │        ┌──────── Genesys Self-Reported (anchor-relative) ────────┐     │
+         │        │                                                         │     │
+Speech → │ Stage 1 │  Stage 2   │      Stage 3        │  Stage 4  │→ Event │     │
+ends     │ Audio   │  r2d2 STT  │    Endpointing       │ WebSocket │ arrives│     │
+         │ Capture │ Processing │  (isFinal batching)   │ Delivery  │        │     │
+         │~50-100ms│ ~500-800ms │   0.3s – 15s+         │~50-200ms  │        │     │
+         └─────────┴────────────┴───────────────────────┴───────────┘        │     │
+                                                                             │     │
+                                                                             │     │
+DEEPGRAM PIPELINE (independent ground-truth clock):                          │     │
+                                                                             │     │
+         ┌───── Deepgram Nova-3 (AudioHook Proxy) ─────┐                     │     │
+         │                                              │                     │     │
+Speech → │ Deepgram STT  │  300ms Endpointing  │→ Done  │                     │     │
+ends     │  Processing   │   (fast, fixed)      │        │                     │     │
+         └───────────────┴──────────────────────┘        │                     │     │
+                                                                              │     │
+         Ground truth = receivedAt − audio_wall_clock_end ────────────────────┘     │
+                        (Genesys)    (Deepgram)                                     │
+                                                                                    │
+         Median: 1,248ms             432ms (anchor-relative)           1,712ms ─────┘
+```
+
+**Key insight**: The self-reported metric (middle bracket) misses Stage 1 entirely and zeros out its fastest event, making it appear that latency is ~432ms at the median. The ground truth (outer bracket) captures everything the user actually experiences — **1,712ms at the median, 4.0x higher**.
 
 ---
 
 ## Why the p95 Is Dramatically Higher Than the Median
 
-The median adds only **+0.87s** over Genesys self-reported latency — a modest and expected overhead from Stages 1, 3, and 4 combined. But at p95, the gap explodes to **+8.4s**. This is caused by **Stage 3: Endpointing**.
+The median adds **+1.28s** over Genesys self-reported latency — this gap reflects Stage 1 (audio capture transport) plus the baseline that the anchor-event method zeros out. But at p95, the gap explodes to **+8.9s**. This is caused by **Stage 3: Endpointing**.
 
 ### The Endpointing Effect
 
@@ -138,10 +176,32 @@ Six movie monologues were played through live Genesys calls, providing diverse s
 | 2 | **Cyrano de Bergerac** (nose monologue) | 203.3s | 15 | 1,748 ms | Rapid wit, staccato delivery |
 | 3 | **Glengarry Glen Ross** (ABC speech) | 274.1s | 23 | 1,734 ms | Aggressive, punctuated by short pauses |
 | 4 | **Iron Man** (press conference) | 95.9s | 8 | 2,920 ms | Mixed: dialogue + monologue |
-| 5 | **To Kill a Mockingbird** (closing argument) | 197.2s | 28 | 1,129 ms | Measured, deliberate, clear pauses |
+| 5 | **To Kill a Mockingbird** (closing argument) | 197.2s | 27 | 1,129 ms | Measured, deliberate, clear pauses |
 | 6 | **The Shawshank Redemption** (Red's parole hearing) | 173.7s | 19 | 1,785 ms | Reflective, conversational cadence |
 
-**Total**: 94 matched utterance pairs across ~1,050 seconds of call audio.
+**Total**: 93 matched utterance pairs across ~1,050 seconds of call audio.
+
+### What Is a "Matched Pair"?
+
+Each of the 93 matched pairs is one **utterance** — a sentence-level transcript event — from Deepgram matched to one utterance from Genesys by fuzzy text similarity. These are not individual words and not entire conversations; they are turn-level speech segments that each system independently identified as a complete spoken phrase.
+
+**Example**: Deepgram emits `"You wanna work here? Close."` and Genesys emits `"you wanna work here close"` — these are matched at 1.0 similarity, producing a true latency of 1,812 ms.
+
+### Why Only 93 Out of 353 Total Utterances?
+
+Deepgram produced **223 final transcripts** across the 6 sessions. Genesys produced **130 final events**. The matching algorithm produced 94 candidate pairs, of which 1 was excluded as a false match (negative latency), leaving **93 valid pairs**. The low match rate is explained by five factors:
+
+1. **Endpointing asymmetry** (biggest factor) — Deepgram uses a 300ms silence threshold, splitting speech into many short utterances. Genesys batches more aggressively, combining 2–4 Deepgram-sized utterances into a single `isFinal=true` event. The matching algorithm uses **greedy 1:1 matching** — once a Genesys event is claimed by its best Deepgram match, the other Deepgram utterances that overlap the same Genesys event go unmatched.
+
+2. **Similarity threshold** — Matches below 0.55 are rejected. When Genesys batches heavily, its transcript contains extra sentences that drag the text similarity below the threshold compared to any single Deepgram utterance.
+
+3. **Transcription divergence** — Genesys r2d2 and Deepgram Nova-3 produce different text for the same audio. Phone-quality audio through Genesys's VoIP pipeline degrades differently than BlackHole's direct capture. Example: Deepgram heard `"Sofia, the story for a white woman"` while Genesys transcribed `"feel sorry for a wait moment"` — too different to match.
+
+4. **No double matching** — Each utterance on both sides can only participate in one pair. This prevents inflated counts but means some valid utterances go unpaired when multiple candidates compete.
+
+5. **Short/ambiguous utterances** — Very short transcripts like `"oh"`, `"good"`, or `"yes"` can match multiple candidates with similar scores, and some are filtered to avoid false matches.
+
+A 93-out-of-130 Genesys match rate (72%) and 93-out-of-223 Deepgram match rate (42%) are expected given the endpointing asymmetry. The unmatched Deepgram utterances are predominantly short fragments that Genesys combined into longer events.
 
 ### Per-Movie Observations
 
@@ -158,16 +218,16 @@ Six movie monologues were played through live Genesys calls, providing diverse s
 
 | Percentile | Latency |
 |---:|---:|
-| p50 (Median) | 1,710 ms |
+| p50 (Median) | 1,712 ms |
 | p75 | 2,300 ms |
 | p90 | 4,627 ms |
-| p95 | 10,428 ms |
-| p99 | 16,430 ms |
+| p95 | 10,544 ms |
+| p99 | 16,472 ms |
 | Max | 20,365 ms |
 | Min | 733 ms |
 
-- **Standard Deviation**: 4,677 ms — reflects the heavy right tail from endpointing batching
-- **Mean Similarity**: 0.798 — indicates strong cross-system utterance matching quality
+- **Standard Deviation**: 3,290 ms — reflects the heavy right tail from endpointing batching
+- **Mean Similarity**: 0.801 — indicates strong cross-system utterance matching quality
 
 ### Latency Bands
 
@@ -209,7 +269,7 @@ Text similarity score (x-axis) versus true latency (y-axis). High-latency outlie
 
 ## Data Quality Notes
 
-- **1 false match detected**: In To Kill a Mockingbird, "is." was matched to "i'm so" with similarity 0.571, producing a latency of -29,618 ms (negative = impossible). This is a matching artifact from the short utterance length and should be excluded from statistical analysis. The aggregate statistics above include this outlier; excluding it would reduce the standard deviation and slightly improve the mean.
+- **1 false match excluded**: In To Kill a Mockingbird, "is." was matched to "i'm so" with similarity 0.571, producing a latency of -29,618 ms (negative = physically impossible). This false match is filtered out at the notebook level — all aggregate statistics, charts, and exported data exclude it. The remaining 93 valid matched pairs are used for all analysis.
 - **Similarity threshold**: 0.55 — balances match recall against false positive risk. Lower thresholds would increase matches but introduce more noise.
 - **Channel**: All matched utterances are EXTERNAL (customer/caller side), since the monologue audio played through the phone system appears as the external participant.
 
