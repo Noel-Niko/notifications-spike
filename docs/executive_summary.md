@@ -343,6 +343,3 @@ cd notebooks && uv run jupyter notebook cross_system_latency.ipynb
 
 See `docs/manual_test_directions.md` for the complete setup and test execution guide.
 
-
-
-
