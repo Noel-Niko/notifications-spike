@@ -64,12 +64,43 @@ Two independent systems capture the same live call audio simultaneously on a sin
 ```
 Live Genesys Call (agent + customer speaking)
     │
+    │  PATH A — The production transcription pipeline (what we're measuring)
     ├──→ [Genesys Cloud] ──→ r2d2 STT ──→ Endpointing ──→ WebSocket ──→ notifications-spike
-    │                                                                      (records receivedAt)
+    │     Call audio travels       Genesys converts       Genesys waits      Event delivered
+    │     over VoIP/WebRTC to      audio to text using    for speaker to     to our app via
+    │     Genesys Cloud servers    their built-in r2d2    finish (isFinal)   WebSocket channel
+    │     (Stage 1)                engine (Stage 2)       before emitting    (Stage 4)
+    │                                                     the transcript
+    │                                                     (Stage 3)
+    │                                                             ↓
+    │                                                     notifications-spike records
+    │                                                     receivedAt = time.time()
+    │                                                     when each event arrives
     │
+    │  PATH B — The independent ground-truth clock (how we know when words were spoken)
     └──→ [BlackHole Virtual Audio] ──→ poc-deepgram ──→ Deepgram Nova-3 STT
-                                        (records audio_wall_clock_end)
+          macOS virtual audio            Browser-based       Streams audio to
+          device captures the            app captures         Deepgram's cloud
+          same call audio that           microphone input     STT API in real time
+          plays through the              and records          and records when each
+          computer's speakers            stream_start_time    transcript is returned
+                                         = time.time()
+                                                ↓
+                                         For each transcript:
+                                         audio_wall_clock_end =
+                                           stream_start_time + audio_end
+                                         (= wall-clock time the words were spoken)
 ```
+
+**How the two paths connect to the three table columns:**
+
+| Path | Produces | Table Column |
+|------|----------|-------------|
+| **Path A alone** | `receivedAt` and event metadata (`offsetMs`, `durationMs`) | **Genesys r2d2 (Self-Reported)** — latency estimated from Genesys's own timestamps using the anchor-event method |
+| **Path B alone** | `audio_wall_clock_end` and `server_receipt_time` (Deepgram's response time) | **Deepgram Nova-3 (AudioHook Proxy)** — latency from speech-end to Deepgram transcript return |
+| **Path A × Path B** | `receivedAt` minus `audio_wall_clock_end`, matched by fuzzy text similarity | **Genesys End-to-End (Ground Truth)** — true latency from speech-end to Genesys event arrival |
+
+The ground-truth measurement works because Path B tells us *exactly when each phrase was spoken* (via Deepgram's audio timestamps), and Path A tells us *exactly when Genesys delivered the transcript* (via `receivedAt`). The difference is the true end-to-end latency that a real application experiences.
 
 ### Formula
 

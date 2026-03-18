@@ -1,0 +1,42 @@
+{
+  "num_session_pairs": 6,
+  "session_pairs": [
+    {
+      "deepgram": "nova-3_2026-03-18T19-24-15Z.json",
+      "genesys": "23c14252-468b-46fa-b621-e2c9326a2722.jsonl"
+    },
+    {
+      "deepgram": "nova-3_2026-03-18T19-17-36Z.json",
+      "genesys": "2fe10c64-f7c6-449c-a26c-c85b9a50ca6d.jsonl"
+    },
+    {
+      "deepgram": "nova-3_2026-03-18T19-10-50Z.json",
+      "genesys": "f536b591-490c-499d-8596-ce4ec1f45d62.jsonl"
+    },
+    {
+      "deepgram": "nova-3_2026-03-18T19-07-21Z.json",
+      "genesys": "ef34bf63-6153-4bed-8f7f-da7844099828.jsonl"
+    },
+    {
+      "deepgram": "nova-3_2026-03-18T19-02-32Z.json",
+      "genesys": "158d6fb9-9fc8-4312-a633-4929a68f5eb1.jsonl"
+    },
+    {
+      "deepgram": "nova-3_2026-03-18T18-54-36Z.json",
+      "genesys": "bf4c94bf-c655-4845-82ad-56eabd726f90.jsonl"
+    }
+  ],
+  "matched_pairs": 93,
+  "similarity_threshold": 0.55,
+  "latency_ms": {
+    "mean": 2774.8,
+    "median": 1712.4,
+    "std": 3290.1,
+    "min": 733.3,
+    "max": 20365.5,
+    "p50": 1712.4,
+    "p95": 10544.4,
+    "p99": 16472.4
+  },
+  "mean_similarity": 0.801
+}

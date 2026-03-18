@@ -1,0 +1,31 @@
+conversation_id,utterance_id,channel,latency_seconds,offset_ms,duration_ms,confidence,transcript_text,anomaly
+358b269d-0af6-4649-b974-b14c8e84ed63,0c4d591f-242a-4e81-91ca-a2d951fdeeee,INTERNAL,18.636089086532593,89138,2942,0.9555,can i get that item number i'm sorry the order number whenever you're ready,high
+358b269d-0af6-4649-b974-b14c8e84ed63,48296b5a-4054-4cd7-aee5-849b67e0400b,EXTERNAL,14.014581203460693,91459,5243,0.9486666666666667,sure yeah it was a yeah it was a replacement order in that number is one five six,high
+e5172891-824c-4ba6-b431-9be833634e7b,6967213b-75d0-44a3-bf10-f2f19445d9bf,INTERNAL,13.799643278121948,135916,583,0.9853333333333333,let me see,high
+f90adf8c-dee0-4bf2-97bf-b547519e3d57,59ba29c7-c0d2-4813-aa7f-d11f2bae3067,EXTERNAL,13.549384355545044,79258,1089,0.7752857142857144,for the number do you want that,high
+f90adf8c-dee0-4bf2-97bf-b547519e3d57,8a96d0a8-2230-4f3b-9a0a-c8c33f15f8df,INTERNAL,13.034930229187012,80825,35,0.359,just,high
+f90adf8c-dee0-4bf2-97bf-b547519e3d57,c972ad17-0790-412c-9937-a6660ac81a0d,EXTERNAL,11.445525884628296,82153,314,0.9995,one five,high
+fb32df7f-082a-444c-b582-0626b2b2c661,53646851-edab-4f09-89dc-e0ec0c3bcb22,INTERNAL,11.094306230545044,290520,2556,0.9923333333333333,put some notes in here and i will get you on over,high
+f1b36c30-d282-4b42-be4c-b2fbbe3e29ef,c644b37f-3aa6-4393-bbe2-8ef98e8713e5,INTERNAL,10.907355070114136,272816,2286,0.9899000000000001,okay did you have access to our website at all,high
+358b269d-0af6-4649-b974-b14c8e84ed63,dfa961b9-44ff-43bf-b058-646a0f0f26e4,EXTERNAL,10.1717209815979,97739,2806,0.9831428571428571,three zero two eight eight three eight,high
+74452bed-27f6-4d4b-a6da-c4d4c7ed07ac,0c71e72b-8196-433c-85d6-f80032be3775,INTERNAL,9.766847372055054,467617,917,0.997,residential,high
+e5172891-824c-4ba6-b431-9be833634e7b,f7e755e9-fc08-4f0b-8b1c-9ecc76893711,EXTERNAL,9.58864426612854,138159,2568,0.8583749999999999,he says compatible with grainger part that means,high
+f90adf8c-dee0-4bf2-97bf-b547519e3d57,53d4a0f3-6078-4229-a319-26af2b8cca5c,EXTERNAL,9.39824914932251,84172,343,0.9975,six three,high
+e9a43a2f-8fc0-4545-a40d-9c2f29b6b0a7,b97bf955-28bf-4fe7-9253-375118669c0c,EXTERNAL,8.409257173538208,359899,40,0.439,yeah,high
+aac2f309-34d8-4054-8b65-54159d7c94ff,a8766b84-3b2d-475f-8590-1a6a2fc956ce,INTERNAL,8.310527324676514,159480,10188,0.8915925925925926,yeah there you go there we go and i'm sorry if i get a look quiet here i'm just typing this up for you by thank you,high
+f5b1882a-54f2-4f24-9537-a28e85de6058,27fdb9d7-0bd4-405f-b526-5ce90d0b7639,INTERNAL,7.537597179412842,425838,1025,0.9757999999999999,well i'm glad we could,high
+665801e2-4c40-42bc-9b18-7fb8414ce6ff,c5545490-8807-428f-bf55-db2cf22355c4,EXTERNAL,7.449827194213867,100399,6550,0.9622727272727274,it's six six eight eight three one three four four three,high
+db0a1050-f223-487b-9212-9bb9c49477bd,99ca4a2b-9b4d-4234-a6f0-2015d97f37a7,INTERNAL,6.914567232131958,73196,2654,0.9028888888888891,alright no problem gonna be happy to help and,high
+2d187ef5-4834-4b1a-a88a-b8223b4d2fff,fa61aede-12b6-49b5-8475-fc2336722ede,EXTERNAL,6.677199125289917,258779,6230,0.8723333333333333,we'll do letters am and then number four zero five seven five,high
+e9a43a2f-8fc0-4545-a40d-9c2f29b6b0a7,f522de27-e425-4f07-b0dd-a58bb80b9465,INTERNAL,5.887499809265137,265800,5987,0.9180588235294119,okay so that's not bringing anything up but let me try to this here stock peel plant,high
+4c6c929e-ed05-4d7b-a06e-1cd2dd585e33,aee86fa7-d0c0-4da2-b962-f3ecbed3e7bd,EXTERNAL,5.769449710845947,214176,668,0.9996666666666667,okay thank you,high
+f90adf8c-dee0-4bf2-97bf-b547519e3d57,00d79b1b-0e5d-4c06-a858-a4d64b37e60b,EXTERNAL,5.690371036529541,85817,2407,0.9778333333333333,seven zero zero two two five,high
+8527246d-cc2a-4c61-af98-91ca1e17771e,2f66271d-dcd6-47ac-89f0-0dfbebe5df5a,INTERNAL,5.631465911865234,61358,4812,0.9387857142857143,echo kilo kilo three that is a filter roll for eighty nine eleven seven,high
+e5172891-824c-4ba6-b431-9be833634e7b,6ddb609f-c8ff-4d57-a80a-f23b9c636f0e,INTERNAL,5.615861415863037,140659,4062,0.970181818181818,right yes yeah i i don't have any information on that,high
+e9a43a2f-8fc0-4545-a40d-9c2f29b6b0a7,ea1c502a-2fb4-41f5-b0f4-b515cbc10836,INTERNAL,5.601338863372803,549218,3325,0.9097142857142858,right right right if they're still usable,high
+1272d4a9-e963-4690-b037-893a188b313f,9b4f09e7-82bf-4435-a84b-30355e3ab6bc,INTERNAL,5.553393840789795,161418,1707,0.978125,okay let me try and pull that up,high
+fc8c2fff-48f9-41ef-92f3-0955d2eff579,85b5ed5b-ea67-4740-81d5-7103f87fca1d,EXTERNAL,5.5351951122283936,160859,3783,0.9440999999999999,is a ninety ps maximum pressure so i don't know,high
+28c04877-2f5d-4096-9639-39e44cb199f0,10b134a5-8c06-432f-9dff-fc722b4a6d31,INTERNAL,5.06397008895874,442780,558,0.8503333333333334,alright one second,high
+add7bbab-c67c-49b0-b60e-499364a2ef0f,400e0264-17de-4921-9f41-da0ae6179e35,EXTERNAL,5.037869215011597,12219,3683,0.9506666666666667,hi there this is lisa coleman calling from us how are you,high
+fb32df7f-082a-444c-b582-0626b2b2c661,061382ee-b359-491b-baeb-369afaed76de,INTERNAL,5.024792194366455,330658,4062,0.9943333333333335,and it requires them to approve it before the order is released,high
+95ff285b-a708-4f48-aa43-1f5f913a5945,f8bbd999-737b-4ff2-bcc0-cd4fa796ad86,INTERNAL,5.02176308631897,123359,2911,0.8653333333333334,we're halfway through the week so it should be smooth sailing right,high
