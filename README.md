@@ -159,6 +159,84 @@ conversation_events/
 - `transcript.alternatives[].offsetMs`: Timing offset in milliseconds
 - `transcript.alternatives[].durationMs`: Duration in milliseconds
 
+## Cross-System Latency Measurement
+
+Measure true end-to-end latency from spoken audio to transcription delivery by correlating this app's data with [poc-deepgram](../poc-deepgram), which provides ground-truth wall-clock timestamps for when speech actually occurred.
+
+### One-Time Setup: Audio Routing
+
+Install [BlackHole](https://existential.audio/blackhole/) to route Genesys call audio into poc-deepgram:
+
+```bash
+brew install blackhole-2ch
+```
+
+Then in **Audio MIDI Setup** (macOS):
+1. Create a **Multi-Output Device** combining your speakers + BlackHole 2ch
+2. Set system output to the Multi-Output Device
+
+This lets you hear the call audio while simultaneously routing it to poc-deepgram.
+
+### During a Call
+
+Run both applications simultaneously:
+
+```bash
+# Terminal 1: Start this app (Genesys transcript capture)
+uv run uvicorn main:app --host 0.0.0.0 --port 8765
+
+# Terminal 2: Start poc-deepgram (ground-truth audio timing)
+cd ../poc-deepgram
+uv run uvicorn poc_deepgram.app:create_app --factory --host 0.0.0.0 --port 8766
+```
+
+Then:
+1. Open `http://localhost:8766` in a browser
+2. Select **BlackHole 2ch** as the microphone input
+3. Click **Start**
+4. Take the Genesys call — both systems capture data in parallel
+5. When the call ends, click **Stop** in poc-deepgram
+
+### After the Call
+
+Run the correlation tool to compute true latency:
+
+```bash
+uv run python -m scripts.correlate_latency \
+  --deepgram ../poc-deepgram/results/<session-file>.json \
+  --genesys conversation_events/<conversation-id>.jsonl
+```
+
+This fuzzy-matches utterances between the two systems by text similarity and computes:
+
+```
+true_latency = genesys_receivedAt - deepgram_audio_wall_clock_end
+```
+
+Output includes summary statistics (mean, median, p95, p99), per-channel breakdown, and CSV export to `analysis_results/cross_system/`.
+
+For interactive analysis, use the Jupyter notebook:
+
+```bash
+cd notebooks
+uv run jupyter notebook cross_system_latency.ipynb
+```
+
+### How It Works
+
+| System | Role | Key Timestamp |
+|--------|------|---------------|
+| **poc-deepgram** | Captures call audio, provides wall-clock time of speech | `audio_wall_clock_end` (when words were spoken) |
+| **notifications-spike** | Receives Genesys transcription events | `receivedAt` (when text arrived) |
+
+Both apps run on the same machine and use `time.time()`, so clocks are synchronized. The correlation tool matches utterances by fuzzy text similarity (threshold: 0.55) with temporal proximity as a tiebreaker.
+
+### Running Tests
+
+```bash
+uv run pytest tests/ -v
+```
+
 ## Key Limitations
 
 1. **Max Concurrent Conversations**: Set to 10 by default - if more than 10 agents are on calls simultaneously, additional conversations will be ignored until slots free up
