@@ -323,7 +323,7 @@ def calculate_transcription_latency(conversation_events):
 
 For the complete implementation plan to build a latency analysis notebook based on this field analysis, see:
 
-📋 **[Latency Analysis Notebook - Implementation Plan](./latency_analysis_notebook_plan.md)**
+📋 **[Latency Analysis Notebook - Implementation Plan](latency_analysis_notebook_plan.md)**
 
 The implementation plan includes:
 - 7 modules with detailed tasks and checkboxes
