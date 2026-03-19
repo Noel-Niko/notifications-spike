@@ -1,7 +1,7 @@
 # Result Executive Summary of Experimental Data on Genesys Latency using Notifications (WebSocket)
--> Download Executive Summary @ https://github.com/Noel-Niko/notifications-spike/blob/master/docs/exec_summary_final.docx
--> Read Analysis @ https://github.com/Noel-Niko/notifications-spike/blob/master/docs/analysis.md
--> Review Notebook @ https://github.com/Noel-Niko/notifications-spike/blob/master/notebooks/cross_system_latency.ipynb
+* Download Executive Summary @ https://github.com/Noel-Niko/notifications-spike/blob/master/docs/exec_summary_final.docx
+* Read Analysis @ https://github.com/Noel-Niko/notifications-spike/blob/master/docs/analysis.md
+* Review Notebook @ https://github.com/Noel-Niko/notifications-spike/blob/master/notebooks/cross_system_latency.ipynb
 
 
 
