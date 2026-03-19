@@ -1,5 +1,6 @@
 # Result Executive Summary of Experimental Data on Genesys Latency using Notifications (WebSocket)
--> https://github.com/noel-nosse_wwg/notifications-spike/blob/main/docs/executive_summary.md
+-> Download Executive Summary @ https://github.com/Noel-Niko/notifications-spike/blob/master/docs/exec_summary_final.docx
+-> Read Analysis @ 
 
 
 
