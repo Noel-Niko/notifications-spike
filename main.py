@@ -38,7 +38,7 @@ CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 AGENT_EMAILS_FILE = os.environ.get("AGENT_EMAILS_FILE", "agents.txt")
 AGENT_TOPIC_TEMPLATE = os.environ.get("AGENT_TOPIC_TEMPLATE", "v2.users.{user_id}.conversations")
-MAX_CONCURRENT_CONVERSATIONS = int(os.environ.get("MAX_CONVERSATIONS", "1"))
+MAX_CONCURRENT_CONVERSATIONS = int(os.environ.get("MAX_CONVERSATIONS", "10"))
 CONVERSATION_EVENT_DIR = os.environ.get("CONVERSATION_EVENT_DIR", "conversation_events")
 
 if not all([REGION_API_BASE, REGION_LOGIN_BASE, CLIENT_ID, CLIENT_SECRET]):
@@ -365,25 +365,111 @@ async def subscribe_agent_topics(
     raise RuntimeError("Failed to subscribe to agent topics; see logs for details")
 
 
+# ------------ Active Conversation Recovery -------------
+
+def extract_active_conversation_ids(
+    conversations: List[Dict[str, Any]],
+    agent_user_ids: Set[str],
+) -> Set[str]:
+    """Return conversation IDs where a monitored agent is connected and not ended.
+
+    Pure function — no side effects, no dependency on global state.
+
+    Args:
+        conversations: List of conversation dicts from Genesys
+            ``GET /api/v2/conversations`` (the ``entities`` array).
+        agent_user_ids: Set of Genesys user IDs we are monitoring.
+
+    Returns:
+        Set of conversation IDs that should be subscribed to.
+    """
+    active: Set[str] = set()
+    for conv in conversations:
+        conv_id = conv.get("id")
+        if not conv_id:
+            continue
+        for part in conv.get("participants") or []:
+            if not isinstance(part, dict):
+                continue
+            purpose = part.get("purpose")
+            if not isinstance(purpose, str) or purpose.lower() != "agent":
+                continue
+            if part.get("userId") not in agent_user_ids:
+                continue
+            if part.get("connectedTime") and not part.get("endTime"):
+                active.add(conv_id)
+                break
+    return active
+
+
+async def recover_active_conversations(
+    client: httpx.AsyncClient,
+    token: str,
+    chan_id: str,
+    agent_user_ids: Set[str],
+) -> int:
+    """Poll Genesys for in-progress conversations and subscribe to them.
+
+    Called once after the WebSocket connects to catch any conversations that
+    started during the startup window.
+
+    Returns:
+        Number of conversations recovered.
+    """
+    resp = await client.get(
+        f"{REGION_API_BASE}/api/v2/conversations",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    resp.raise_for_status()
+    conversations = resp.json().get("entities") or []
+
+    conv_ids = extract_active_conversation_ids(conversations, agent_user_ids)
+    recovered = 0
+    for conv_id in conv_ids:
+        if conv_id not in active_conversations:
+            activated = await activate_conversation(client, token, chan_id, conv_id)
+            if activated:
+                recovered += 1
+                log.info("Recovered in-progress conversation %s", conv_id)
+    if recovered:
+        log.info("Recovered %d in-progress conversation(s) from startup window", recovered)
+    else:
+        log.info("No in-progress conversations to recover")
+    return recovered
+
+
 # ------------ Transcript Handling -------------
 def _conversation_times(event_body: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:
     participants = event_body.get("participants")
     if not isinstance(participants, list):
         return None, None
 
-    call_start: Optional[str] = None
-    call_end: Optional[str] = None
+    best_start: Optional[str] = None
+    best_end: Optional[str] = None
+    best_is_active = False
 
     for part in participants:
         if not isinstance(part, dict):
             continue
         purpose = part.get("purpose")
-        if isinstance(purpose, str) and purpose.lower() == "agent":
-            call_start = part.get("connectedTime")
-            call_end = part.get("endTime")
-            break
+        if not isinstance(purpose, str) or purpose.lower() != "agent":
+            continue
 
-    return call_start, call_end
+        connected = part.get("connectedTime")
+        if not connected:
+            continue
+
+        ended = part.get("endTime")
+        is_active = ended is None
+
+        if best_start is None or (is_active and not best_is_active) or (
+            is_active == best_is_active and connected > best_start
+        ):
+            best_start = connected
+            best_end = ended
+            best_is_active = is_active
+
+    return best_start, best_end
 
 
 async def handle_transcript_event(conv_id: str, transcript: Dict[str, Any]) -> bool:
@@ -429,6 +515,15 @@ async def ws_loop():
                         len(email_to_user_id),
                         MAX_CONCURRENT_CONVERSATIONS,
                     )
+                    # Recover conversations that started during startup
+                    try:
+                        await recover_active_conversations(
+                            client, token, channel_id,
+                            set(email_to_user_id.values()),
+                        )
+                    except Exception as e:
+                        log.warning("Failed to recover active conversations: %s", e)
+
                     async for raw in ws:
                         try:
                             msg = json.loads(raw)

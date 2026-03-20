@@ -40,10 +40,15 @@ def parse_sqs_message(
         sqs_sent_timestamp: SQS SentTimestamp attribute (epoch ms), or None.
 
     Returns:
-        Dict ready to be serialized as one JSONL line.
+        Dict ready to be serialized as one JSONL line, or ``None`` if the
+        event has no transcripts (e.g. status-only events like SESSION_ONGOING).
     """
     raw_event = json.loads(body)
     event_body = raw_event["detail"]["eventBody"]
+
+    transcripts = event_body.get("transcripts")
+    if not transcripts:
+        return None
 
     return {
         "conversationId": event_body["conversationId"],
@@ -52,7 +57,7 @@ def parse_sqs_message(
         "ebTime": raw_event["time"],
         "genesysEventTime": event_body["eventTime"],
         "sessionStartTimeMs": event_body["sessionStartTimeMs"],
-        "transcripts": event_body["transcripts"],
+        "transcripts": transcripts,
         "rawEvent": raw_event,
     }
 
@@ -77,7 +82,9 @@ def save_event(parsed: dict, output_dir: Path) -> Path:
 # ---------------------------------------------------------------------------
 
 
-def poll_sqs(queue_url: str, profile: str, output_dir: Path) -> None:
+def poll_sqs(
+    queue_url: str, profile: str, output_dir: Path, region: str | None = None
+) -> None:
     """Poll SQS queue for EventBridge transcription events.
 
     Long-polls the queue, parses each message, saves to JSONL, and deletes
@@ -87,10 +94,11 @@ def poll_sqs(queue_url: str, profile: str, output_dir: Path) -> None:
         queue_url: Full SQS queue URL.
         profile: AWS profile name for boto3 session.
         output_dir: Directory to save conversation JSONL files.
+        region: AWS region name (e.g. ``us-east-2``).
     """
     import boto3  # Lazy import — only needed for actual polling
 
-    session = boto3.Session(profile_name=profile)
+    session = boto3.Session(profile_name=profile, region_name=region)
     sqs = session.client("sqs")
 
     running = True
@@ -132,15 +140,17 @@ def poll_sqs(queue_url: str, profile: str, output_dir: Path) -> None:
 
             try:
                 parsed = parse_sqs_message(msg["Body"], received_at, sqs_sent_timestamp)
-                file_path = save_event(parsed, output_dir)
-                logger.info(
-                    "Saved event for conversation %s to %s",
-                    parsed["conversationId"],
-                    file_path,
-                )
+                if parsed is not None:
+                    file_path = save_event(parsed, output_dir)
+                    logger.info(
+                        "Saved event for conversation %s to %s",
+                        parsed["conversationId"],
+                        file_path,
+                    )
+                else:
+                    logger.debug("Skipping non-transcript event: %s", msg.get("MessageId"))
             except Exception:
                 logger.exception("Error processing message: %s", msg.get("MessageId"))
-                continue
 
             try:
                 sqs.delete_message(
@@ -173,9 +183,10 @@ def main() -> None:
         sys.exit(1)
 
     profile = os.environ.get("AWS_PROFILE", "765425735388_admin-role")
+    region = os.environ.get("AWS_REGION", "us-east-2")
     output_dir = Path(os.environ.get("EB_EVENT_DIR", "EventBridge/conversation_events"))
 
-    poll_sqs(queue_url=queue_url, profile=profile, output_dir=output_dir)
+    poll_sqs(queue_url=queue_url, profile=profile, output_dir=output_dir, region=region)
 
 
 if __name__ == "__main__":

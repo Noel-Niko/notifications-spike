@@ -201,14 +201,14 @@ The test intentionally uses monologues to stress-test the pipeline and expose th
 
 Six movie monologues were played through live Genesys calls, providing diverse speech patterns and durations:
 
-| # | Movie | Duration | Matched Pairs | Median Latency | Speech Pattern |
-|---|-------|----------|:---:|---:|---|
-| 1 | **Maleficent** (Sleeping Beauty curse) | 105.7s | 1 | 11,937 ms | Slow, dramatic, few pauses |
-| 2 | **Cyrano de Bergerac** (nose monologue) | 203.3s | 15 | 1,748 ms | Rapid wit, staccato delivery |
-| 3 | **Glengarry Glen Ross** (ABC speech) | 274.1s | 23 | 1,734 ms | Aggressive, punctuated by short pauses |
-| 4 | **Iron Man** (press conference) | 95.9s | 8 | 2,920 ms | Mixed: dialogue + monologue |
-| 5 | **To Kill a Mockingbird** (closing argument) | 197.2s | 27 | 1,129 ms | Measured, deliberate, clear pauses |
-| 6 | **The Shawshank Redemption** (Red's parole hearing) | 173.7s | 19 | 1,785 ms | Reflective, conversational cadence |
+| # | Movie                                                                                                | Duration | Matched Pairs | Median Latency | Speech Pattern |
+|---|------------------------------------------------------------------------------------------------------|----------|:---:|---:|---|
+| 1 | **Maleficent** (Sleeping Beauty curse https://youtu.be/kCV0hy6ex1c?si=8NoTiVw8lrf-yRZr)              | 105.7s | 1 | 11,937 ms | Slow, dramatic, few pauses |
+| 2 | **Cyrano de Bergerac** (nose monologue https://youtu.be/YpHwm5EFVbY?si=gkdzDCB5Bsxdnz-b)                                                             | 203.3s | 15 | 1,748 ms | Rapid wit, staccato delivery |
+| 3 | **Glengarry Glen Ross** (ABC speech https://youtu.be/zCf46yHIzSo?si=OiSEv2ERiNCe4Xel)                | 274.1s | 23 | 1,734 ms | Aggressive, punctuated by short pauses |
+| 4 | **Iron Man** (press conference https://youtu.be/tjTrFo-bITU?si=rL8RrPXFntUwIlHX)                     | 95.9s | 8 | 2,920 ms | Mixed: dialogue + monologue |
+| 5 | **To Kill a Mockingbird** (closing argument https://youtu.be/-x6njs-cGUE?si=9AxHr9QpuihTOn5P)        | 197.2s | 27 | 1,129 ms | Measured, deliberate, clear pauses |
+| 6 | **The Shawshank Redemption** (Red's parole hearing https://youtu.be/Di7vbNJwzZQ?si=GphgpnKadC9UxGtk) | 173.7s | 19 | 1,785 ms | Reflective, conversational cadence |
 
 **Total**: 93 matched utterance pairs across ~1,050 seconds of call audio.
 

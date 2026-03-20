@@ -36,6 +36,8 @@ sudo killall coreaudiod
 1. In **System Settings → Sound → Output**, select the **Multi-Output Device** you just created
 2. Alternatively, Option-click the volume icon in the menu bar and select it there
 
+![macOS Sound Output settings showing Multi-Output Device](multi-output%20device.png)
+
 You now hear the call audio AND it routes to BlackHole for poc-deepgram to capture.
 
 ### 5. Configure Browser and Genesys Cloud
@@ -51,7 +53,15 @@ You now hear the call audio AND it routes to BlackHole for poc-deepgram to captu
    - **Ringer**: Multi-Output Device
 5. Click **Save**
 
-See `docs/audio-settings-in-genesys.png` for reference.
+![Genesys Audio Device Profile — "Latency Testing" with MacBook Pro Microphone, Multi-Output Device](audio-settings-in-genesys.png)
+
+During an active call, you can switch profiles via the **Preferences for Interactions** panel. Select the "Latency Testing" profile (or "Use Computer settings" as a fallback):
+
+![Genesys call — selecting audio profile from Preferences for Interactions](genesys%20settings.jpg)
+
+The GIF below shows the full Genesys setup flow during a connected call:
+
+![Genesys setup walkthrough](genesys%20setup.gif)
 
 **Verified working configuration:**
 - **macOS System Input**: MacBook Pro Microphone (your voice → Genesys)
@@ -65,7 +75,7 @@ This configuration allows answering Genesys calls in Chrome while poc-deepgram c
 
 ## Before Each Test Call
 
-### 5. Start notifications-spike (Terminal 1)
+### 6. Start notifications-spike (Terminal 1)
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
@@ -74,7 +84,7 @@ uv run uvicorn main:app --host 0.0.0.0 --port 8765
 
 Wait for: `WebSocket connected (agents=N, max_concurrent_conversations=10)`
 
-### 5b. Start EventBridge SQS consumer (Terminal 3)
+### 7. Start EventBridge SQS consumer (Terminal 2)
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
@@ -89,24 +99,24 @@ Wait for: `Polling SQS queue: ...`
 
 Both notifications-spike (WebSocket) and the SQS consumer (EventBridge) capture the same conversations simultaneously — same conversation IDs appear in both `conversation_events/` and `EventBridge/conversation_events/`.
 
-### 6. Start poc-deepgram (Terminal 2)
+### 8. Start poc-deepgram (Terminal 3)
 
 ```bash
 cd ~/PycharmProjects/poc-deepgram
 uv run uvicorn poc_deepgram.app:create_app --factory --host 0.0.0.0 --port 8766
 ```
 
-### 7. Open poc-deepgram in browser
+### 9. Open poc-deepgram in browser
 
 Navigate to **http://localhost:8766**
 
-### 8. Select BlackHole as audio input
+### 10. Select BlackHole as audio input
 
 In the **audio source dropdown** at the top of the poc-deepgram page (next to the Start button), select **BlackHole 2ch**.
 
 > **Important**: Your macOS **System Settings → Sound → Input** should still be your physical microphone (not BlackHole). The dropdown in the browser is separate from the system input. BlackHole only carries system audio output — it does not carry your mic voice.
 
-### 9. Click Start
+### 11. Click Start
 
 Click the **Start** button in the poc-deepgram browser UI. The status indicator should turn green (Connected).
 
@@ -114,22 +124,23 @@ Click the **Start** button in the poc-deepgram browser UI. The status indicator 
 
 ## During the Call
 
-### 10. Take the Genesys call normally
+### 12. Take the Genesys call normally
 
 Both systems capture data in parallel — no action needed from you during the call:
 
 - **notifications-spike** receives Genesys transcription events via WebSocket and writes them to `conversation_events/<conversation-id>.jsonl`
+- **EventBridge SQS consumer** polls SQS for EventBridge-delivered transcription events and writes to `EventBridge/conversation_events/<conversation-id>.jsonl`
 - **poc-deepgram** captures the call audio via BlackHole, sends it to Deepgram, and timestamps each utterance with wall-clock time
 
 ---
 
 ## After the Call
 
-### 11. Stop poc-deepgram
+### 13. Stop poc-deepgram
 
 Click **Stop** in the poc-deepgram browser UI. This saves the session JSON to `~/PycharmProjects/poc-deepgram/results/`.
 
-### 12. Identify your output files
+### 14. Identify your output files
 
 ```bash
 # Most recent Deepgram session
@@ -142,7 +153,7 @@ ls -lt ~/PycharmProjects/notifications-spike/conversation_events/ | head -3
 ls -lt ~/PycharmProjects/notifications-spike/EventBridge/conversation_events/ | head -3
 ```
 
-### 12b. Cross-check EventBridge conversation IDs
+### 15. Cross-check EventBridge conversation IDs
 
 Verify the same conversation IDs appear in both Notifications and EventBridge output directories:
 
@@ -153,7 +164,7 @@ diff <(ls conversation_events/ | sort) <(ls EventBridge/conversation_events/ | s
 
 If a conversation is missing from one path, check terminal logs for errors.
 
-### 13. Run the correlation tool
+### 16. Run the correlation tool
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
@@ -163,7 +174,7 @@ uv run python -m scripts.correlate_latency \
   --genesys conversation_events/<CONVERSATION_ID>.jsonl
 ```
 
-Replace `<SESSION_FILE>` and `<CONVERSATION_ID>` with the actual filenames from step 12.
+Replace `<SESSION_FILE>` and `<CONVERSATION_ID>` with the actual filenames from step 14.
 
 ### Output
 
@@ -176,7 +187,7 @@ The tool prints:
 
 CSV results are exported to `analysis_results/cross_system/correlation.csv`.
 
-### 14. (Optional) Interactive analysis — Notifications only
+### 17. (Optional) Interactive analysis — Notifications only
 
 For deeper analysis with visualizations (Notifications path only):
 
@@ -187,7 +198,7 @@ uv run jupyter notebook cross_system_latency-01-RESULTS.ipynb
 
 Select the session files in the notebook and run all cells.
 
-### 14b. (Optional) Interactive analysis — EventBridge vs Notifications comparison
+### 18. (Optional) Interactive analysis — EventBridge vs Notifications comparison
 
 For head-to-head comparison of EventBridge and Notifications delivery latency:
 
@@ -262,6 +273,13 @@ This is less clean (ambient noise) but works without any virtual audio device co
 - Check the terminal for `Subscribed to transcripts for conversation` log messages
 - Verify the `.env` file has correct Genesys credentials
 
+### SQS consumer not capturing events
+
+- Verify the consumer is running: you should see `Polling SQS queue:` in the terminal
+- Check AWS auth: `aws sso login --profile 765425735388_admin-role`
+- Verify messages exist: `aws sqs get-queue-attributes --queue-url $SQS_QUEUE_URL --attribute-names ApproximateNumberOfMessages --profile 765425735388_admin-role`
+- If messages are sitting in SQS but not consumed, restart the consumer
+
 ---
 
 ## What This Measures
@@ -278,7 +296,7 @@ Speaker → [1] Audio Capture → [2] r2d2 STT → [3] Endpointing
   → [4b-i] EventBridge publish → [4b-ii] EB rule → SQS enqueue → [4b-iii] Consumer polls
 ```
 
-Stages 1–3 are shared. Stage 4 is the delivery mechanism under comparison.
+Stages 1-3 are shared. Stage 4 is the delivery mechanism under comparison.
 
 ### Pipeline Stages
 

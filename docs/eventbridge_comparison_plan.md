@@ -342,7 +342,21 @@ Insert after "Why the p95 Is Dramatically Higher" section (after line 195). Cont
 - Where time is spent in the EB pipeline
 - Whether the dominant cost is EB routing, SQS enqueue, or poll cycle
 
-#### 5.8. Reproduction section (lines 331–342) — add EB commands
+#### 5.8. New section: "Notifications API Concurrency Limits & Scaling Considerations"
+
+Insert after the EventBridge Hop Analysis section. Document:
+
+- **Bug found during testing**: `MAX_CONCURRENT_CONVERSATIONS` defaulted to 1, causing notifications-spike to silently skip every other conversation in sequential test calls (alternating miss-hit pattern). Fixed by changing default to 10.
+- **Genesys Notifications API enterprise limit**: 1,000 concurrent topic subscriptions per WebSocket channel. Each active conversation requires one subscription (`v2.conversations.{id}.transcription`).
+- **Our scale requirement**: 1,200 agents. At peak, this could exceed the 1,000-subscription limit.
+- **Implications for production**:
+  - Need multiple WebSocket channels (at least 2) to cover 1,200 agents, OR
+  - Use wildcard topic subscriptions if Genesys supports them, OR
+  - Use EventBridge as the primary delivery mechanism (no per-conversation subscription needed — EB rule matches ALL transcription events for the org)
+- **EventBridge advantage**: No per-conversation subscription management. A single EB rule captures all conversations org-wide. SQS scales horizontally. This is a significant architectural simplification at 1,200-agent scale.
+- **Recommendation**: If EB latency is comparable to Notifications, EB is the better production architecture for our agent count.
+
+#### 5.9. Reproduction section (lines 331–342) — add EB commands
 
 ```bash
 # Start SQS consumer (Terminal 3, alongside notifications-spike and poc-deepgram)
@@ -354,7 +368,7 @@ uv run python -m scripts.sqs_consumer
 cd notebooks && uv run jupyter notebook cross_system_latency-02-EB-RESULTS.ipynb
 ```
 
-#### 5.9. Test Corpus table (lines 203–213) — add EB match count column
+#### 5.10. Test Corpus table (lines 203–213) — add EB match count column
 
 Each movie row gains a column for EventBridge matched pairs alongside Notifications:
 

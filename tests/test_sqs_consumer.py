@@ -117,6 +117,29 @@ class TestParseSqsMessage:
         )
         assert parsed["sqsSentTimestamp"] is None
 
+    def test_returns_none_for_status_event(self):
+        """Status-only events (e.g. SESSION_ONGOING) have no transcripts."""
+        status_event = {
+            "version": "0",
+            "id": "abc-123",
+            "detail-type": "v2.conversations.{id}.transcription",
+            "source": "aws.partner/genesys.com/cloud/o-abc123/DA-VOICE-SB",
+            "time": "2026-03-19T22:04:48Z",
+            "detail": {
+                "eventBody": {
+                    "eventTime": "2026-03-19T22:04:48.128Z",
+                    "conversationId": "97b9dcb3-1111-2222-3333-444455556666",
+                    "communicationId": "7dd98c4f-aaaa-bbbb-cccc-ddddeeee0001",
+                    "sessionStartTimeMs": 1773957594383,
+                    "transcriptionStartTimeMs": 1773957594336,
+                    "status": {"offsetMs": 41, "status": "SESSION_ONGOING"},
+                },
+                "metadata": {"CorrelationId": "abc-123-correlation"},
+            },
+        }
+        parsed = parse_sqs_message(json.dumps(status_event), RECEIVED_AT, SQS_SENT_TIMESTAMP)
+        assert parsed is None
+
 
 # ---------------------------------------------------------------------------
 # Tests: save_event
