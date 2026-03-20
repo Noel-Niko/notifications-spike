@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Id": "__default_policy_ID",
+  "Statement": [
+    {
+      "Sid": "__owner_statement",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "765425735388"
+      },
+      "Action": "SQS:*",
+      "Resource": "arn:aws:sqs:us-east-2:765425735388:genesys-transcription-latency-test"
+    },
+    {
+      "Sid": "eventbridge_delivery",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:us-east-2:765425735388:genesys-transcription-latency-test"
+    },
+    {
+      "Sid": "__receiver_statement",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:sts::173078698674:assumed-role/AWSReservedSSO_173078698674-cscdigitalassistan_6e3a3c6c123a8e57/xnxn040"
+      },
+      "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:ChangeMessageVisibility",
+        "sqs:GetQueueAttributes"
+      ],
+      "Resource": "arn:aws:sqs:us-east-2:765425735388:genesys-transcription-latency-test"
+    }
+  ]
+}

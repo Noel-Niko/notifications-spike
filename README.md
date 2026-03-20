@@ -299,3 +299,10 @@ Install via:
 ```bash
 uv sync
 ```
+
+EVENT BRIDGE NOTES
+assume MLOpsNonProd/cscdigitalassistan   
+kubectx cscdigitalassistan/devbchue2
+kubens cscdigitalassistant
+
+

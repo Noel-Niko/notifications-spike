@@ -10,19 +10,19 @@ Get phone approvals working in 5 minutes.
 cp -r /path/to/imessage-notify ~/.claude/skills/
 ```
 
-### 2. Configure your phone
-Edit **TWO** files with your phone number or Apple ID email:
-
-**File 1:** `~/.claude/skills/imessage-notify/send.sh` (line 11)
+### 2. Configure your phone + whitelist permissions
+Run from inside your repo:
 ```bash
-RECIPIENT="+15551234567"  # Your phone number with country code
-# OR
-RECIPIENT="your.email@example.com"  # Your Apple ID email
+cd /path/to/your/repo
+~/.claude/skills/imessage-notify/whitelist_commands.sh +15551234567
 ```
 
-**File 2:** `~/.claude/skills/imessage-notify/read.sh` (line 15)
+Accepts: `+15551234567`, `1-555-123-4567`, `"(555) 123-4567"`, `555-123-4567`, `5551234567`, or `your.email@icloud.com`
+
+For subsequent repos (phone already configured):
 ```bash
-RECIPIENT="+15551234567"  # Must match send.sh exactly
+cd /path/to/another/repo
+~/.claude/skills/imessage-notify/whitelist_commands.sh
 ```
 
 ### 3. Grant Full Disk Access
@@ -40,17 +40,11 @@ If needed:
 ### 4. Create iMessage chat with yourself
 Open Messages app and send yourself a test message to create the conversation.
 
-### 5. Make scripts executable
+### 5. Verify scripts are executable
+Step 2 handles this automatically. If needed manually:
 ```bash
 chmod +x ~/.claude/skills/imessage-notify/*.sh
 ```
-
-### 6. Understand command approval (CRITICAL)
-```bash
-~/.claude/skills/imessage-notify/whitelist_commands.sh
-```
-
-**Key point:** First time you use phone mode, you'll see "Do you want to proceed?" in the IDE. Click **"Yes"** and it will be remembered for all future uses.
 
 ## Testing (Verify setup works)
 
@@ -110,18 +104,9 @@ Begin the 5-step demo workflow now.
 
 ### First use: Command approval
 
-**The first time** phone mode sends a message, you'll see:
-```
-Do you want to proceed?
-❯ 1. Yes
-  2. No
-```
+If you ran `whitelist_commands.sh` (Step 2), commands are pre-approved and you should not see any prompts.
 
-**Action:** Click "Yes"
-
-**Why:** Claude Code's safety feature requires approving bash commands on first use.
-
-**After approval:** All future phone mode uses work seamlessly without IDE prompts.
+If you still see "Do you want to proceed?", click **"Yes"** — it will be remembered for all future uses in that session. Re-run `whitelist_commands.sh` from the repo to fix permanently.
 
 ## Troubleshooting
 
@@ -138,14 +123,18 @@ open /System/Applications/Messages.app
 Sign into iMessage: Messages → Settings → iMessage
 
 ### "Do you want to proceed?" keeps appearing
-- This should only happen once
-- After clicking "Yes", it's remembered
-- If it keeps appearing, check that scripts have execute permissions: `ls -la ~/.claude/skills/imessage-notify/*.sh`
+- Re-run the whitelist script from inside the affected repo:
+  ```bash
+  cd /path/to/your/repo
+  ~/.claude/skills/imessage-notify/whitelist_commands.sh
+  ```
+- If it still appears, click "Yes" once — it will be remembered for that session
+- Check that scripts have execute permissions: `ls -la ~/.claude/skills/imessage-notify/*.sh`
 
 ### IDE prompts appear during phone mode
-- This is the command approval on first use
-- Click "Yes" and it won't happen again
-- To pre-approve, use plan mode with allowedPrompts
+- Run `whitelist_commands.sh` from inside the repo (see above)
+- Fallback: click "Yes" once and it won't happen again
+- Alternative: pre-approve in plan mode with allowedPrompts
 
 ## Full Documentation
 

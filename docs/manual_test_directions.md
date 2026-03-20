@@ -74,6 +74,21 @@ uv run uvicorn main:app --host 0.0.0.0 --port 8765
 
 Wait for: `WebSocket connected (agents=N, max_concurrent_conversations=10)`
 
+### 5b. Start EventBridge SQS consumer (Terminal 3)
+
+```bash
+cd ~/PycharmProjects/notifications-spike
+export SQS_QUEUE_URL="https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test"
+export AWS_PROFILE="765425735388_admin-role"
+uv run python -m scripts.sqs_consumer
+```
+
+Wait for: `Polling SQS queue: ...`
+
+> **AWS Profile**: You **must** use the `765425735388_admin-role` profile. The SSO role in account 173078698674 is blocked by Organization SCP `p-kfhxcsd9`. If auth fails, run: `aws sso login --profile 765425735388_admin-role`
+
+Both notifications-spike (WebSocket) and the SQS consumer (EventBridge) capture the same conversations simultaneously — same conversation IDs appear in both `conversation_events/` and `EventBridge/conversation_events/`.
+
 ### 6. Start poc-deepgram (Terminal 2)
 
 ```bash
@@ -120,9 +135,23 @@ Click **Stop** in the poc-deepgram browser UI. This saves the session JSON to `~
 # Most recent Deepgram session
 ls -lt ~/PycharmProjects/poc-deepgram/results/ | head -3
 
-# Most recent Genesys conversation
+# Most recent Genesys conversation (Notifications WebSocket)
 ls -lt ~/PycharmProjects/notifications-spike/conversation_events/ | head -3
+
+# Most recent EventBridge conversation (SQS consumer)
+ls -lt ~/PycharmProjects/notifications-spike/EventBridge/conversation_events/ | head -3
 ```
+
+### 12b. Cross-check EventBridge conversation IDs
+
+Verify the same conversation IDs appear in both Notifications and EventBridge output directories:
+
+```bash
+# Compare conversation IDs between the two paths
+diff <(ls conversation_events/ | sort) <(ls EventBridge/conversation_events/ | sort)
+```
+
+If a conversation is missing from one path, check terminal logs for errors.
 
 ### 13. Run the correlation tool
 
@@ -147,16 +176,27 @@ The tool prints:
 
 CSV results are exported to `analysis_results/cross_system/correlation.csv`.
 
-### 14. (Optional) Interactive analysis
+### 14. (Optional) Interactive analysis — Notifications only
 
-For deeper analysis with visualizations:
+For deeper analysis with visualizations (Notifications path only):
 
 ```bash
 cd ~/PycharmProjects/notifications-spike/notebooks
-uv run jupyter notebook cross_system_latency.ipynb
+uv run jupyter notebook cross_system_latency-01-RESULTS.ipynb
 ```
 
 Select the session files in the notebook and run all cells.
+
+### 14b. (Optional) Interactive analysis — EventBridge vs Notifications comparison
+
+For head-to-head comparison of EventBridge and Notifications delivery latency:
+
+```bash
+cd ~/PycharmProjects/notifications-spike/notebooks
+uv run jupyter notebook cross_system_latency-02-EB-RESULTS.ipynb
+```
+
+This notebook correlates both delivery paths against Deepgram ground truth and produces a comparison table, hop analysis, and visualizations.
 
 ---
 
@@ -226,15 +266,19 @@ This is less clean (ambient noise) but works without any virtual audio device co
 
 ## What This Measures
 
-The **true latency** captures the full Genesys transcription pipeline — from the moment words are spoken to when the transcribed text arrives at our application:
+The **true latency** captures the full Genesys transcription pipeline — from the moment words are spoken to when the transcribed text arrives at our application. We measure two delivery paths:
 
 ```
-Speaker's voice
-  → [1] Genesys captures audio from the call (VoIP/WebRTC stream)
-  → [2] Genesys STT engine (r2d2) processes the audio into text
-  → [3] Genesys endpointing decides the utterance is complete (isFinal=true)
-  → [4] WebSocket notification delivered to notifications-spike
+Notifications API (WebSocket) Delivery Path:
+Speaker → [1] Audio Capture → [2] r2d2 STT → [3] Endpointing
+  → [4a] WebSocket notification delivered to notifications-spike
+
+EventBridge (SQS) Delivery Path:
+Speaker → [1] Audio Capture → [2] r2d2 STT → [3] Endpointing
+  → [4b-i] EventBridge publish → [4b-ii] EB rule → SQS enqueue → [4b-iii] Consumer polls
 ```
+
+Stages 1–3 are shared. Stage 4 is the delivery mechanism under comparison.
 
 ### Pipeline Stages
 
