@@ -377,17 +377,17 @@ Each movie row gains a column for EventBridge matched pairs alongside Notificati
 ## Implementation Order
 
 ```
-Step 0:  pyproject.toml (add boto3) → uv lock && uv sync
+Step 0:  pyproject.toml (add boto3) → uv lock && uv sync                                    ✅ DONE
          ↓
-Step 1:  [parallel] tests/test_sqs_consumer.py  |  tests/test_correlate.py (add EB tests)
+Step 1:  [parallel] tests/test_sqs_consumer.py  |  tests/test_correlate.py (add EB tests)    ✅ DONE
          ↓
-Step 2:  [parallel] scripts/sqs_consumer.py     |  scripts/correlate_latency.py (add EB loader)
+Step 2:  [parallel] scripts/sqs_consumer.py     |  scripts/correlate_latency.py (add EB loader) ✅ DONE
          ↓
-Step 3:  uv run pytest tests/test_sqs_consumer.py tests/test_correlate.py -v
+Step 3:  uv run pytest tests/test_sqs_consumer.py tests/test_correlate.py -v                 ✅ DONE (40/40 passed)
          ↓
-Step 4:  [parallel] docs/manual_test_directions.md  |  notebooks/cross_system_latency-02-EB-RESULTS.ipynb
+Step 4:  [parallel] docs/manual_test_directions.md  |  notebooks/cross_system_latency-02-EB-RESULTS.ipynb  ✅ DONE
          ↓
-Step 5:  .env updates
+Step 5:  .env updates                                                                        ✅ DONE
          ↓
          === USER: Purge SQS, start all 3 systems, play 6 recordings ===
          ↓

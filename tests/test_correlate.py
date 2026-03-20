@@ -13,9 +13,11 @@ from scripts.correlate_latency import (
     DeepgramEvent,
     load_deepgram_session,
     load_genesys_conversation,
+    load_eventbridge_conversation,
     match_utterances,
     compute_latency,
     correlate,
+    correlate_eventbridge,
 )
 
 
@@ -423,3 +425,176 @@ class TestCorrelate:
 
         results = correlate(dg_file, gn_file)
         assert len(results) == 0
+
+
+# ---------------------------------------------------------------------------
+# Fixtures: EventBridge JSONL (SQS consumer output format)
+# ---------------------------------------------------------------------------
+
+
+def _eventbridge_events(events: list[dict] | None = None) -> list[dict]:
+    """Build minimal SQS consumer output JSONL events."""
+    if events is None:
+        events = [
+            {
+                "conversationId": "conv-001",
+                "receivedAt": STREAM_START + 5.5,
+                "sqsSentTimestamp": int((STREAM_START + 5.2) * 1000),
+                "ebTime": "2026-03-17T00:00:05Z",
+                "genesysEventTime": "2026-03-17T00:00:04.800Z",
+                "sessionStartTimeMs": int(STREAM_START * 1000),
+                "transcripts": [
+                    {
+                        "utteranceId": "utt-eb-001",
+                        "isFinal": True,
+                        "channel": "INTERNAL",
+                        "alternatives": [
+                            {
+                                "transcript": "thank you for calling grainger",
+                                "confidence": 0.96,
+                                "offsetMs": 2000,
+                                "durationMs": 2500,
+                            }
+                        ],
+                    }
+                ],
+                "rawEvent": {},
+            },
+            {
+                "conversationId": "conv-001",
+                "receivedAt": STREAM_START + 8.0,
+                "sqsSentTimestamp": int((STREAM_START + 7.7) * 1000),
+                "ebTime": "2026-03-17T00:00:07Z",
+                "genesysEventTime": "2026-03-17T00:00:07.500Z",
+                "sessionStartTimeMs": int(STREAM_START * 1000),
+                "transcripts": [
+                    {
+                        "utteranceId": "utt-eb-002",
+                        "isFinal": True,
+                        "channel": "INTERNAL",
+                        "alternatives": [
+                            {
+                                "transcript": "how can i help you today",
+                                "confidence": 0.98,
+                                "offsetMs": 5000,
+                                "durationMs": 2000,
+                            }
+                        ],
+                    }
+                ],
+                "rawEvent": {},
+            },
+        ]
+    return events
+
+
+@pytest.fixture
+def eventbridge_jsonl_file(tmp_path: Path) -> Path:
+    fp = tmp_path / "eb_conversation.jsonl"
+    lines = [json.dumps(e) for e in _eventbridge_events()]
+    fp.write_text("\n".join(lines))
+    return fp
+
+
+# ---------------------------------------------------------------------------
+# Tests: EventBridge loading
+# ---------------------------------------------------------------------------
+
+
+class TestLoadEventBridgeConversation:
+    def test_loads_events(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert len(events) == 2
+        assert all(isinstance(e, GenesysEvent) for e in events)
+
+    def test_extracts_received_at(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert events[0].received_at == pytest.approx(STREAM_START + 5.5)
+        assert events[1].received_at == pytest.approx(STREAM_START + 8.0)
+
+    def test_extracts_transcript_text(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert events[0].transcript == "thank you for calling grainger"
+        assert events[1].transcript == "how can i help you today"
+
+    def test_extracts_channel(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert events[0].channel == "INTERNAL"
+
+    def test_extracts_utterance_id(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert events[0].utterance_id == "utt-eb-001"
+        assert events[1].utterance_id == "utt-eb-002"
+
+    def test_filters_final_only(self, tmp_path: Path):
+        events = _eventbridge_events()
+        events[0]["transcripts"][0]["isFinal"] = False
+        fp = tmp_path / "eb.jsonl"
+        fp.write_text("\n".join(json.dumps(e) for e in events))
+        loaded = load_eventbridge_conversation(fp)
+        assert len(loaded) == 1
+        assert loaded[0].transcript == "how can i help you today"
+
+    def test_handles_multiple_transcripts_per_line(self, tmp_path: Path):
+        """One SQS message can carry multiple utterances in transcripts[]."""
+        event = {
+            "conversationId": "conv-001",
+            "receivedAt": STREAM_START + 6.0,
+            "sqsSentTimestamp": int((STREAM_START + 5.8) * 1000),
+            "ebTime": "2026-03-17T00:00:05Z",
+            "genesysEventTime": "2026-03-17T00:00:05.500Z",
+            "sessionStartTimeMs": int(STREAM_START * 1000),
+            "transcripts": [
+                {
+                    "utteranceId": "utt-multi-001",
+                    "isFinal": True,
+                    "channel": "EXTERNAL",
+                    "alternatives": [
+                        {"transcript": "first utterance", "confidence": 0.9,
+                         "offsetMs": 1000, "durationMs": 1000}
+                    ],
+                },
+                {
+                    "utteranceId": "utt-multi-002",
+                    "isFinal": True,
+                    "channel": "INTERNAL",
+                    "alternatives": [
+                        {"transcript": "second utterance", "confidence": 0.95,
+                         "offsetMs": 2000, "durationMs": 1500}
+                    ],
+                },
+            ],
+            "rawEvent": {},
+        }
+        fp = tmp_path / "eb_multi.jsonl"
+        fp.write_text(json.dumps(event))
+        loaded = load_eventbridge_conversation(fp)
+        assert len(loaded) == 2
+        assert loaded[0].transcript == "first utterance"
+        assert loaded[1].transcript == "second utterance"
+
+    def test_deduplicates_by_utterance_id(self, tmp_path: Path):
+        """SQS at-least-once delivery can produce duplicate messages."""
+        events = _eventbridge_events()
+        # Duplicate the first event (same utteranceId)
+        all_events = events + [events[0]]
+        fp = tmp_path / "eb_dup.jsonl"
+        fp.write_text("\n".join(json.dumps(e) for e in all_events))
+        loaded = load_eventbridge_conversation(fp)
+        assert len(loaded) == 2
+        utterance_ids = [e.utterance_id for e in loaded]
+        assert len(set(utterance_ids)) == 2
+
+
+class TestCorrelateEventBridge:
+    def test_end_to_end(
+        self, deepgram_session_file: Path, eventbridge_jsonl_file: Path
+    ):
+        results = correlate_eventbridge(
+            deepgram_session_file, eventbridge_jsonl_file
+        )
+        assert len(results) == 2
+        # First: received at +5.5, audio ended at +4.5 → 1.0s
+        assert results[0].true_latency_s == pytest.approx(1.0, abs=0.001)
+        # Second: received at +8.0, audio ended at +7.0 → 1.0s
+        assert results[1].true_latency_s == pytest.approx(1.0, abs=0.001)

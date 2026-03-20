@@ -176,6 +176,34 @@ css = [
 ]
 
 [[package]]
+name = "boto3"
+version = "1.42.72"
+source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
+dependencies = [
+    { name = "botocore" },
+    { name = "jmespath" },
+    { name = "s3transfer" },
+]
+sdist = { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/ff/78/daf8d8950341f4596b2ffa8e69750569a6f567bcae8f2be0a8095a15fc71/boto3-1.42.72.tar.gz", hash = "sha256:932f023ea3b54fd85df453dcfff7d8c5a0f8be144c0ad57568943505c72c1e6a" }
+wheels = [
+    { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/30/c7/ac1e8d49b0cb5631410796dd439c621d50d9b241f98a79e38e8d466b8d00/boto3-1.42.72-py3-none-any.whl", hash = "sha256:2b5fdac4f202b2ccb9ed21f8b84229463b15573ea16941c2b1b8db1c69e08b63" },
+]
+
+[[package]]
+name = "botocore"
+version = "1.42.72"
+source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
+dependencies = [
+    { name = "jmespath" },
+    { name = "python-dateutil" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/ca/ff/36bfa472894648ded83cfe7bb09faabd0db113551dbe920589cfc9cadad7/botocore-1.42.72.tar.gz", hash = "sha256:491b75eb41d46cf99cf8d6cab89f2e2c3602ce8e90d738a1da217a5fb6b2b7ef" }
+wheels = [
+    { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/66/50/3297ba278a0d6644396011cc592ee88f628206599fc6cff25f5c83b629e7/botocore-1.42.72-py3-none-any.whl", hash = "sha256:038f34553da68df2ce70edc729f170cc198678daaad43f98649727c59f6404d4" },
+]
+
+[[package]]
 name = "certifi"
 version = "2026.2.25"
 source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
@@ -848,6 +876,15 @@ wheels = [
 ]
 
 [[package]]
+name = "jmespath"
+version = "1.1.0"
+source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
+sdist = { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/d3/59/322338183ecda247fb5d1763a6cbe46eff7222eaeebafd9fa65d4bf5cb11/jmespath-1.1.0.tar.gz", hash = "sha256:472c87d80f36026ae83c6ddd0f1d05d4e510134ed462851fd5f754c8c3cbb88d" }
+wheels = [
+    { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl", hash = "sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64" },
+]
+
+[[package]]
 name = "json5"
 version = "0.13.0"
 source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
@@ -1476,6 +1513,7 @@ name = "notifications-spike"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "boto3" },
     { name = "dotenv" },
     { name = "fastapi" },
     { name = "httpx" },
@@ -1499,6 +1537,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "boto3", specifier = ">=1.35.0" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "fastapi", specifier = ">=0.135.1" },
     { name = "httpx", specifier = ">=0.28.1" },
@@ -2378,6 +2417,18 @@ wheels = [
     { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/13/64/b4d76f227d5c45a7e0b796c674fd81b0a6c4fbd48dc29271857d8219571c/rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_aarch64.whl", hash = "sha256:dff13836529b921e22f15cb099751209a60009731a68519630a24d61f0b1b30a" },
     { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/20/91/092bacadeda3edf92bf743cc96a7be133e13a39cdbfd7b5082e7ab638406/rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_i686.whl", hash = "sha256:1b151685b23929ab7beec71080a8889d4d6d9fa9a983d213f07121205d48e2c4" },
     { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/d1/b7/b95708304cd49b7b6f82fdd039f1748b66ec2b21d6a45180910802f1abf1/rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:ac37f9f516c51e5753f27dfdef11a88330f04de2d564be3991384b2f3535d02e" },
+]
+
+[[package]]
+name = "s3transfer"
+version = "0.16.0"
+source = { registry = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/simple" }
+dependencies = [
+    { name = "botocore" },
+]
+sdist = { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/05/04/74127fc843314818edfa81b5540e26dd537353b123a4edc563109d8f17dd/s3transfer-0.16.0.tar.gz", hash = "sha256:8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920" }
+wheels = [
+    { url = "https://graingerinc.jfrog.io/artifactory/api/pypi/pypi-shared-virtual/packages/packages/fc/51/727abb13f44c1fcf6d145979e1535a35794db0f6e450a0cb46aa24732fe2/s3transfer-0.16.0-py3-none-any.whl", hash = "sha256:18e25d66fed509e3868dc1572b3f427ff947dd2c56f844a5bf09481ad3f3b2fe" },
 ]
 
 [[package]]

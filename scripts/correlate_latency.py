@@ -117,6 +117,45 @@ def load_genesys_conversation(path: Path) -> list[GenesysEvent]:
     return events
 
 
+def load_eventbridge_conversation(path: Path) -> list[GenesysEvent]:
+    """Load final transcript events from an EventBridge SQS consumer JSONL file.
+
+    Handles the EB format where ``transcripts`` is a top-level array (one SQS
+    message can carry multiple utterances).  Deduplicates by ``utteranceId``
+    because SQS standard queues provide at-least-once delivery.
+    """
+    events: list[GenesysEvent] = []
+    seen: set[str] = set()
+    for line in path.read_text().strip().splitlines():
+        if not line.strip():
+            continue
+        raw = json.loads(line)
+        received_at = raw["receivedAt"]
+        for transcript_data in raw.get("transcripts", []):
+            if not transcript_data.get("isFinal", False):
+                continue
+            utterance_id = transcript_data.get("utteranceId", "")
+            if utterance_id and utterance_id in seen:
+                continue
+            if utterance_id:
+                seen.add(utterance_id)
+            alts = transcript_data.get("alternatives", [])
+            if not alts:
+                continue
+            alt = alts[0]
+            events.append(
+                GenesysEvent(
+                    transcript=alt.get("transcript", ""),
+                    received_at=received_at,
+                    channel=transcript_data.get("channel", "UNKNOWN"),
+                    utterance_id=utterance_id,
+                    offset_ms=alt.get("offsetMs", 0),
+                    duration_ms=alt.get("durationMs", 0),
+                )
+            )
+    return events
+
+
 # ---------------------------------------------------------------------------
 # Matching
 # ---------------------------------------------------------------------------
@@ -225,6 +264,30 @@ def correlate(
 
     matches = match_utterances(
         dg_events, gn_events, similarity_threshold=similarity_threshold
+    )
+    logger.info("Matched %d utterance pairs", len(matches))
+
+    results = [compute_latency(dg, gn, sim) for dg, gn, sim in matches]
+    return results
+
+
+def correlate_eventbridge(
+    deepgram_path: Path,
+    eventbridge_path: Path,
+    similarity_threshold: float = SIMILARITY_THRESHOLD,
+) -> list[CorrelationResult]:
+    """Correlate Deepgram ground truth with EventBridge SQS consumer data."""
+    dg_events = load_deepgram_session(deepgram_path)
+    eb_events = load_eventbridge_conversation(eventbridge_path)
+
+    logger.info(
+        "Loaded %d Deepgram events, %d EventBridge events",
+        len(dg_events),
+        len(eb_events),
+    )
+
+    matches = match_utterances(
+        dg_events, eb_events, similarity_threshold=similarity_threshold
     )
     logger.info("Matched %d utterance pairs", len(matches))
 
