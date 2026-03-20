@@ -26,6 +26,5 @@ calls/
 # Claude Code
 .claude/
 
-
 # Claude notifications (cloned installer)
 claude-notifications/
