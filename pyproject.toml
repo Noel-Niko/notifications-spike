@@ -25,3 +25,8 @@ dev = [
     "pytest>=9.0.2",
     "pytest-asyncio>=1.3.0",
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tests that require Messages.app and iMessage (skipped by default)",
+]

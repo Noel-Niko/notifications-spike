@@ -35,39 +35,39 @@ The directory should contain:
 - `SKILL.md` - Claude Code skill documentation
 - `README.md` - Technical documentation
 
-### 2. Configure Your Phone Number/Email
+### 2. Configure Your Phone Number and Whitelist Permissions
 
-Edit **TWO** files to set your iMessage recipient (your own phone number or Apple ID email):
+Run the setup script **from inside your repo**, passing your phone number or Apple ID email:
 
-#### File 1: `~/.claude/skills/imessage-notify/send.sh`
-
-Find line 11 and change:
 ```bash
-RECIPIENT="nnosse@wgu.edu"
+cd /path/to/your/repo
+~/.claude/skills/imessage-notify/whitelist_commands.sh +15551234567
 ```
 
-To your phone number or Apple ID email:
+This single command:
+- Configures your phone number in both `send.sh` and `read.sh`
+- Injects wildcard permission entries into the repo's `.claude/settings.local.json`
+- Injects the same entries into the global `~/.claude/settings.json`
+- Ensures all skill scripts are executable
+
+**Accepted phone number formats** (all normalized to `+1XXXXXXXXXX`):
+
+| Format | Example |
+|---|---|
+| With country code | `+15551234567` |
+| With dashes | `1-555-123-4567` |
+| With parentheses | `"(555) 123-4567"` (quote the parens) |
+| Without country code | `555-123-4567` |
+| Digits only | `5551234567` |
+| Apple ID email | `your.email@icloud.com` |
+
+**For subsequent repos**, run without the phone number (it's already configured):
 ```bash
-RECIPIENT="+15551234567"  # Your phone number with country code
-# OR
-RECIPIENT="your.email@example.com"  # Your Apple ID email
+cd /path/to/another/repo
+~/.claude/skills/imessage-notify/whitelist_commands.sh
 ```
 
-#### File 2: `~/.claude/skills/imessage-notify/read.sh`
-
-Find line 15 and change:
-```bash
-RECIPIENT="nnosse@wgu.edu"
-```
-
-To the **same** phone number or email you used above:
-```bash
-RECIPIENT="+15551234567"  # Must match send.sh
-# OR
-RECIPIENT="your.email@example.com"  # Must match send.sh
-```
-
-**Important**: Both files must have the **exact same** RECIPIENT value.
+The script is idempotent — safe to run multiple times.
 
 ### 3. Grant Full Disk Access to Your Terminal App
 
@@ -104,39 +104,12 @@ Send yourself a test iMessage to create the conversation:
 
 This creates the chat thread that the scripts will use.
 
-### 5. Make Scripts Executable
+### 5. Make Scripts Executable (if not already)
+
+The setup script in Step 2 handles this automatically. If you need to do it manually:
 
 ```bash
 chmod +x ~/.claude/skills/imessage-notify/*.sh
-```
-
-### 6. Whitelist Commands (CRITICAL FOR PHONE MODE)
-
-**⚠️ IMPORTANT:** Without this step, phone mode will be blocked by IDE approval prompts!
-
-Run the whitelist helper script:
-
-```bash
-~/.claude/skills/imessage-notify/whitelist_commands.sh
-```
-
-This script explains that you need to:
-- **Approve commands on first use** - When Claude Code asks "Do you want to proceed?" for notify.sh, click "Yes"
-- The approval is **remembered for all future uses**
-- After first approval, phone mode works seamlessly without IDE interruptions
-
-**Why this matters:**
-- In phone mode, Claude sends approvals via `notify.sh`
-- If bash commands require IDE approval, you'll see "Do you want to proceed?" in the IDE
-- This defeats the purpose of phone mode (you're back in the IDE!)
-- After first approval, the command is whitelisted and phone mode works perfectly
-
-**Alternative (Pre-approve in plan mode):**
-When using plan mode, include in your allowedPrompts:
-```
-allowedPrompts: [
-  {tool: "Bash", prompt: "iMessage notifications"}
-]
 ```
 
 ## Testing the Setup
