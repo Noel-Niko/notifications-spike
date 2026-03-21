@@ -1,6 +1,6 @@
 # Manual Test Directions: Cross-System Latency Measurement
 
-Measure true end-to-end latency from spoken audio to Genesys transcription delivery using poc-deepgram as a ground-truth audio clock.
+Measure true end-to-end latency from spoken audio to Genesys transcription delivery using poc-deepgram as a ground-truth audio clock. Both delivery paths — **Notifications API (WebSocket)** and **EventBridge (SQS)** — are captured simultaneously for comparison.
 
 ---
 
@@ -73,9 +73,64 @@ This configuration allows answering Genesys calls in Chrome while poc-deepgram c
 
 ---
 
+## Prerequisites
+
+For EventBridge infrastructure details, see `Genesys_EventBridge_Setup_Runbook.md`.
+
+Before each testing session, verify:
+
+- **AWS SSO login** active for the sandbox account:
+  ```bash
+  aws sso login --profile 765425735388_admin-role
+  ```
+  > **Must use `765425735388_admin-role`** — the SSO role in account 173078698674 is blocked by Organization SCP `p-kfhxcsd9`.
+
+- **Dependencies installed**:
+  ```bash
+  cd ~/PycharmProjects/notifications-spike
+  uv sync
+  ```
+
+- **`.env` file** configured with Genesys credentials (`CLIENT_ID`, `CLIENT_SECRET`, etc.)
+
+- **BlackHole Multi-Output Device** set as macOS system output (see One-Time Setup above)
+
+---
+
 ## Before Each Test Call
 
-### 6. Start notifications-spike (Terminal 1)
+### 6. Clean Up Previous Data
+
+#### Purge the SQS queue
+
+```bash
+aws sqs purge-queue \
+  --queue-url https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test \
+  --region us-east-2 \
+  --profile 765425735388_admin-role
+```
+
+> Purge takes up to 60 seconds. Verify with:
+
+```bash
+aws sqs get-queue-attributes \
+  --queue-url https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test \
+  --attribute-names ApproximateNumberOfMessages \
+  --region us-east-2 \
+  --profile 765425735388_admin-role
+```
+
+Expected: `"ApproximateNumberOfMessages": "0"`
+
+#### Delete previous result files (optional)
+
+```bash
+rm -f EventBridge/conversation_events/*.jsonl
+rm -f conversation_events/*.jsonl
+rm -f ~/PycharmProjects/poc-deepgram/results/nova-3_*.json
+```
+
+### 7. Start notifications-spike (Terminal 1)
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
@@ -84,47 +139,54 @@ uv run uvicorn main:app --host 0.0.0.0 --port 8765
 
 Wait for: `WebSocket connected (agents=N, max_concurrent_conversations=10)`
 
-### 7. Start EventBridge SQS consumer (Terminal 2)
+### 8. Start EventBridge SQS consumer (Terminal 2)
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
-export SQS_QUEUE_URL="https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test"
-export AWS_PROFILE="765425735388_admin-role"
+SQS_QUEUE_URL="https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test" \
+AWS_PROFILE="765425735388_admin-role" \
+AWS_REGION="us-east-2" \
 uv run python -m scripts.sqs_consumer
 ```
 
-Wait for: `Polling SQS queue: ...`
+Wait for:
+```
+[...] INFO Polling SQS queue: https://sqs.us-east-2.amazonaws.com/765425735388/...
+[...] INFO Saving events to: EventBridge/conversation_events
+```
 
 > **AWS Profile**: You **must** use the `765425735388_admin-role` profile. The SSO role in account 173078698674 is blocked by Organization SCP `p-kfhxcsd9`. If auth fails, run: `aws sso login --profile 765425735388_admin-role`
 
 Both notifications-spike (WebSocket) and the SQS consumer (EventBridge) capture the same conversations simultaneously — same conversation IDs appear in both `conversation_events/` and `EventBridge/conversation_events/`.
 
-### 8. Start poc-deepgram (Terminal 3)
+### 9. Start poc-deepgram (Terminal 3)
 
 ```bash
 cd ~/PycharmProjects/poc-deepgram
 uv run uvicorn poc_deepgram.app:create_app --factory --host 0.0.0.0 --port 8766
 ```
 
-### 9. Open poc-deepgram in browser
+### 10. Open poc-deepgram in browser
 
 Navigate to **http://localhost:8766**
 
-### 10. Select BlackHole as audio input
+### 11. Select BlackHole as audio input
 
 In the **audio source dropdown** at the top of the poc-deepgram page (next to the Start button), select **BlackHole 2ch**.
 
 > **Important**: Your macOS **System Settings → Sound → Input** should still be your physical microphone (not BlackHole). The dropdown in the browser is separate from the system input. BlackHole only carries system audio output — it does not carry your mic voice.
 
-### 11. Click Start
+### 12. Click Start
 
 Click the **Start** button in the poc-deepgram browser UI. The status indicator should turn green (Connected).
+
+All 3 systems must be running **before** you take the first call.
 
 ---
 
 ## During the Call
 
-### 12. Take the Genesys call normally
+### 13. Take the Genesys call normally
 
 Both systems capture data in parallel — no action needed from you during the call:
 
@@ -132,15 +194,17 @@ Both systems capture data in parallel — no action needed from you during the c
 - **EventBridge SQS consumer** polls SQS for EventBridge-delivered transcription events and writes to `EventBridge/conversation_events/<conversation-id>.jsonl`
 - **poc-deepgram** captures the call audio via BlackHole, sends it to Deepgram, and timestamps each utterance with wall-clock time
 
+> **Between calls**: In the poc-deepgram browser UI, click **Stop** after each call, then **Start** before the next.
+
 ---
 
 ## After the Call
 
-### 13. Stop poc-deepgram
+### 14. Stop poc-deepgram
 
 Click **Stop** in the poc-deepgram browser UI. This saves the session JSON to `~/PycharmProjects/poc-deepgram/results/`.
 
-### 14. Identify your output files
+### 15. Identify your output files
 
 ```bash
 # Most recent Deepgram session
@@ -153,18 +217,18 @@ ls -lt ~/PycharmProjects/notifications-spike/conversation_events/ | head -3
 ls -lt ~/PycharmProjects/notifications-spike/EventBridge/conversation_events/ | head -3
 ```
 
-### 15. Cross-check EventBridge conversation IDs
+### 16. Cross-check conversation IDs
 
 Verify the same conversation IDs appear in both Notifications and EventBridge output directories:
 
 ```bash
-# Compare conversation IDs between the two paths
-diff <(ls conversation_events/ | sort) <(ls EventBridge/conversation_events/ | sort)
+diff <(ls conversation_events/*.jsonl | xargs -I{} basename {} | sort) \
+     <(ls EventBridge/conversation_events/*.jsonl | xargs -I{} basename {} | sort)
 ```
 
-If a conversation is missing from one path, check terminal logs for errors.
+If a conversation is missing from one path, check that terminal's logs for errors.
 
-### 16. Run the correlation tool
+### 17. Run the correlation tool
 
 ```bash
 cd ~/PycharmProjects/notifications-spike
@@ -174,9 +238,9 @@ uv run python -m scripts.correlate_latency \
   --genesys conversation_events/<CONVERSATION_ID>.jsonl
 ```
 
-Replace `<SESSION_FILE>` and `<CONVERSATION_ID>` with the actual filenames from step 14.
+Replace `<SESSION_FILE>` and `<CONVERSATION_ID>` with the actual filenames from step 15.
 
-### Output
+#### Output
 
 The tool prints:
 - Number of matched utterance pairs
@@ -187,7 +251,7 @@ The tool prints:
 
 CSV results are exported to `analysis_results/cross_system/correlation.csv`.
 
-### 17. (Optional) Interactive analysis — Notifications only
+### 18. (Optional) Interactive analysis — Notifications only
 
 For deeper analysis with visualizations (Notifications path only):
 
@@ -198,7 +262,7 @@ uv run jupyter notebook cross_system_latency-01-RESULTS.ipynb
 
 Select the session files in the notebook and run all cells.
 
-### 18. (Optional) Interactive analysis — EventBridge vs Notifications comparison
+### 19. (Optional) Interactive analysis — EventBridge vs Notifications comparison
 
 For head-to-head comparison of EventBridge and Notifications delivery latency:
 
@@ -207,7 +271,60 @@ cd ~/PycharmProjects/notifications-spike/notebooks
 uv run jupyter notebook cross_system_latency-02-EB-RESULTS.ipynb
 ```
 
-This notebook correlates both delivery paths against Deepgram ground truth and produces a comparison table, hop analysis, and visualizations.
+Run all cells. The notebook auto-matches files from all 3 sources by conversation ID and time overlap, and produces a comparison table, hop analysis, and visualizations.
+
+---
+
+## SQS Consumer Reference
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SQS_QUEUE_URL` | *(required)* | Full SQS queue URL |
+| `AWS_PROFILE` | `765425735388_admin-role` | AWS credentials profile |
+| `AWS_REGION` | `us-east-2` | AWS region for SQS client |
+| `EB_EVENT_DIR` | `EventBridge/conversation_events` | Output directory for JSONL files |
+
+### Output Format
+
+Each JSONL line contains:
+
+```json
+{
+  "conversationId": "97b9dcb3-...",
+  "receivedAt": 1773957600.123,
+  "sqsSentTimestamp": 1773957599800,
+  "ebTime": "2026-03-19T22:04:48Z",
+  "genesysEventTime": "2026-03-19T22:04:48.128Z",
+  "sessionStartTimeMs": 1773957594383,
+  "transcripts": [{ ... }],
+  "rawEvent": { ... }
+}
+```
+
+### Peek at SQS Without Consuming (debugging)
+
+```bash
+aws sqs receive-message \
+  --queue-url https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test \
+  --max-number-of-messages 1 \
+  --visibility-timeout 0 \
+  --attribute-names SentTimestamp \
+  --region us-east-2 \
+  --profile 765425735388_admin-role \
+  | jq '.Messages[0].Body | fromjson'
+```
+
+### Check Queue Depth
+
+```bash
+aws sqs get-queue-attributes \
+  --queue-url https://sqs.us-east-2.amazonaws.com/765425735388/genesys-transcription-latency-test \
+  --attribute-names ApproximateNumberOfMessages ApproximateNumberOfMessagesNotVisible \
+  --region us-east-2 \
+  --profile 765425735388_admin-role
+```
 
 ---
 
@@ -250,6 +367,40 @@ If the issue persists in Chrome:
 - Check the Genesys Audio Device Profile — Microphone must be **MacBook Pro Microphone**
 - BlackHole only carries system output audio, not microphone input — your voice goes through the physical mic directly to Genesys
 
+### `NoRegionError: You must specify a region`
+
+Set `AWS_REGION=us-east-2` in the environment. The `765425735388_admin-role` profile may not have a default region configured in `~/.aws/config`.
+
+### `NoCredentialError` or `ExpiredToken`
+
+Re-authenticate:
+```bash
+aws sso login --profile 765425735388_admin-role
+```
+
+### SQS consumer runs but no messages arrive
+
+- Confirm EventBridge rule is active in the AWS console (account `765425735388`, region `us-east-2`)
+- Confirm a Genesys call is in progress with transcription enabled
+- Check CloudWatch Logs: `/aws/events/genesys/eventbridge/transcription-test`
+
+### SQS consumer not capturing events
+
+- Verify the consumer is running: you should see `Polling SQS queue:` in the terminal
+- Check AWS auth: `aws sso login --profile 765425735388_admin-role`
+- Verify messages exist: `aws sqs get-queue-attributes --queue-url $SQS_QUEUE_URL --attribute-names ApproximateNumberOfMessages --profile 765425735388_admin-role`
+- If messages are sitting in SQS but not consumed, restart the consumer
+
+### Conversation missing from one path
+
+- **Missing from Notifications**: Check notifications-spike terminal — confirm `Subscribed to transcripts for conversation` appears. Verify the agent is in `agents.txt`.
+- **Missing from EventBridge**: Check SQS consumer terminal for errors. Verify SQS queue depth is changing during calls.
+- **Missing from Deepgram**: Verify BlackHole 2ch is selected in the browser dropdown and the status shows Connected (green).
+
+### `KeyError` in parse_sqs_message
+
+Status-only events (no `transcripts` key) are automatically skipped. If you see other unexpected formats, peek at the raw message with the debug command in the SQS Consumer Reference section above.
+
 ### Fallback: Open mic approach (if BlackHole causes issues)
 
 If the Multi-Output Device breaks Genesys audio:
@@ -272,13 +423,6 @@ This is less clean (ambient noise) but works without any virtual audio device co
 - Confirm the agent on the call is listed in `agents.txt`
 - Check the terminal for `Subscribed to transcripts for conversation` log messages
 - Verify the `.env` file has correct Genesys credentials
-
-### SQS consumer not capturing events
-
-- Verify the consumer is running: you should see `Polling SQS queue:` in the terminal
-- Check AWS auth: `aws sso login --profile 765425735388_admin-role`
-- Verify messages exist: `aws sqs get-queue-attributes --queue-url $SQS_QUEUE_URL --attribute-names ApproximateNumberOfMessages --profile 765425735388_admin-role`
-- If messages are sitting in SQS but not consumed, restart the consumer
 
 ---
 

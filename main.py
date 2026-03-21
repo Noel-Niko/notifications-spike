@@ -422,6 +422,15 @@ async def recover_active_conversations(
     )
     resp.raise_for_status()
     conversations = resp.json().get("entities") or []
+    log.info(
+        "Recovery poll returned %d conversation(s) from GET /api/v2/conversations",
+        len(conversations),
+    )
+    if not conversations:
+        log.warning(
+            "GET /api/v2/conversations returned 0 entities — this endpoint requires "
+            "user-context auth; client_credentials may return empty results (see issue #8)"
+        )
 
     conv_ids = extract_active_conversation_ids(conversations, agent_user_ids)
     recovered = 0
@@ -444,22 +453,46 @@ def _conversation_times(event_body: Dict[str, Any]) -> Tuple[Optional[str], Opti
     if not isinstance(participants, list):
         return None, None
 
-    best_start: Optional[str] = None
-    best_end: Optional[str] = None
-    best_is_active = False
+    conv_id = event_body.get("id", "?")
 
+    # Debug: dump all agent participants so we can see exactly what Genesys sends
+    agent_participants = []
     for part in participants:
         if not isinstance(part, dict):
             continue
         purpose = part.get("purpose")
         if not isinstance(purpose, str) or purpose.lower() != "agent":
             continue
+        agent_participants.append({
+            "userId": part.get("userId"),
+            "connectedTime": part.get("connectedTime"),
+            "endTime": part.get("endTime"),
+            "state": part.get("state"),
+            "purpose": purpose,
+        })
 
-        connected = part.get("connectedTime")
+    if agent_participants:
+        log.debug(
+            "Conversation %s has %d agent participant(s): %s",
+            conv_id,
+            len(agent_participants),
+            json.dumps(agent_participants, default=str),
+        )
+
+    best_start: Optional[str] = None
+    best_end: Optional[str] = None
+    best_is_active = False
+
+    for agent in agent_participants:
+        connected = agent["connectedTime"]
         if not connected:
+            log.debug(
+                "Conversation %s skipping agent %s (no connectedTime, state=%s, endTime=%s)",
+                conv_id, agent["userId"], agent["state"], agent["endTime"],
+            )
             continue
 
-        ended = part.get("endTime")
+        ended = agent["endTime"]
         is_active = ended is None
 
         if best_start is None or (is_active and not best_is_active) or (
@@ -468,6 +501,14 @@ def _conversation_times(event_body: Dict[str, Any]) -> Tuple[Optional[str], Opti
             best_start = connected
             best_end = ended
             best_is_active = is_active
+
+    # Warn when we see agents but none are active — this is the stuck-state scenario
+    if agent_participants and not best_is_active:
+        log.warning(
+            "Conversation %s: no active agent found. best_start=%s best_end=%s participants=%s",
+            conv_id, best_start, best_end,
+            json.dumps(agent_participants, default=str),
+        )
 
     return best_start, best_end
 

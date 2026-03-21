@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+import logging
+
 import pytest
 
 from main import extract_active_conversation_ids, _conversation_times
@@ -19,12 +22,15 @@ def _make_participant(
     purpose: str = "agent",
     connected_time: str | None = "2026-03-20T18:00:00Z",
     end_time: str | None = None,
+    state: str | None = None,
 ) -> dict:
     p = {"userId": user_id, "purpose": purpose}
     if connected_time is not None:
         p["connectedTime"] = connected_time
     if end_time is not None:
         p["endTime"] = end_time
+    if state is not None:
+        p["state"] = state
     return p
 
 
@@ -259,3 +265,246 @@ class TestConversationTimes:
         start, end = _conversation_times(event_body)
         assert start == "2026-03-20T18:01:05Z"
         assert end is None
+
+
+# ---------------------------------------------------------------------------
+# Tests for _conversation_times debug/warning logging (issue #7/#8 diagnostics)
+# ---------------------------------------------------------------------------
+
+
+class TestConversationTimesLogging:
+    """Verify diagnostic logging added for issue #7 stuck-state debugging."""
+
+    def test_warns_when_all_agents_ended(self, caplog):
+        """When agents exist but all have endTime, emit a WARNING with participant dump."""
+        event_body = {
+            "id": "conv-stuck",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time="2026-03-20T18:00:00Z",
+                    end_time="2026-03-20T18:05:00Z",
+                    state="disconnected",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.WARNING, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        assert start == "2026-03-20T18:00:00Z"
+        assert end == "2026-03-20T18:05:00Z"
+
+        warning_msgs = [r for r in caplog.records if r.levelno == logging.WARNING]
+        assert len(warning_msgs) == 1
+        assert "conv-stuck" in warning_msgs[0].message
+        assert "no active agent found" in warning_msgs[0].message
+        assert "agent-111" in warning_msgs[0].message
+
+    def test_no_warning_when_active_agent_exists(self, caplog):
+        """When an active agent is found, no warning should be emitted."""
+        event_body = {
+            "id": "conv-ok",
+            "participants": [
+                _make_participant("agent-111", connected_time="2026-03-20T18:00:00Z"),
+            ],
+        }
+        with caplog.at_level(logging.WARNING, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        assert start == "2026-03-20T18:00:00Z"
+        assert end is None
+
+        warning_msgs = [r for r in caplog.records if r.levelno == logging.WARNING]
+        assert len(warning_msgs) == 0
+
+    def test_no_warning_when_no_agent_participants(self, caplog):
+        """When there are no agent participants at all, no warning (nothing to report)."""
+        event_body = {
+            "id": "conv-noagent",
+            "participants": [
+                _make_participant("cust-1", purpose="customer"),
+            ],
+        }
+        with caplog.at_level(logging.WARNING, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        assert start is None
+        assert end is None
+
+        warning_msgs = [r for r in caplog.records if r.levelno == logging.WARNING]
+        assert len(warning_msgs) == 0
+
+    def test_debug_logs_agent_participant_dump(self, caplog):
+        """At DEBUG level, all agent participants should be dumped as JSON."""
+        event_body = {
+            "id": "conv-debug",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time=None,
+                    end_time="2026-03-20T18:01:00Z",
+                    state="terminated",
+                ),
+                _make_participant(
+                    "agent-222",
+                    connected_time="2026-03-20T18:01:05Z",
+                    state="connected",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.DEBUG, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        assert start == "2026-03-20T18:01:05Z"
+        assert end is None
+
+        debug_msgs = [r for r in caplog.records if r.levelno == logging.DEBUG]
+        # Should have the participant dump + a skip message for agent-111
+        dump_msgs = [m for m in debug_msgs if "agent participant(s)" in m.message]
+        assert len(dump_msgs) == 1
+        assert "2 agent participant(s)" in dump_msgs[0].message
+        assert "agent-111" in dump_msgs[0].message
+        assert "agent-222" in dump_msgs[0].message
+
+        skip_msgs = [m for m in debug_msgs if "skipping agent" in m.message]
+        assert len(skip_msgs) == 1
+        assert "agent-111" in skip_msgs[0].message
+        assert "terminated" in skip_msgs[0].message
+
+    def test_debug_logs_include_state_field(self, caplog):
+        """The state field from Genesys should appear in debug participant dumps."""
+        event_body = {
+            "id": "conv-state",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time="2026-03-20T18:00:00Z",
+                    state="connected",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.DEBUG, logger="transcript-recorder"):
+            _conversation_times(event_body)
+
+        debug_msgs = [r for r in caplog.records if r.levelno == logging.DEBUG]
+        dump_msgs = [m for m in debug_msgs if "agent participant(s)" in m.message]
+        assert len(dump_msgs) == 1
+        # Parse the JSON from the log message to verify state is included
+        log_text = dump_msgs[0].message
+        json_start = log_text.index("[")
+        participants_json = json.loads(log_text[json_start:])
+        assert participants_json[0]["state"] == "connected"
+
+    def test_warns_with_multiple_ended_agents_dumps_all(self, caplog):
+        """Warning should include all agent participants for diagnosis."""
+        event_body = {
+            "id": "conv-multi-ended",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time="2026-03-20T17:50:00Z",
+                    end_time="2026-03-20T17:55:00Z",
+                    state="disconnected",
+                ),
+                _make_participant(
+                    "agent-222",
+                    connected_time="2026-03-20T17:55:05Z",
+                    end_time="2026-03-20T18:00:00Z",
+                    state="disconnected",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.WARNING, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        assert start == "2026-03-20T17:55:05Z"
+        assert end == "2026-03-20T18:00:00Z"
+
+        warning_msgs = [r for r in caplog.records if r.levelno == logging.WARNING]
+        assert len(warning_msgs) == 1
+        assert "agent-111" in warning_msgs[0].message
+        assert "agent-222" in warning_msgs[0].message
+
+    def test_missed_call_no_connected_time_has_end_time(self, caplog):
+        """Simulate exact issue #7 scenario: agent alerting timed out, no connectedTime, has endTime."""
+        event_body = {
+            "id": "conv-missed",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time=None,
+                    end_time="2026-03-20T19:45:00Z",
+                    state="terminated",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.DEBUG, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        # No connectedTime means function returns (None, None)
+        assert start is None
+        assert end is None
+
+        # Should have debug skip message
+        debug_msgs = [r for r in caplog.records if r.levelno == logging.DEBUG]
+        skip_msgs = [m for m in debug_msgs if "skipping agent" in m.message]
+        assert len(skip_msgs) == 1
+        assert "no connectedTime" in skip_msgs[0].message
+
+    def test_missed_call_then_rerouted_second_alerting(self, caplog):
+        """Issue #7 mid-state: first agent timed out, second alerting (not yet connected)."""
+        event_body = {
+            "id": "conv-reroute-alerting",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time=None,
+                    end_time="2026-03-20T19:45:00Z",
+                    state="terminated",
+                ),
+                _make_participant(
+                    "agent-111",
+                    connected_time=None,
+                    state="alerting",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.DEBUG, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        # Neither participant has connectedTime
+        assert start is None
+        assert end is None
+
+        debug_msgs = [r for r in caplog.records if r.levelno == logging.DEBUG]
+        skip_msgs = [m for m in debug_msgs if "skipping agent" in m.message]
+        assert len(skip_msgs) == 2
+
+    def test_missed_call_then_rerouted_second_connected(self, caplog):
+        """Issue #7 recovery state: first timed out, second now connected."""
+        event_body = {
+            "id": "conv-reroute-connected",
+            "participants": [
+                _make_participant(
+                    "agent-111",
+                    connected_time=None,
+                    end_time="2026-03-20T19:45:00Z",
+                    state="terminated",
+                ),
+                _make_participant(
+                    "agent-111",
+                    connected_time="2026-03-20T19:46:00Z",
+                    state="connected",
+                ),
+            ],
+        }
+        with caplog.at_level(logging.WARNING, logger="transcript-recorder"):
+            start, end = _conversation_times(event_body)
+
+        # Should find the connected participant
+        assert start == "2026-03-20T19:46:00Z"
+        assert end is None
+
+        # No warning because an active agent was found
+        warning_msgs = [r for r in caplog.records if r.levelno == logging.WARNING]
+        assert len(warning_msgs) == 0

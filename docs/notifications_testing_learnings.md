@@ -26,6 +26,8 @@ The startup sequence is: get OAuth token → create channel → subscribe agent 
 
 **Fix**: Added `recover_active_conversations()` which calls `GET /api/v2/conversations` immediately after the WebSocket connects, finds conversations where a monitored agent is connected but not ended, and subscribes to them. This catches calls that started during the startup window.
 
+**⚠️ Update (see issue #8)**: `recover_active_conversations()` likely never worked. `GET /api/v2/conversations` returns conversations for the *logged-in user*, but with `client_credentials` OAuth there is no user context — the API returns an empty `entities` array. The real reason issue #2 was mitigated is that testers followed the "Prevention" step below.
+
 **Prevention**: Always wait for the `WebSocket connected (agents=N, max_concurrent_conversations=10)` log line before taking the first call. The recovery function is a safety net, not a replacement for proper sequencing.
 
 **Time lost**: One partial test run (had to redo 4 of 6 calls).
@@ -92,6 +94,77 @@ The same pattern affects `extract_active_conversation_ids()` for startup recover
 **Data action**: Removed `346de798` JSONL from EventBridge and matching Deepgram file (`nova-3_2026-03-20T22-02-43Z.json`). Need to re-record Shawshank Redemption as the 6th call.
 
 **Time lost**: One call out of 6, plus diagnosis time.
+
+---
+
+## 7. Notification system stuck after missed call and agent re-ready
+
+**Symptom**: Conversation `7cf1beb6` captured by EventBridge/SQS but NOT by notifications-spike. SQS consumer logs show active transcription events being saved at 19:56–19:57, but the notification system terminal shows the conversation stuck at `connected=False ended=True` since 19:46 — a ~10-minute gap with no recovery.
+
+```
+# Notification system (stuck):
+[2026-03-20 19:46:03,876] INFO Conversation 7cf1beb6-... agent state: connected=False ended=True
+[2026-03-20 19:48:49,608] INFO Conversation 7cf1beb6-... agent state: connected=False ended=True
+
+# SQS consumer (working):
+[2026-03-20 19:56:58,045] INFO Saved event for conversation 7cf1beb6-... to EventBridge/conversation_events/7cf1beb6-....jsonl
+[2026-03-20 19:57:02,741] INFO Saved event for conversation 7cf1beb6-... to EventBridge/conversation_events/7cf1beb6-....jsonl
+```
+
+**Trigger**: Agent misses the first call attempt (doesn't answer in time), then sets themselves as "ready" again in Genesys. The call re-routes to the same agent, who answers successfully on the second attempt.
+
+**Root cause**: The notification system's state machine cannot recover from a missed-call deactivation mid-session. The sequence is:
+
+1. Call arrives, agent is alerted → Genesys creates participant with `connectedTime=null`
+2. Agent doesn't answer in time → Genesys sets `endTime` on that participant (alerting timed out)
+3. `_conversation_times()` skips participants with no `connectedTime` (line 459: `if not connected: continue`), but the conversation update event still carries the ended participant data, producing `connected=False ended=True` in the state evaluation at line 550
+4. The `elif call_end:` branch fires, but since the conversation was never in `active_conversations` (it was never activated because `connectedTime` was never set), `deactivate_conversation` is a no-op
+5. Agent re-readies in Genesys → call re-routes → new agent participant created in alerting state (`connectedTime=null`)
+6. Agent answers → new participant gets `connectedTime` set, `endTime=null`
+7. **But**: the `v2.users.{agent_id}.conversations` event payload from Genesys may not immediately reflect the new participant's connected state, OR the notification system's event processing has already settled into the `connected=False ended=True` loop from the first participant's data, and never receives a clean `connected=True ended=False` event that would trigger `schedule_conversation`
+
+The SQS/EventBridge system is unaffected because it has **no state machine** — it passively consumes all org-wide transcription events from the SQS queue regardless of conversation lifecycle state.
+
+**Key architectural difference**: The notification system requires an explicit subscribe→receive→unsubscribe cycle per conversation, while EventBridge delivers all events to a single queue with no per-conversation subscription management.
+
+**Why `recover_active_conversations()` doesn't help**: This function (line 405) polls `GET /api/v2/conversations` to find active conversations, but it **only runs once at WebSocket connect** during startup. There is no periodic recovery mechanism during the session. If a conversation enters a stuck state mid-session, there is no way to recover it.
+
+**Fix needed**: The fix must be event-driven (not periodic polling) — 30–60s polling is too slow and would miss the start of re-routed calls. Additionally, periodic polling via `recover_active_conversations()` won't work because `GET /api/v2/conversations` returns nothing with `client_credentials` auth (see issue #8). Options:
+
+1. **Re-activation on state change (recommended)**: When the WebSocket receives a `v2.users.{agent_id}.conversations` event where `_conversation_times` returns `(call_start, None)` — i.e., an active agent participant — call `schedule_conversation` regardless of whether the conversation was previously deactivated. The current code already does this at line 548 (`if call_start and not call_end: schedule_conversation`), so the real fix is in `_conversation_times`: ensure it correctly identifies the new active participant even when previous participants have ended. Debug logging should be added to dump the raw participant list when the function returns `(None, ...)` to diagnose exactly what Genesys sends for the re-routed participant.
+2. **Remove the one-directional state assumption**: Allow re-subscription. When a conversation update event arrives and ANY agent participant (not just the first) shows `connectedTime` set with no `endTime`, treat it as active. The current `_conversation_times` logic does prefer active participants (lines 465–466), so the issue may be in what Genesys sends in the event payload, not in the parsing logic.
+3. **Fix the API first (issue #8), then add fast periodic polling**: Once `recover_active_conversations()` uses an API that works with `client_credentials` (e.g., `POST /api/v2/analytics/conversations/details/query`), run it every 5–10 seconds as a safety net alongside the event-driven re-activation.
+
+**Prevention**: Until fixed, if you miss a call and re-ready:
+- Do NOT rely on restarting the notification system — `recover_active_conversations()` doesn't work (see issue #8)
+- Accept that the notification system will miss that conversation and rely on EventBridge/SQS data
+
+**Data action**: Conversation `7cf1beb6` has EventBridge data only. Notification system JSONL is empty/missing for this conversation.
+
+---
+
+## 8. `recover_active_conversations()` returns nothing — wrong API for `client_credentials` auth
+
+**Symptom**: After restarting the notification system during an active conversation (attempting the workaround from issue #7), the recovery log shows `No in-progress conversations to recover` even though an agent is actively connected to a call.
+
+```
+[2026-03-20 20:07:22,504] INFO HTTP Request: GET https://api.mypurecloud.com/api/v2/conversations "HTTP/1.1 200 OK"
+[2026-03-20 20:07:22,505] INFO No in-progress conversations to recover
+```
+
+**Root cause**: `recover_active_conversations()` calls `GET /api/v2/conversations` (line 419), which returns conversations **for the currently authenticated user**. The system authenticates with `client_credentials` OAuth grant (line 170), which has no user context — it's a service-to-service token. The API returns `200 OK` with an empty `entities` array because there's no "logged-in user" to query conversations for.
+
+This means `recover_active_conversations()` has **never actually recovered a conversation**. The issue #2 symptom was mitigated entirely by the "Prevention" step (waiting for WebSocket to connect before taking calls), not by the recovery code.
+
+**Fix needed**: Replace `GET /api/v2/conversations` with an API that works with `client_credentials` and can query by agent user ID. Options:
+
+1. **`POST /api/v2/analytics/conversations/details/query`** — query active conversations filtered by agent user IDs. Works with `client_credentials` as it's a platform analytics endpoint, not a user-context endpoint.
+2. **`GET /api/v2/users/{userId}/conversations`** — iterate through each monitored agent's user ID and query their conversations individually. Check whether this endpoint supports `client_credentials` auth.
+3. **Switch to `authorization_code` grant** — authenticate as an actual Genesys user so `GET /api/v2/conversations` works. Adds complexity (requires user login flow, token refresh) and doesn't solve the underlying design issue.
+
+Option 1 is likely the cleanest approach for a multi-agent monitoring system.
+
+**Impact on issue #7**: The recommended fix for issue #7 (periodic polling via `recover_active_conversations`) depends on this fix being applied first — polling an API that always returns empty is useless regardless of frequency.
 
 ---
 
