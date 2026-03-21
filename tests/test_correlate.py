@@ -18,6 +18,7 @@ from scripts.correlate_latency import (
     compute_latency,
     correlate,
     correlate_eventbridge,
+    export_csv,
 )
 
 
@@ -168,6 +169,19 @@ class TestLoadDeepgramSession:
         assert len(events) == 1
         assert events[0].transcript == "how can i help you today"
 
+    def test_extracts_confidence(self, deepgram_session_file: Path):
+        events = load_deepgram_session(deepgram_session_file)
+        assert events[0].confidence == 0.95
+        assert events[1].confidence == 0.97
+
+    def test_missing_confidence_defaults_to_zero(self, tmp_path: Path):
+        session = _deepgram_session()
+        del session["transcripts"][0]["confidence"]
+        fp = tmp_path / "session.json"
+        fp.write_text(json.dumps(session))
+        events = load_deepgram_session(fp)
+        assert events[0].confidence == 0.0
+
 
 class TestLoadGenesysConversation:
     def test_loads_events(self, genesys_jsonl_file: Path):
@@ -195,6 +209,19 @@ class TestLoadGenesysConversation:
         loaded = load_genesys_conversation(fp)
         assert len(loaded) == 1
         assert loaded[0].transcript == "how can i help you today"
+
+    def test_extracts_confidence(self, genesys_jsonl_file: Path):
+        events = load_genesys_conversation(genesys_jsonl_file)
+        assert events[0].confidence == 0.96
+        assert events[1].confidence == 0.98
+
+    def test_missing_confidence_defaults_to_zero(self, tmp_path: Path):
+        events = _genesys_events()
+        del events[0]["transcript"]["alternatives"][0]["confidence"]
+        fp = tmp_path / "conversation.jsonl"
+        fp.write_text("\n".join(json.dumps(e) for e in events))
+        loaded = load_genesys_conversation(fp)
+        assert loaded[0].confidence == 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -396,6 +423,44 @@ class TestComputeLatency:
         assert result.genesys_received_at == STREAM_START + 3.0
         assert result.audio_wall_clock_end == STREAM_START + 2.0
 
+    def test_passes_through_confidence(self):
+        dg = DeepgramEvent(
+            transcript="thank you for calling grainger",
+            audio_wall_clock_start=STREAM_START + 2.0,
+            audio_wall_clock_end=STREAM_START + 4.5,
+            confidence=0.95,
+        )
+        gn = GenesysEvent(
+            transcript="thank you for calling grainger",
+            received_at=STREAM_START + 5.3,
+            channel="INTERNAL",
+            utterance_id="utt-001",
+            offset_ms=2000,
+            duration_ms=2500,
+            confidence=0.96,
+        )
+        result = compute_latency(dg, gn)
+        assert result.deepgram_confidence == 0.95
+        assert result.genesys_confidence == 0.96
+
+    def test_confidence_defaults_when_not_provided(self):
+        dg = DeepgramEvent(
+            transcript="test",
+            audio_wall_clock_start=STREAM_START + 1.0,
+            audio_wall_clock_end=STREAM_START + 2.0,
+        )
+        gn = GenesysEvent(
+            transcript="test",
+            received_at=STREAM_START + 2.5,
+            channel="EXTERNAL",
+            utterance_id="utt-003",
+            offset_ms=1000,
+            duration_ms=1000,
+        )
+        result = compute_latency(dg, gn)
+        assert result.deepgram_confidence == 0.0
+        assert result.genesys_confidence == 0.0
+
 
 # ---------------------------------------------------------------------------
 # Tests: End-to-end correlation
@@ -410,6 +475,16 @@ class TestCorrelate:
         assert results[0].true_latency_s == pytest.approx(0.8, abs=0.001)
         # Second utterance: received at +7.8, audio ended at +7.0 → latency 0.8s
         assert results[1].true_latency_s == pytest.approx(0.8, abs=0.001)
+
+    def test_end_to_end_propagates_confidence(
+        self, deepgram_session_file: Path, genesys_jsonl_file: Path
+    ):
+        results = correlate(deepgram_session_file, genesys_jsonl_file)
+        assert len(results) == 2
+        assert results[0].deepgram_confidence == 0.95
+        assert results[0].genesys_confidence == 0.96
+        assert results[1].deepgram_confidence == 0.97
+        assert results[1].genesys_confidence == 0.98
 
     def test_returns_empty_for_no_matches(self, tmp_path: Path):
         dg_session = _deepgram_session()
@@ -585,6 +660,19 @@ class TestLoadEventBridgeConversation:
         utterance_ids = [e.utterance_id for e in loaded]
         assert len(set(utterance_ids)) == 2
 
+    def test_extracts_confidence(self, eventbridge_jsonl_file: Path):
+        events = load_eventbridge_conversation(eventbridge_jsonl_file)
+        assert events[0].confidence == 0.96
+        assert events[1].confidence == 0.98
+
+    def test_missing_confidence_defaults_to_zero(self, tmp_path: Path):
+        events = _eventbridge_events()
+        del events[0]["transcripts"][0]["alternatives"][0]["confidence"]
+        fp = tmp_path / "eb.jsonl"
+        fp.write_text("\n".join(json.dumps(e) for e in events))
+        loaded = load_eventbridge_conversation(fp)
+        assert loaded[0].confidence == 0.0
+
 
 class TestCorrelateEventBridge:
     def test_end_to_end(
@@ -598,3 +686,50 @@ class TestCorrelateEventBridge:
         assert results[0].true_latency_s == pytest.approx(1.0, abs=0.001)
         # Second: received at +8.0, audio ended at +7.0 → 1.0s
         assert results[1].true_latency_s == pytest.approx(1.0, abs=0.001)
+
+    def test_end_to_end_propagates_confidence(
+        self, deepgram_session_file: Path, eventbridge_jsonl_file: Path
+    ):
+        results = correlate_eventbridge(
+            deepgram_session_file, eventbridge_jsonl_file
+        )
+        assert len(results) == 2
+        assert results[0].deepgram_confidence == 0.95
+        assert results[0].genesys_confidence == 0.96
+        assert results[1].deepgram_confidence == 0.97
+        assert results[1].genesys_confidence == 0.98
+
+
+# ---------------------------------------------------------------------------
+# Tests: CSV export
+# ---------------------------------------------------------------------------
+
+
+class TestExportCsv:
+    def test_csv_includes_confidence_columns(self, tmp_path: Path):
+        results = [
+            CorrelationResult(
+                deepgram_transcript="thank you for calling grainger",
+                genesys_transcript="thank you for calling grainger",
+                audio_wall_clock_end=STREAM_START + 4.5,
+                genesys_received_at=STREAM_START + 5.3,
+                true_latency_s=0.8,
+                true_latency_ms=800.0,
+                channel="INTERNAL",
+                similarity=0.99,
+                deepgram_confidence=0.95,
+                genesys_confidence=0.96,
+            ),
+        ]
+        csv_path = tmp_path / "test_output.csv"
+        export_csv(results, csv_path)
+
+        import csv
+
+        with csv_path.open() as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+        assert "deepgram_confidence" in reader.fieldnames
+        assert "genesys_confidence" in reader.fieldnames
+        assert float(rows[0]["deepgram_confidence"]) == 0.95
+        assert float(rows[0]["genesys_confidence"]) == 0.96

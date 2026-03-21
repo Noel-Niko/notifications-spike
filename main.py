@@ -19,6 +19,7 @@ import logging
 import os
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
@@ -402,37 +403,183 @@ def extract_active_conversation_ids(
     return active
 
 
+def build_analytics_query(agent_user_ids: Set[str]) -> Dict[str, Any]:
+    """Build the request body for POST /api/v2/analytics/conversations/details/query.
+
+    Queries for conversations in the last 24 hours where any of the monitored
+    agents participated with purpose=agent.
+
+    Args:
+        agent_user_ids: Set of Genesys user IDs to filter on.
+
+    Returns:
+        Dict suitable for passing as ``json=`` to httpx.
+    """
+    now = datetime.now(timezone.utc)
+    interval_start = now - timedelta(hours=24)
+    interval = f"{interval_start.strftime('%Y-%m-%dT%H:%M:%S.000Z')}/{now.strftime('%Y-%m-%dT%H:%M:%S.000Z')}"
+
+    return {
+        "interval": interval,
+        "order": "desc",
+        "orderBy": "conversationStart",
+        "paging": {"pageSize": 100, "pageNumber": 1},
+        "segmentFilters": [
+            {
+                "type": "or",
+                "predicates": [
+                    {"type": "dimension", "dimension": "userId", "operator": "matches", "value": uid}
+                    for uid in sorted(agent_user_ids)
+                ],
+            },
+            {
+                "type": "and",
+                "predicates": [
+                    {"type": "dimension", "dimension": "purpose", "operator": "matches", "value": "agent"}
+                ],
+            },
+        ],
+    }
+
+
+async def query_active_conversations(
+    client: httpx.AsyncClient,
+    token: str,
+    agent_user_ids: Set[str],
+) -> List[Dict[str, Any]]:
+    """Query Genesys analytics for recent conversations involving monitored agents.
+
+    Uses POST /api/v2/analytics/conversations/details/query which works with
+    client_credentials auth (unlike GET /api/v2/conversations which requires
+    user-context auth).
+
+    Args:
+        client: HTTP client.
+        token: OAuth bearer token.
+        agent_user_ids: Set of Genesys user IDs to query for.
+
+    Returns:
+        List of conversation dicts from the analytics response.
+    """
+    body = build_analytics_query(agent_user_ids)
+    log.debug("Analytics query body: %s", json.dumps(body, indent=2))
+
+    try:
+        resp = await client.post(
+            f"{REGION_API_BASE}/api/v2/analytics/conversations/details/query",
+            json=body,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            },
+        )
+        resp.raise_for_status()
+    except httpx.HTTPStatusError as exc:
+        detail = _read_error_detail(exc.response)
+        log.warning(
+            "Analytics conversation query failed (status %s): %s",
+            exc.response.status_code,
+            detail,
+        )
+        return []
+
+    data = resp.json()
+    conversations = data.get("conversations") or []
+    log.info(
+        "Analytics query returned %d conversation(s) from POST /api/v2/analytics/conversations/details/query",
+        len(conversations),
+    )
+    if conversations:
+        log.debug("Analytics response conversations: %s", json.dumps(conversations, default=str))
+    return conversations
+
+
+def extract_active_from_analytics(
+    conversations: List[Dict[str, Any]],
+    agent_user_ids: Set[str],
+) -> Set[str]:
+    """Extract active conversation IDs from an analytics details query response.
+
+    The analytics response has a different structure from GET /api/v2/conversations:
+    each conversation has ``conversationId``, and participants contain ``sessions``
+    with ``segments`` arrays. A conversation is considered active if any monitored
+    agent has a segment with ``segmentType`` containing 'interact' or 'connected'
+    and no ``segmentEnd``.
+
+    Pure function — no side effects.
+
+    Args:
+        conversations: List from the ``conversations`` key of the analytics response.
+        agent_user_ids: Set of Genesys user IDs we are monitoring.
+
+    Returns:
+        Set of conversation IDs with active agent participation.
+    """
+    active: Set[str] = set()
+    for conv in conversations:
+        conv_id = conv.get("conversationId")
+        if not conv_id:
+            continue
+
+        # Check if conversation itself has ended
+        conv_end = conv.get("conversationEnd")
+        if conv_end:
+            log.debug("Conversation %s already ended at %s, skipping", conv_id, conv_end)
+            continue
+
+        for part in conv.get("participants") or []:
+            if not isinstance(part, dict):
+                continue
+            purpose = part.get("purpose")
+            if not isinstance(purpose, str) or purpose.lower() != "agent":
+                continue
+            user_id = part.get("userId")
+            if user_id not in agent_user_ids:
+                continue
+
+            # Check sessions/segments for active participation
+            for session in part.get("sessions") or []:
+                for segment in session.get("segments") or []:
+                    seg_type = (segment.get("segmentType") or "").lower()
+                    seg_end = segment.get("segmentEnd")
+                    if seg_type in ("interact", "connected") and not seg_end:
+                        log.debug(
+                            "Conversation %s: agent %s has active %s segment (no segmentEnd)",
+                            conv_id, user_id, seg_type,
+                        )
+                        active.add(conv_id)
+                        break
+                else:
+                    continue
+                break
+            else:
+                continue
+            break
+
+    log.info(
+        "Analytics extraction found %d active conversation(s) from %d total",
+        len(active), len(conversations),
+    )
+    return active
+
+
 async def recover_active_conversations(
     client: httpx.AsyncClient,
     token: str,
     chan_id: str,
     agent_user_ids: Set[str],
 ) -> int:
-    """Poll Genesys for in-progress conversations and subscribe to them.
+    """Poll Genesys analytics for in-progress conversations and subscribe to them.
 
-    Called once after the WebSocket connects to catch any conversations that
-    started during the startup window.
+    Uses the analytics conversations details query endpoint which works with
+    client_credentials auth. Called once after the WebSocket connects to catch
+    any conversations that started during the startup window.
 
     Returns:
         Number of conversations recovered.
     """
-    resp = await client.get(
-        f"{REGION_API_BASE}/api/v2/conversations",
-        headers={"Authorization": f"Bearer {token}"},
-    )
-    resp.raise_for_status()
-    conversations = resp.json().get("entities") or []
-    log.info(
-        "Recovery poll returned %d conversation(s) from GET /api/v2/conversations",
-        len(conversations),
-    )
-    if not conversations:
-        log.warning(
-            "GET /api/v2/conversations returned 0 entities — this endpoint requires "
-            "user-context auth; client_credentials may return empty results (see issue #8)"
-        )
-
-    conv_ids = extract_active_conversation_ids(conversations, agent_user_ids)
+    conversations = await query_active_conversations(client, token, agent_user_ids)
+    conv_ids = extract_active_from_analytics(conversations, agent_user_ids)
     recovered = 0
     for conv_id in conv_ids:
         if conv_id not in active_conversations:

@@ -39,6 +39,7 @@ class DeepgramEvent:
     transcript: str
     audio_wall_clock_start: float
     audio_wall_clock_end: float
+    confidence: float = 0.0
 
 
 @dataclass
@@ -49,6 +50,7 @@ class GenesysEvent:
     utterance_id: str = ""
     offset_ms: int = 0
     duration_ms: int = 0
+    confidence: float = 0.0
 
 
 @dataclass
@@ -61,6 +63,8 @@ class CorrelationResult:
     true_latency_ms: float
     channel: str
     similarity: float = 0.0
+    deepgram_confidence: float = 0.0
+    genesys_confidence: float = 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -85,6 +89,7 @@ def load_deepgram_session(path: Path) -> list[DeepgramEvent]:
                 transcript=t["transcript"],
                 audio_wall_clock_start=wc_start if wc_start is not None else 0.0,
                 audio_wall_clock_end=wc_end,
+                confidence=t.get("confidence", 0.0),
             )
         )
     return events
@@ -112,6 +117,7 @@ def load_genesys_conversation(path: Path) -> list[GenesysEvent]:
                 utterance_id=transcript_data.get("utteranceId", ""),
                 offset_ms=alt.get("offsetMs", 0),
                 duration_ms=alt.get("durationMs", 0),
+                confidence=alt.get("confidence", 0.0),
             )
         )
     return events
@@ -151,6 +157,7 @@ def load_eventbridge_conversation(path: Path) -> list[GenesysEvent]:
                     utterance_id=utterance_id,
                     offset_ms=alt.get("offsetMs", 0),
                     duration_ms=alt.get("durationMs", 0),
+                    confidence=alt.get("confidence", 0.0),
                 )
             )
     return events
@@ -239,6 +246,8 @@ def compute_latency(
         true_latency_ms=latency_s * 1000,
         channel=gn.channel,
         similarity=similarity,
+        deepgram_confidence=dg.confidence,
+        genesys_confidence=gn.confidence,
     )
 
 
@@ -330,12 +339,16 @@ def print_summary(results: list[CorrelationResult]) -> None:
                 f"(n={len(ch_latencies)})"
             )
 
-    print(f"\n{'─'*60}")
-    print(f"{'Latency':>10}  {'Sim':>5}  {'Ch':>8}  Transcript")
-    print(f"{'─'*60}")
+    print(f"\n{'─'*74}")
+    print(f"{'Latency':>10}  {'Sim':>5}  {'DG Conf':>7}  {'GN Conf':>7}  {'Ch':>8}  Transcript")
+    print(f"{'─'*74}")
     for r in results:
-        trunc = r.genesys_transcript[:45] + ("..." if len(r.genesys_transcript) > 45 else "")
-        print(f"{r.true_latency_ms:>8.0f}ms  {r.similarity:>5.2f}  {r.channel:>8}  {trunc}")
+        trunc = r.genesys_transcript[:35] + ("..." if len(r.genesys_transcript) > 35 else "")
+        print(
+            f"{r.true_latency_ms:>8.0f}ms  {r.similarity:>5.2f}"
+            f"  {r.deepgram_confidence:>7.3f}  {r.genesys_confidence:>7.3f}"
+            f"  {r.channel:>8}  {trunc}"
+        )
     print()
 
 
@@ -353,6 +366,8 @@ def export_csv(results: list[CorrelationResult], output_path: Path) -> None:
             "true_latency_ms",
             "channel",
             "similarity",
+            "deepgram_confidence",
+            "genesys_confidence",
         ])
         for r in results:
             writer.writerow([
@@ -364,6 +379,8 @@ def export_csv(results: list[CorrelationResult], output_path: Path) -> None:
                 round(r.true_latency_ms, 1),
                 r.channel,
                 round(r.similarity, 3),
+                round(r.deepgram_confidence, 3),
+                round(r.genesys_confidence, 3),
             ])
     logger.info("Results exported to %s", output_path)
 

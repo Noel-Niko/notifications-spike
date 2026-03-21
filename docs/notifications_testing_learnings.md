@@ -156,15 +156,24 @@ The SQS/EventBridge system is unaffected because it has **no state machine** —
 
 This means `recover_active_conversations()` has **never actually recovered a conversation**. The issue #2 symptom was mitigated entirely by the "Prevention" step (waiting for WebSocket to connect before taking calls), not by the recovery code.
 
-**Fix needed**: Replace `GET /api/v2/conversations` with an API that works with `client_credentials` and can query by agent user ID. Options:
+**Fix applied**: Replaced `GET /api/v2/conversations` with `POST /api/v2/analytics/conversations/details/query` — a platform analytics endpoint that works with `client_credentials` auth because it queries org-wide data rather than "current user" data.
 
-1. **`POST /api/v2/analytics/conversations/details/query`** — query active conversations filtered by agent user IDs. Works with `client_credentials` as it's a platform analytics endpoint, not a user-context endpoint.
-2. **`GET /api/v2/users/{userId}/conversations`** — iterate through each monitored agent's user ID and query their conversations individually. Check whether this endpoint supports `client_credentials` auth.
-3. **Switch to `authorization_code` grant** — authenticate as an actual Genesys user so `GET /api/v2/conversations` works. Adds complexity (requires user login flow, token refresh) and doesn't solve the underlying design issue.
+The new implementation:
+- `build_analytics_query(agent_user_ids)` constructs the query body with a 24-hour interval and segment filters for all monitored agent user IDs (purpose=agent)
+- `query_active_conversations(client, token, agent_user_ids)` executes the POST request with error handling
+- `extract_active_from_analytics(conversations, agent_user_ids)` parses the analytics response format (which uses `conversationId`, `participants.sessions.segments` structure) and identifies conversations where a monitored agent has an active `interact` or `connected` segment with no `segmentEnd`
+- Comprehensive debug logging dumps the raw analytics response so the response format can be verified on first live test
 
-Option 1 is likely the cleanest approach for a multi-agent monitoring system.
+**Why not change credentials?** Switching from `client_credentials` to `authorization_code` grant was considered and rejected:
+- `authorization_code` requires interactive user login (not automatable for a server process)
+- Returns conversations for only ONE user — useless for monitoring 1,200 agents
+- Requires stateful token refresh management
+- Violates 12-factor principles (manual intervention, stateful sessions)
+- `client_credentials` is Genesys's recommended auth pattern for server integrations
 
-**Impact on issue #7**: The recommended fix for issue #7 (periodic polling via `recover_active_conversations`) depends on this fix being applied first — polling an API that always returns empty is useless regardless of frequency.
+**Verification needed**: The analytics API response format may differ from what the parser expects. On first live test, check the DEBUG-level logs for the raw response and adjust `extract_active_from_analytics()` if needed. The function logs a warning if the response is empty or the format doesn't match expectations.
+
+**Impact on issue #7**: With this fix applied, `recover_active_conversations()` can now be called periodically (not just at startup) to catch stuck conversations. However, this adds ongoing API load — see section 4d of `docs/analysis_key_points.md` for the 1,200-agent scaling implications.
 
 ---
 
