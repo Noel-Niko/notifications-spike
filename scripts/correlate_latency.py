@@ -25,8 +25,8 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-SIMILARITY_THRESHOLD = 0.55
-MAX_TEMPORAL_DISTANCE_S = 60.0
+SIMILARITY_THRESHOLD = 0.70
+MAX_TEMPORAL_DISTANCE_S = 15.0
 
 
 # ---------------------------------------------------------------------------

@@ -36,7 +36,7 @@ sudo killall coreaudiod
 1. In **System Settings → Sound → Output**, select the **Multi-Output Device** you just created
 2. Alternatively, Option-click the volume icon in the menu bar and select it there
 
-![macOS Sound Output settings showing Multi-Output Device](multi-output%20device.png)
+![macOS Sound Output settings showing Multi-Output Device](../multi-output%20device.png)
 
 You now hear the call audio AND it routes to BlackHole for poc-deepgram to capture.
 
@@ -53,15 +53,15 @@ You now hear the call audio AND it routes to BlackHole for poc-deepgram to captu
    - **Ringer**: Multi-Output Device
 5. Click **Save**
 
-![Genesys Audio Device Profile — "Latency Testing" with MacBook Pro Microphone, Multi-Output Device](audio-settings-in-genesys.png)
+![Genesys Audio Device Profile — "Latency Testing" with MacBook Pro Microphone, Multi-Output Device](../audio-settings-in-genesys.png)
 
 During an active call, you can switch profiles via the **Preferences for Interactions** panel. Select the "Latency Testing" profile (or "Use Computer settings" as a fallback):
 
-![Genesys call — selecting audio profile from Preferences for Interactions](genesys%20settings.jpg)
+![Genesys call — selecting audio profile from Preferences for Interactions](../genesys%20settings.jpg)
 
 The GIF below shows the full Genesys setup flow during a connected call:
 
-![Genesys setup walkthrough](genesys%20setup.gif)
+![Genesys setup walkthrough](../genesys%20setup.gif)
 
 **Verified working configuration:**
 - **macOS System Input**: MacBook Pro Microphone (your voice → Genesys)

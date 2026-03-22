@@ -171,45 +171,26 @@ conversation_events/
 
 ## Cross-System Latency Measurement
 
-Measure true end-to-end latency from spoken audio to transcription delivery by correlating this app's data with [poc-deepgram](../poc-deepgram), which provides ground-truth wall-clock timestamps for when speech actually occurred.
+Measure true end-to-end latency from spoken audio to transcription delivery by correlating this app's data with **poc-deepgram** (a separate repository at `../poc-deepgram`), which provides ground-truth wall-clock timestamps for when speech actually occurred.
 
-### One-Time Setup: Audio Routing
+> **Full setup and test directions**: See [`docs/setup-and-run-directions/manual_test_directions.md`](docs/setup-and-run-directions/manual_test_directions.md) for complete step-by-step instructions including BlackHole audio routing setup, 3-terminal startup sequence (Notifications + EventBridge SQS consumer + poc-deepgram), Genesys audio device configuration, and troubleshooting.
 
-Install [BlackHole](https://existential.audio/blackhole/) to route Genesys call audio into poc-deepgram:
+### Quick Overview
 
-```bash
-brew install blackhole-2ch
-```
+The test setup requires **3 terminals** running simultaneously plus a browser:
 
-Then in **Audio MIDI Setup** (macOS):
-1. Create a **Multi-Output Device** combining your speakers + BlackHole 2ch
-2. Set system output to the Multi-Output Device
+| Terminal | Command | Purpose |
+|----------|---------|---------|
+| 1 | `uv run uvicorn main:app --host 0.0.0.0 --port 8765` | Notifications API (WebSocket) capture |
+| 2 | `SQS_QUEUE_URL=... uv run python -m scripts.sqs_consumer` | EventBridge (SQS) capture |
+| 3 | `cd ../poc-deepgram && uv run uvicorn poc_deepgram.app:create_app --factory --host 0.0.0.0 --port 8766` | Ground-truth audio timing |
+| Browser | `http://localhost:8766` | poc-deepgram UI (select BlackHole 2ch, click Start) |
 
-This lets you hear the call audio while simultaneously routing it to poc-deepgram.
+> **poc-deepgram is a separate repo** — it must be cloned alongside this repo at `../poc-deepgram`. It captures call audio via BlackHole virtual audio routing and sends it to Deepgram for independent transcription with wall-clock timestamps. This provides the ground-truth reference for latency measurement.
 
-### During a Call
+### After a Call
 
-Run both applications simultaneously:
-
-```bash
-# Terminal 1: Start this app (Genesys transcript capture)
-uv run uvicorn main:app --host 0.0.0.0 --port 8765
-
-# Terminal 2: Start poc-deepgram (ground-truth audio timing)
-cd ../poc-deepgram
-uv run uvicorn poc_deepgram.app:create_app --factory --host 0.0.0.0 --port 8766
-```
-
-Then:
-1. Open `http://localhost:8766` in a browser
-2. Select **BlackHole 2ch** as the microphone input
-3. Click **Start**
-4. Take the Genesys call — both systems capture data in parallel
-5. When the call ends, click **Stop** in poc-deepgram
-
-### After the Call
-
-Run the correlation tool to compute true latency:
+Run the correlation tool:
 
 ```bash
 uv run python -m scripts.correlate_latency \
@@ -217,35 +198,32 @@ uv run python -m scripts.correlate_latency \
   --genesys conversation_events/<conversation-id>.jsonl
 ```
 
-This fuzzy-matches utterances between the two systems by text similarity and computes:
-
-```
-true_latency = genesys_receivedAt - deepgram_audio_wall_clock_end
-```
-
-Output includes summary statistics (mean, median, p95, p99), per-channel breakdown, and CSV export to `analysis_results/cross_system/`.
-
-For interactive analysis, use the Jupyter notebook:
+For interactive analysis with visualizations:
 
 ```bash
-cd notebooks
-uv run jupyter notebook cross_system_latency.ipynb
+# Notifications latency analysis
+uv run jupyter notebook notebooks/cross_system_latency-01-RESULTS.ipynb
+
+# EventBridge vs Notifications comparison
+uv run jupyter notebook notebooks/cross_system_latency-02-EB-RESULTS.ipynb
 ```
-
-### How It Works
-
-| System | Role | Key Timestamp |
-|--------|------|---------------|
-| **poc-deepgram** | Captures call audio, provides wall-clock time of speech | `audio_wall_clock_end` (when words were spoken) |
-| **notifications-spike** | Receives Genesys transcription events | `receivedAt` (when text arrived) |
-
-Both apps run on the same machine and use `time.time()`, so clocks are synchronized. The correlation tool matches utterances by fuzzy text similarity (threshold: 0.55) with temporal proximity as a tiebreaker.
 
 ### Running Tests
 
 ```bash
 uv run pytest tests/ -v
 ```
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [`docs/setup-and-run-directions/manual_test_directions.md`](docs/setup-and-run-directions/manual_test_directions.md) | **Start here** — full setup and test execution guide (BlackHole, 3-terminal startup, Genesys audio config, troubleshooting) |
+| [`docs/analysis.md`](docs/analysis.md) | Executive summary of latency findings |
+| [`docs/analysis_key_points.md`](docs/analysis_key_points.md) | Detailed EventBridge vs Notifications comparison with scaling analysis for 1,200 agents |
+| [`docs/notifications_testing_learnings.md`](docs/notifications_testing_learnings.md) | Issues discovered during testing (8 issues with root causes, fixes, and lessons) |
+| [`docs/notifications_production_implementation_guide.md`](docs/notifications_production_implementation_guide.md) | What a production Notifications API implementation would require (channel sharding, state machine, recovery, monitoring) |
+| [`EventBridge/Genesys_EventBridge_Setup_Runbook.md`](EventBridge/Genesys_EventBridge_Setup_Runbook.md) | EventBridge infrastructure setup (EB rules, SQS targets, CloudWatch) |
 
 ## Key Limitations
 
@@ -300,9 +278,13 @@ Install via:
 uv sync
 ```
 
-EVENT BRIDGE NOTES
-assume MLOpsNonProd/cscdigitalassistan   
+## EventBridge Notes
+
+For EventBridge setup and AWS context, see [`EventBridge/Genesys_EventBridge_Setup_Runbook.md`](EventBridge/Genesys_EventBridge_Setup_Runbook.md).
+
+```bash
+# AWS/Kubernetes context for EventBridge sandbox
+# Assume: MLOpsNonProd/cscdigitalassistan
 kubectx cscdigitalassistan/devbchue2
 kubens cscdigitalassistant
-
-
+```
