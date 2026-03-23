@@ -197,7 +197,7 @@ Every one of these failure modes requires custom code in the notification system
 
 ### Head-to-Head Table
 
-| Metric | Notifications API (WebSocket) | EventBridge (SQS) | Genesys Self-Reported | Deepgram Nova-3 |
+| Metric | Notifications API (WebSocket) | EventBridge (SQS) | Genesys Self-Reported | Deepgram Direct (POC) |
 |--------|---:|---:|---:|---:|
 | **Median** | ??? ms | ??? ms | ??? ms | ??? ms |
 | **Mean** | ??? ms | ??? ms | ??? ms | ??? ms |

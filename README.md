@@ -222,7 +222,7 @@ uv run pytest tests/ -v
 | [`docs/analysis.md`](docs/analysis.md) | Executive summary of latency findings |
 | [`docs/analysis_key_points.md`](docs/analysis_key_points.md) | Detailed EventBridge vs Notifications comparison with scaling analysis for 1,200 agents |
 | [`docs/notifications_testing_learnings.md`](docs/notifications_testing_learnings.md) | Issues discovered during testing (8 issues with root causes, fixes, and lessons) |
-| [`docs/notifications_production_implementation_guide.md`](docs/notifications_production_implementation_guide.md) | What a production Notifications API implementation would require (channel sharding, state machine, recovery, monitoring) |
+| [`docs/notifications_production_implementation_guide.md`](docs/historical/notifications_production_implementation_guide.md) | What a production Notifications API implementation would require (channel sharding, state machine, recovery, monitoring) |
 | [`EventBridge/Genesys_EventBridge_Setup_Runbook.md`](EventBridge/Genesys_EventBridge_Setup_Runbook.md) | EventBridge infrastructure setup (EB rules, SQS targets, CloudWatch) |
 
 ## Key Limitations

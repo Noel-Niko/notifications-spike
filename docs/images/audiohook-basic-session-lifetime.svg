@@ -1,0 +1,149 @@
+<?plantuml 1.2026.1?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="889.583" height="594.792" data-diagram-type="SEQUENCE" preserveAspectRatio="none" style="width:889px;height:594px;background:#fff" viewBox="0 0 889 594">
+  <defs>
+    <path id="a" fill="#FFAD99" stroke="#FFAD99" stroke-width="1.042" d="M266.227 213.827h10.417v138.769h-10.417z"/>
+    <path id="b" stroke="#181818" stroke-width="1.042" d="M266.227 213.827v138.769m10.417-138.769v138.769m-10.417-138.769h10.417"/>
+    <path id="c" fill="#FFAD99" stroke="#FFAD99" stroke-width="1.042" d="M266.227 381.763h10.417v150.195h-10.417z"/>
+    <path id="d" stroke="#181818" stroke-width="1.042" d="M266.227 381.763v150.195m10.417-150.195v150.195m-10.417 0h10.417"/>
+    <path id="e" fill="#FFAD99" stroke="#FFAD99" stroke-width="1.042" d="M805.465 136.825h10.417v215.772h-10.417z"/>
+    <path id="f" stroke="#181818" stroke-width="1.042" d="M805.465 136.825v215.771m10.416-215.771v215.771m-10.416-215.771h10.416"/>
+    <path id="g" fill="#FFAD99" stroke="#FFAD99" stroke-width="1.042" d="M805.465 381.763h10.417v150.195h-10.417z"/>
+    <path id="h" stroke="#181818" stroke-width="1.042" d="M805.465 381.763v150.195m10.416-150.195v150.195m-10.416 0h10.416"/>
+  </defs>
+  <path fill="#F0F0F0" stroke="#B32700" stroke-width=".521" d="M126.042 6.25h215.422v582.609H126.042z"/>
+  <text x="177.751" y="18.82" fill="#330B00" font-family="sans-serif" font-size="13.542" font-weight="bold" textLength="112.003">Genesys Cloud</text>
+  <path fill="#F0F0F0" stroke="#B32700" stroke-width=".521" d="M593.547 6.25h290.356v582.609H593.547z"/>
+  <text x="690.506" y="18.82" fill="#330B00" font-family="sans-serif" font-size="13.542" font-weight="bold" textLength="96.438">Your Service</text>
+  <use xlink:href="#a" stroke-width="1.042"/>
+  <use xlink:href="#b" stroke-width="1.042"/>
+  <use xlink:href="#c" stroke-width="1.042"/>
+  <use xlink:href="#d" stroke-width="1.042"/>
+  <use xlink:href="#e" stroke-width="1.042"/>
+  <use xlink:href="#f" stroke-width="1.042"/>
+  <use xlink:href="#g" stroke-width="1.042"/>
+  <use xlink:href="#h" stroke-width="1.042"/>
+  <g class="participant-lifeline" data-entity-uid="part1" data-qualified-name="Client">
+    <path fill="none" d="M157.458 61.206h8.333v291.39h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M161.458 61.206v291.39"/>
+    <path stroke="#992100" stroke-dasharray="1.042 4.167" stroke-width=".521" d="M161.458 352.596v29.167"/>
+    <path fill="none" d="M157.458 381.763h8.333v168.945h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M161.458 381.763v168.945"/>
+  </g>
+  <g class="participant-lifeline" data-entity-uid="part2" data-qualified-name="ClientSession">
+    <path fill="none" d="M267.269 213.322h8.333v139.274h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M271.2 213.322v139.274"/>
+    <path stroke="#992100" stroke-dasharray="1.042 4.167" stroke-width=".521" d="M271.2 352.596v29.167"/>
+    <path fill="none" d="M267.269 381.763h8.333v168.945h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M271.2 381.763v168.945"/>
+  </g>
+  <g class="participant-lifeline" data-entity-uid="part3" data-qualified-name="Server">
+    <path fill="none" d="M660.287 61.206h8.333v291.39h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M664.38 61.206v291.39"/>
+    <path stroke="#992100" stroke-dasharray="1.042 4.167" stroke-width=".521" d="M664.38 352.596v29.167"/>
+    <path fill="none" d="M660.287 381.763h8.333v168.945h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M664.38 381.763v168.945"/>
+  </g>
+  <g class="participant-lifeline" data-entity-uid="part4" data-qualified-name="ServerSession">
+    <path fill="none" d="M806.506 136.32h8.333v216.276h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M810.36 136.32v216.276"/>
+    <path stroke="#992100" stroke-dasharray="1.042 4.167" stroke-width=".521" d="M810.36 352.596v29.167"/>
+    <path fill="none" d="M806.506 381.763h8.333v168.945h-8.333z"/>
+    <path stroke="#992100" stroke-dasharray="5.208 5.208" stroke-width=".521" d="M810.36 381.763v168.945"/>
+  </g>
+  <g class="participant participant-head" data-entity-uid="part1" data-qualified-name="Client">
+    <rect width="62.834" height="33.984" x="130.208" y="26.18" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="137.5" y="48.942" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="48.25">Client</text>
+  </g>
+  <g class="participant participant-tail" data-entity-uid="part1" data-qualified-name="Client">
+    <rect width="62.834" height="33.984" x="130.208" y="549.666" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="137.5" y="572.428" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="48.25">Client</text>
+  </g>
+  <g class="participant participant-tail" data-entity-uid="part2" data-qualified-name="ClientSession">
+    <rect width="131.722" height="33.984" x="205.575" y="549.666" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="212.866" y="572.428" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="117.139">Client Session</text>
+  </g>
+  <g class="participant participant-head" data-entity-uid="part3" data-qualified-name="Server">
+    <rect width="133.48" height="33.984" x="597.713" y="26.18" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="605.005" y="48.942" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="118.897">Load Balancer</text>
+  </g>
+  <g class="participant participant-tail" data-entity-uid="part3" data-qualified-name="Server">
+    <rect width="133.48" height="33.984" x="597.713" y="549.666" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="605.005" y="572.428" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="118.897">Load Balancer</text>
+  </g>
+  <g class="participant participant-tail" data-entity-uid="part4" data-qualified-name="ServerSession">
+    <rect width="138.127" height="33.984" x="741.61" y="549.666" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+    <text x="748.901" y="572.428" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="123.543">Server Session</text>
+  </g>
+  <use xlink:href="#a" stroke-width="1.042"/>
+  <use xlink:href="#b" stroke-width="1.042"/>
+  <use xlink:href="#c" stroke-width="1.042"/>
+  <use xlink:href="#d" stroke-width="1.042"/>
+  <use xlink:href="#e" stroke-width="1.042"/>
+  <use xlink:href="#f" stroke-width="1.042"/>
+  <use xlink:href="#g" stroke-width="1.042"/>
+  <use xlink:href="#h" stroke-width="1.042"/>
+  <g class="message" data-entity-1="part1" data-entity-2="part3">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m651.953 90.682 10.417 4.167-10.417 4.166 4.167-4.166z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M161.625 94.849h496.578"/>
+    <text x="168.917" y="89.326" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">1</text>
+    <text x="183.231" y="89.326" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="237.271">Establish WebSocket connection</text>
+  </g>
+  <g class="message" data-entity-1="part3" data-entity-2="part4">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m729.11 122.241 10.416 4.167-10.416 4.167 4.166-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M664.453 126.408h70.907"/>
+    <text x="671.745" y="120.885" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">2</text>
+  </g>
+  <rect width="138.127" height="33.984" x="741.61" y="103.182" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+  <text x="748.901" y="125.944" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="123.543">Server Session</text>
+  <g class="message" data-entity-1="part4" data-entity-2="part1">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m173.083 167.684-10.416 4.167 10.416 4.166-4.166-4.166z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M166.833 171.851h637.59"/>
+    <text x="179.333" y="166.328" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">3</text>
+    <text x="193.647" y="166.328" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="174.815">101 Switching Protocols</text>
+  </g>
+  <g class="message" data-entity-1="part1" data-entity-2="part2">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m193.075 199.243 10.416 4.167-10.416 4.167 4.166-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M161.625 203.41h37.7"/>
+    <text x="168.917" y="197.887" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">4</text>
+  </g>
+  <rect width="131.722" height="33.984" x="205.575" y="180.184" fill="#FFEBE6" stroke="#B32700" stroke-width=".521" rx="2.604" ry="2.604"/>
+  <text x="212.866" y="202.946" fill="#330B00" font-family="sans-serif" font-size="16.667" textLength="117.139">Client Session</text>
+  <g class="message" data-entity-1="part2" data-entity-2="part4">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m792.965 244.686 10.416 4.166-10.416 4.167 4.166-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M276.644 248.852h522.571"/>
+    <text x="283.935" y="243.33" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">5</text>
+    <text x="298.249" y="243.33" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="377.629">{type: &quot;open&quot;, parameters: {media: [{...}, ...], ...}}</text>
+  </g>
+  <g class="message" data-entity-1="part4" data-entity-2="part2">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m288.102 276.245-10.417 4.167 10.417 4.167-4.167-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M281.852 280.412h522.571"/>
+    <text x="294.352" y="274.889" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">6</text>
+    <text x="308.666" y="274.889" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="340.223">{type: &quot;opened&quot;, parameters: {media: [{...}]}</text>
+  </g>
+  <path fill="#FFD6CC" stroke="#B32700" stroke-width="1.042" d="M206.25 293.954v27.083H875V304.37l-10.417-10.416H206.25"/>
+  <path fill="#FFD6CC" stroke="#B32700" stroke-width="1.042" d="M864.583 293.954v10.416H875l-10.417-10.416"/>
+  <text x="340.574" y="312.698" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="390.93">Audio may start streaming after &quot;opened&quot; is received</text>
+  <path fill="#FFD6CC" stroke="#B32700" stroke-width="1.042" d="M206.25 413.013v27.083H875v-16.667l-10.417-10.416H206.25"/>
+  <path fill="#FFD6CC" stroke="#B32700" stroke-width="1.042" d="M864.583 413.013v10.416H875l-10.417-10.416"/>
+  <text x="343.974" y="431.758" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="384.13">Client will stop sending audio before sending &quot;close&quot;</text>
+  <g class="message" data-entity-1="part2" data-entity-2="part4">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m792.965 464.673 10.416 4.166-10.416 4.167 4.166-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M276.644 468.839h522.571"/>
+    <text x="283.935" y="463.317" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">7</text>
+    <text x="298.249" y="463.317" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="111.661">{type: &quot;close&quot;}</text>
+  </g>
+  <g class="message" data-entity-1="part4" data-entity-2="part2">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m288.102 496.232-10.417 4.167 10.417 4.166-4.167-4.166z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M281.852 500.399h522.571"/>
+    <text x="294.352" y="494.876" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">8</text>
+    <text x="308.666" y="494.876" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="120.918">{type: &quot;closed&quot;}</text>
+  </g>
+  <g class="message" data-entity-1="part2" data-entity-2="part4">
+    <path fill="#E63200" stroke="#E63200" stroke-width="1.042" d="m282.894 527.791-10.417 4.167 10.417 4.167-4.167-4.167zm515.279 0 10.417 4.167-10.417 4.167 4.167-4.167z"/>
+    <path stroke="#E63200" stroke-width="2.083" d="M276.644 531.958h527.779"/>
+    <text x="289.144" y="526.435" fill="#330B00" font-family="sans-serif" font-size="14.583" font-weight="bold" textLength="10.147">9</text>
+    <text x="303.458" y="526.435" fill="#330B00" font-family="sans-serif" font-size="14.583" textLength="328.923">&lt;WebSocket and TLS/TCP close handshake&gt;</text>
+  </g>
+  <path stroke="#992100" stroke-width="2.083" d="m801.298 522.583 18.75 18.75m-18.75 0 18.75-18.75m-557.988 0 18.75 18.75m-18.75 0 18.75-18.75"/>
+<?plantuml-src bPPRRzem5CVVyocEijUsup8nWQfA7UswXwf20ccQfZuuzacn27PcEwMivRlFkH1o9ojgW7D-FfU_JqpqXekGABA5kv33S31mT6xHQyBaZeiNC2h2WkDMARcRoq0g-8IJyQYqAd5-by9am7Wyy9g19V-BCFpIv7eYMmHDXBxKgBXVHLPhJZS2jOPHmVMDqCsBaf5WMMe__Yi0Jz9W0yGcb5OfgHYgZF36ew-b3ax4gP1XnT-bmD7VtkMHg4iKUvPj6xCWod3AGo9CGv_euQG5xcot07PrLS7IqYVjG7ltI_mJeQ1MuxTw6uFurG9tjb40kzgeOFKsAi3vDkum8Fj2ojRASl0_OjOdv8WyMDd2y-DUnYNRDzr6rEzOqaVq0jfypvJ0FlkJW-V5oj5Kh54RyWE9hQztyXFUiuJJWlPTU-I-_HTDvnHXqsdNYk96JAUZOMFbPRfbB_BpnIU1BXumIqCCtXgZk1Trdt5riaEa6jkWJyoSFzHIh7iaO-G-3z5S-TdMUdJKqOYzg4fyXqH6YcZheG8e_gh9jmLXBDwDuMZWUF8Dt0UqUxRNC0zan5mdF1siuCu3ZiAuG69t_16Q_7OUjEPI5BZC0WuA1ZPDckgNZ9I5rIkdMCdqA0cpFxe1iMEbaa0nXwfCfRPIljIKMHmdg-Zo9dFCu5uRuWLSh-4dUaj9DsY0IY6GcdW5LMWrh8J9ykHHZdPYrxpMS3XclRuiEsRs8MW8onqtT1rhlb3II2e3VSnQ4gjGUzcUPwreM_vQBNO6xsOVuWnS6Q9mBo0P0JIej7LjaN4oWz_lLrTNXmkmr-VaUZXKuzQRAiP5rXdv-U08-v01CfQp5FUY6lKsObp2bkn1nmDjhrQZRImRyMteF1rm3GefybTapiV7XsFp9Ezz4sKoxtWGs2Go16s7DCcJLE2XBnNcHfS6KjjfxIjsYXzwYvZmh651BSFrQNw9lQjMZylFg_a2aW2mjYRxZBt16uUXbKxkAwDxj9P7wny0?>
+</svg>

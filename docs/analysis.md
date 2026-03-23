@@ -10,7 +10,7 @@
 
 All three columns use data from the **same 6 test calls** (movie monologues played through live Genesys calls on March 18, 2026).
 
-| Metric | Deepgram Nova-3 (AudioHook Proxy) | Genesys r2d2 (Self-Reported) | Genesys End-to-End (Ground Truth) |
+| Metric | Deepgram Direct (POC) | Genesys r2d2 (Self-Reported) | Genesys End-to-End (Ground Truth) |
 |--------|----------------------------------:|-----------------------------:|----------------------------------:|
 | **Median (p50)** | 1,248 ms | 432 ms | 1,712 ms |
 | **Mean** | 1,596 ms | 626 ms | 2,775 ms |
@@ -22,7 +22,7 @@ All three columns use data from the **same 6 test calls** (movie monologues play
 
 ### What Each Column Measures
 
-- **Deepgram Nova-3 (AudioHook Proxy)**: Time from when speech ended to when Deepgram returned the transcript. poc-deepgram captures the same call audio independently via BlackHole and streams it to Deepgram Nova-3 in real time. This serves as a **proxy for the Genesys AudioHook integration** — streaming call audio to an external STT engine instead of using the built-in r2d2 engine. Deepgram uses a 300ms endpointing threshold, producing faster but more granular utterances.
+- **Deepgram Direct (POC)**: Time from when speech ended to when Deepgram returned the transcript. poc-deepgram captures the same call audio independently via BlackHole and streams it to Deepgram Nova-3 in real time. This serves as a **proxy for the Genesys AudioHook integration** — streaming call audio to an external STT engine instead of using the built-in r2d2 engine. Deepgram uses a 300ms endpointing threshold, producing faster but more granular utterances.
 
 - **Genesys r2d2 (Self-Reported)**: Estimated latency derived from Genesys's own event metadata (`offsetMs`, `durationMs`, and `receivedAt`) using the anchor-event method. This approximates what Genesys reports as their transcription processing time. It captures **Stages 2–4** (STT processing + endpointing + delivery) but **does not include Stage 1** (audio capture transport from caller to Genesys Cloud). The anchor event (lowest-latency utterance per conversation) is set to 0ms, so all values are relative — true self-reported latencies are slightly higher.
 
@@ -34,7 +34,7 @@ All three columns use data from the **same 6 test calls** (movie monologues play
 
 2. **The gap widens dramatically at the tail** — at p95, self-reported is 1,611ms but true latency is **10,544ms (6.5x higher)**. At p99, self-reported is 2,751ms but true latency is **16,472ms (6.0x higher)**. The endpointing batching (Stage 3) dominates tail latency during continuous speech, and this is not reflected in the self-reported metric.
 
-3. **Deepgram (AudioHook proxy) is ~27% faster at the median** (1,248ms vs 1,712ms) than Genesys end-to-end — Deepgram endpoints more aggressively (300ms silence threshold vs Genesys's variable-length endpointing) and delivers transcripts directly without WebSocket routing overhead.
+3. **Deepgram Direct (POC) is ~27% faster at the median** (1,248ms vs 1,712ms) than Genesys end-to-end — Deepgram endpoints more aggressively (300ms silence threshold vs Genesys's variable-length endpointing) and delivers transcripts directly without WebSocket routing overhead.
 
 4. **Deepgram tail latency stays controlled** — p95 of 3,469ms and p99 of 4,338ms vs Genesys's 10,544ms and 16,472ms. Deepgram's faster endpointing prevents the multi-sentence batching that causes Genesys's extreme tail latency.
 
@@ -97,7 +97,7 @@ Live Genesys Call (agent + customer speaking)
 | Path | Produces | Table Column |
 |------|----------|-------------|
 | **Path A alone** | `receivedAt` and event metadata (`offsetMs`, `durationMs`) | **Genesys r2d2 (Self-Reported)** — latency estimated from Genesys's own timestamps using the anchor-event method |
-| **Path B alone** | `audio_wall_clock_end` and `server_receipt_time` (Deepgram's response time) | **Deepgram Nova-3 (AudioHook Proxy)** — latency from speech-end to Deepgram transcript return |
+| **Path B alone** | `audio_wall_clock_end` and `server_receipt_time` (Deepgram's response time) | **Deepgram Direct (POC)** — latency from speech-end to Deepgram transcript return |
 | **Path A × Path B** | `receivedAt` minus `audio_wall_clock_end`, matched by fuzzy text similarity | **Genesys End-to-End (Ground Truth)** — true latency from speech-end to Genesys event arrival |
 
 The ground-truth measurement works because Path B tells us *exactly when each phrase was spoken* (via Deepgram's audio timestamps), and Path A tells us *exactly when Genesys delivered the transcript* (via `receivedAt`). The difference is the true end-to-end latency that a real application experiences.
@@ -143,7 +143,7 @@ ends     │ Audio   │  r2d2 STT  │    Endpointing       │ WebSocket │ a
                                                                              │     │
 DEEPGRAM PIPELINE (independent ground-truth clock):                          │     │
                                                                              │     │
-         ┌───── Deepgram Nova-3 (AudioHook Proxy) ─────┐                     │     │
+         ┌───── Deepgram Direct (POC) ─────┐                     │     │
          │                                              │                     │     │
 Speech → │ Deepgram STT  │  300ms Endpointing  │→ Done  │                     │     │
 ends     │  Processing   │   (fast, fixed)      │        │                     │     │

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="226" height="311" style="background-color:#fff" viewBox="0 0 226 311">
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M65 70h80v40H65z"/>
+  <text x="105" y="94" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0000</text>
+  <path fill="#d5e8d4" stroke="#82b366" d="M145 70h80v40h-80z"/>
+  <text x="185" y="94" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0000</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M65 110h80v40H65z"/>
+  <text x="105" y="134" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0001</text>
+  <path fill="#d5e8d4" stroke="#82b366" d="M145 110h80v40h-80z"/>
+  <text x="185" y="134" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0001</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M65 150h80v40H65z"/>
+  <text x="105" y="174" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0002</text>
+  <path fill="#d5e8d4" stroke="#82b366" d="M145 150h80v40h-80z"/>
+  <text x="185" y="174" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">0002</text>
+  <path fill="none" d="M5 0h50v20H5z"/>
+  <text x="30" y="14" font-family="Helvetica" font-size="14" font-weight="bold" text-anchor="middle">Byte</text>
+  <path fill="none" d="M5 80h50v20H5z"/>
+  <text x="30" y="94" font-family="Courier New" font-size="14" font-weight="bold" text-anchor="middle">0000</text>
+  <path fill="none" d="M5 120h50v20H5z"/>
+  <text x="30" y="134" font-family="Courier New" font-size="14" font-weight="bold" text-anchor="middle">0002</text>
+  <path fill="none" d="M5 160h50v20H5z"/>
+  <text x="30" y="174" font-family="Courier New" font-size="14" font-weight="bold" text-anchor="middle">0004</text>
+  <path fill="none" d="M80 10h130v20H80z"/>
+  <text x="145" y="24" font-family="Helvetica" font-size="14" font-weight="bold" text-anchor="middle">Channel Samples</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M65 270h80v40H65z"/>
+  <text x="105" y="294" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">031F</text>
+  <path fill="#d5e8d4" stroke="#82b366" d="M145 270h80v40h-80z"/>
+  <text x="185" y="294" font-family="Courier New" font-size="12" font-weight="bold" text-anchor="middle">031F</text>
+  <path fill="none" d="M5 280h50v20H5z"/>
+  <text x="30" y="294" font-family="Courier New" font-size="14" font-weight="bold" text-anchor="middle">063E</text>
+  <path fill="none" d="M65 40h80v20H65z"/>
+  <text x="105" y="54" font-family="Helvetica" font-size="14" text-anchor="middle">&quot;external&quot;</text>
+  <path fill="none" d="M150 40h70v20h-70z"/>
+  <text x="185" y="54" font-family="Helvetica" font-size="14" text-anchor="middle">&quot;internal&quot;</text>
+  <path fill="none" stroke="#b3b3b3" d="M65 190h160v81H65z"/>
+  <path fill="none" d="M125 215h40v30h-40z"/>
+  <text x="145" y="234" font-family="Helvetica" font-size="48" text-anchor="middle">⋮</text>
+  <path fill="none" d="M0 20h60v20H0z"/>
+  <text x="30" y="34" font-family="Helvetica" font-size="14" font-weight="bold" text-anchor="middle">Offset</text>
+</svg>

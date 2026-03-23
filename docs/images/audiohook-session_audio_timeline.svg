@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="542" height="601" style="background-color:#fff" viewBox="0 0 542 601">
+  <path fill="#dae8fc" stroke="#6c8ebf" stroke-dasharray="3 3" d="M340 340h40v50h-40z"/>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 200h120v40H0z"/>
+  <text x="60" y="223" font-family="Helvetica" font-size="11" text-anchor="middle">12000 samples</text>
+  <path fill="none" stroke="#000" stroke-dasharray="1 2" stroke-miterlimit="10" d="m120 120 80 30"/>
+  <path fill="#d5e8d4" stroke="#82b366" d="M0 100h120v40H0z"/>
+  <path fill="#ffe6cc" stroke="#d79b00" d="M0 150h120v40H0z"/>
+  <path fill="#d5e8d4" stroke="#82b366" d="M0 490h120v50H0z"/>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 250h120v20H0z"/>
+  <text x="60" y="263" font-family="Helvetica" font-size="11" text-anchor="middle">1600 samples</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 290h120v20H0z"/>
+  <text x="60" y="303" font-family="Helvetica" font-size="11" text-anchor="middle">1600 samples</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 330h120v20H0z"/>
+  <text x="60" y="343" font-family="Helvetica" font-size="11" text-anchor="middle">1600 samples</text>
+  <path fill="#ffe6cc" stroke="#d79b00" d="M0 550h120v50H0z"/>
+  <path fill="none" d="M140 0h120v20H140z"/>
+  <text x="200" y="15" font-family="Helvetica" font-size="16" text-anchor="middle">Client Timeline</text>
+  <path fill="none" d="M480 50h40v20h-40z"/>
+  <text x="518" y="64" font-family="Helvetica" font-size="12" text-anchor="end">0.00s</text>
+  <path fill="none" stroke="#000" stroke-dasharray="1 2" stroke-miterlimit="10" d="M120 60h70"/>
+  <path fill="#e1d5e7" stroke="#9673a6" d="M0 40h120v40H0z"/>
+  <text x="60" y="63" font-family="Helvetica" font-size="11" text-anchor="middle">Establish Connection</text>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 460h120v20H0z"/>
+  <text x="60" y="473" font-family="Helvetica" font-size="11" text-anchor="middle">1040 samples</text>
+  <path fill="none" d="M200 90h40v20h-40z"/>
+  <text x="238" y="104" font-family="Helvetica" font-size="12" text-anchor="end">0.2s</text>
+  <path fill="none" d="M200 50h40v20h-40z"/>
+  <text x="238" y="64" font-family="Helvetica" font-size="12" text-anchor="end">0.0s</text>
+  <path fill="none" d="M200 130h40v20h-40z"/>
+  <text x="238" y="144" font-family="Helvetica" font-size="12" text-anchor="end">0.4s</text>
+  <path fill="none" d="M200 170h40v20h-40z"/>
+  <text x="238" y="184" font-family="Helvetica" font-size="12" text-anchor="end">0.6s</text>
+  <path fill="none" d="M200 210h40v20h-40z"/>
+  <text x="238" y="224" font-family="Helvetica" font-size="12" text-anchor="end">0.8s</text>
+  <path fill="none" d="M200 250h40v20h-40z"/>
+  <text x="238" y="264" font-family="Helvetica" font-size="12" text-anchor="end">1.0s</text>
+  <path fill="none" d="M200 290h40v20h-40z"/>
+  <text x="238" y="304" font-family="Helvetica" font-size="12" text-anchor="end">1.2s</text>
+  <path fill="none" d="M200 330h40v20h-40z"/>
+  <text x="238" y="344" font-family="Helvetica" font-size="12" text-anchor="end">1.4s</text>
+  <path fill="none" d="M200 420h40v20h-40z"/>
+  <text x="238" y="434" font-family="Helvetica" font-size="12" text-anchor="end">36.4s</text>
+  <path fill="none" stroke="#000" stroke-dasharray="1 2" stroke-miterlimit="10" d="M120 259.75h80m-80 39.75h80m-80 40.25h80M120 180l80-10"/>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M0 420h120v20H0z"/>
+  <text x="60" y="433" font-family="Helvetica" font-size="11" text-anchor="middle">1600 samples</text>
+  <path fill="none" stroke="#000" stroke-miterlimit="10" d="M200 350V60"/>
+  <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M190 60h20m-20 0h20m-20 0h20"/>
+  <path fill="none" stroke="#000" stroke-miterlimit="10" d="M195 180h10m-10 40h10M195 99.75h10m-10 40h10M195 340h10m-10-80.25h10m-10 40h10m-10-119.5h10"/>
+  <text x="238" y="474" font-family="Helvetica" font-size="12" text-anchor="end">36.6s</text>
+  <path fill="none" stroke="#000" stroke-miterlimit="10" d="M200 420v110m5-100h-10m10 40h-10"/>
+  <path fill="none" stroke="#000" stroke-dasharray="1 2" stroke-miterlimit="10" d="M120 429.75h80M120 575l80-75m-80-30.25 80-9.75m-80 55 80-35"/>
+  <path fill="#dae8fc" stroke="#6c8ebf" d="M340 60h40v160h-40zm0 160h40v40h-40zm0 40h40v40h-40zm0 40h40v40h-40zm0 130h40v30h-40zm0-40h40v40h-40z"/>
+  <path fill="none" stroke="#000" stroke-dasharray="1 2" stroke-miterlimit="10" d="M120 220h80"/>
+  <text x="518" y="224" font-family="Helvetica" font-size="12" text-anchor="end">0.80s</text>
+  <text x="518" y="264" font-family="Helvetica" font-size="12" text-anchor="end">1.00s</text>
+  <text x="518" y="304" font-family="Helvetica" font-size="12" text-anchor="end">1.20s</text>
+  <text x="518" y="344" font-family="Helvetica" font-size="12" text-anchor="end">1.40s</text>
+  <text x="518" y="434" font-family="Helvetica" font-size="12" text-anchor="end">36.40s</text>
+  <text x="518" y="464" font-family="Helvetica" font-size="12" text-anchor="end">36.53s</text>
+  <text x="518" y="394" font-family="Helvetica" font-size="12" text-anchor="end">36.20s</text>
+  <text x="438" y="224" font-family="Helvetica" font-size="12" text-anchor="end">12000</text>
+  <text x="438" y="264" font-family="Helvetica" font-size="12" text-anchor="end">13600</text>
+  <text x="438" y="304" font-family="Helvetica" font-size="12" text-anchor="end">15200</text>
+  <text x="438" y="344" font-family="Helvetica" font-size="12" text-anchor="end">16800</text>
+  <text x="438" y="434" font-family="Helvetica" font-size="12" text-anchor="end">291200</text>
+  <text x="438" y="464" font-family="Helvetica" font-size="12" text-anchor="end">292240</text>
+  <text x="438" y="394" font-family="Helvetica" font-size="12" text-anchor="end">289600</text>
+  <text x="438" y="64" font-family="Helvetica" font-size="12" text-anchor="end">0</text>
+  <text x="410" y="39" font-family="Helvetica" font-size="12" text-anchor="middle">Samples</text>
+  <text x="496" y="39" font-family="Helvetica" font-size="12" text-anchor="middle">Sample Time</text>
+  <text x="425" y="15" font-family="Helvetica" font-size="16" text-anchor="middle">Server Audio Timeline</text>
+  <path fill="none" stroke="#000" stroke-dasharray="3 3" stroke-miterlimit="10" d="M200 360v50"/>
+  <text x="4" y="115" font-family="Helvetica" font-size="11">&quot;type&quot;: &quot;open&quot;,</text>
+  <text x="4" y="131" font-family="Helvetica" font-size="11">&quot;position&quot;: &quot;PT0S&quot;</text>
+  <text x="7" y="173" font-family="Helvetica" font-size="11">&quot;type&quot;: &quot;opened&quot;</text>
+  <text x="4" y="510" font-family="Helvetica" font-size="11">&quot;type&quot;: &quot;close&quot;,</text>
+  <text x="4" y="526" font-family="Helvetica" font-size="11">&quot;position&quot;: &quot;PT36.53S&quot;</text>
+  <text x="4" y="578" font-family="Helvetica" font-size="11">&quot;type&quot;: &quot;closed&quot;</text>
+</svg>

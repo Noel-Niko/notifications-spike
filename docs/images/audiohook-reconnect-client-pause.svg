@@ -1,0 +1,429 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="631" height="1063" style="background:0 0;background-color:transparent;color-scheme:light dark" viewBox="0 0 631 1063">
+  <g data-cell-id="0">
+    <g data-cell-id="1">
+      <path fill="#F2F2F2" stroke="#CCC" stroke-dasharray="3 3" d="M430.51 645.5v111.25h-110V645.5z" data-cell-id="gYokRgOV7k1jreTETVjb-118"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-119">
+        <path fill="#D5E8D4" stroke="#82B366" d="M320.5 615.5h110v30h-110z"/>
+        <text x="375" y="634" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Pause</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-120">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 555.5h110v30h-110z"/>
+        <text x="375" y="574" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-121">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 848.5h110v127h-110z"/>
+        <text x="375" y="915" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">...</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-124">
+        <path fill="none" d="M420.5 600.5h50v30h-50z"/>
+        <text x="468" y="619" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">15.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-129">
+        <path fill="none" d="M420.5 1021.5h50v30h-50z"/>
+        <text x="468" y="1040" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">40.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-130">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 585.5h110v30h-110z"/>
+        <text x="375" y="604" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-133">
+        <path fill="none" d="M420.5 570.5h50v30h-50z"/>
+        <text x="468" y="589" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">14.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-135">
+        <path fill="none" d="M420.5 541.5h50v30h-50z"/>
+        <text x="468" y="560" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">14.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-136">
+        <path fill="#F5F5F5" stroke="#666" stroke-miterlimit="10" d="M520.5 1036h-20V635.01H490L510.5 617l20.5 18.01h-10.5Z"/>
+        <text x="510" y="829" fill="light-dark(#000000, #ffffff)" data-cell-id="gYokRgOV7k1jreTETVjb-137" font-family="Helvetica" font-size="11" text-anchor="middle" transform="rotate(-90 509.5 825.5)">20s of history, or until closest audio frame</text>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-138">
+        <path d="M530.5 1037h-24l-18.29-.37"/>
+        <path d="m493.91 1033.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-140">
+        <path d="M529.5 616h-24l-18.29-.37"/>
+        <path d="m492.91 612.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-141">
+        <path fill="#D5E8D4" stroke="#82B366" d="M320.5 755.5h110v33h-110z"/>
+        <text x="375" y="775" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Resume</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-142">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 975.5h110v30h-110z"/>
+        <text x="375" y="994" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-143">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 1005.5h110v30h-110z"/>
+        <text x="375" y="1024" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-144">
+        <path fill="none" d="M419.25 802.5h50v30h-50z"/>
+        <text x="467" y="821" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">23.2s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-145">
+        <path fill="none" d="M419.25 772.5h50v30h-50z"/>
+        <text x="467" y="791" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">23.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-146">
+        <path fill="none" d="M419.25 740.5h50v30h-50z"/>
+        <text x="467" y="759" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">23.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-147">
+        <path fill="none" d="M530.5 1020.5h100v30h-100z"/>
+        <text x="532" y="1040" fill="#C00" font-family="Helvetica" font-size="16">Reconnect</text>
+      </g>
+      <path fill="none" stroke="light-dark(rgb(0, 0, 0), rgb(255, 255, 255))" stroke-miterlimit="10" stroke-width="6" d="M320.5 1036.08h110" data-cell-id="gYokRgOV7k1jreTETVjb-148"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-149">
+        <path fill="none" d="M346.5 1033.5h40v30h-40z"/>
+        <text x="384" y="1052" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">(4)</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-150">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 788.5h110v30h-110z"/>
+        <text x="375" y="807" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-151">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 818.5h110v30h-110z"/>
+        <text x="375" y="837" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-152">
+        <path fill="none" d="M421.75 990.5h50v30h-50z"/>
+        <text x="469" y="1009" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">39.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-153">
+        <path fill="none" d="M421.75 960.5h50v30h-50z"/>
+        <text x="469" y="979" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">39.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-154">
+        <path fill="none" d="M419.25 832.5h50v30h-50z"/>
+        <text x="467" y="851" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">23.4s</text>
+      </g>
+      <path fill="#F2F2F2" stroke="#CCC" stroke-dasharray="3 3" d="M110.5 105.75v387.5H.5v-387.5z" data-cell-id="gYokRgOV7k1jreTETVjb-49"/>
+      <path fill="none" stroke="light-dark(rgb(0, 0, 0), rgb(255, 255, 255))" stroke-miterlimit="10" stroke-width="6" d="M.5 493.25h110" data-cell-id="gYokRgOV7k1jreTETVjb-50"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-51">
+        <path fill="#D5E8D4" stroke="#82B366" d="M.5 75.5h110v30H.5z"/>
+        <text x="55" y="94" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Pause</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-61">
+        <path fill="none" d="M100.5 480.5h50v30h-50z"/>
+        <text x="148" y="499" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">40.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-65">
+        <path fill="none" d="M100.5 60.5h50v30h-50z"/>
+        <text x="148" y="79" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">15.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-66">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 45.5h110v30H.5z"/>
+        <text x="55" y="64" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-67">
+        <path fill="none" d="M100.5 30.5h50v30h-50z"/>
+        <text x="148" y="49" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">14.8s</text>
+      </g>
+      <path fill="#FFE6CC" stroke="#D79B00" stroke-miterlimit="10" d="m75.48 467.98 8.5-.01L55.5 490l-28.52-21.97 8.5-.01-.38-335-8.5.01L55.08 111l28.52 21.97-8.5.01Z" data-cell-id="gYokRgOV7k1jreTETVjb-68"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-70">
+        <path fill="none" d="M210.5 480.5h100v30h-100z"/>
+        <text x="212" y="500" fill="#C00" font-family="Helvetica" font-size="16">Reconnect</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-71">
+        <path fill="#F5F5F5" stroke="#666" stroke-miterlimit="10" d="M200.5 495h-20V94.01H170L190.5 76 211 94.01h-10.5Z"/>
+        <text x="190" y="288" fill="light-dark(#000000, #ffffff)" data-cell-id="gYokRgOV7k1jreTETVjb-72" font-family="Helvetica" font-size="11" text-anchor="middle" transform="rotate(-90 189.5 284.5)">20s of history, or until closest audio frame</text>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-73">
+        <path d="M210.5 496h-24l-18.29-.37"/>
+        <path d="m173.91 492.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-75">
+        <path d="M209.5 75h-24l-18.29-.37"/>
+        <path d="m172.91 71.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-76">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 15.5h110v30H.5z"/>
+        <text x="55" y="34" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-77">
+        <path fill="none" d="M100.5.5h50v30h-50z"/>
+        <text x="148" y="19" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">14.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-113">
+        <path fill="none" d="M25.5 491.5h40v30h-40z"/>
+        <text x="63" y="510" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">(1)</text>
+      </g>
+      <path fill="#F2F2F2" stroke="#CCC" stroke-dasharray="3 3" d="M430.5 345.5v150h-110v-150z" data-cell-id="gYokRgOV7k1jreTETVjb-7"/>
+      <path fill="none" stroke="light-dark(rgb(0, 0, 0), rgb(255, 255, 255))" stroke-miterlimit="10" stroke-width="6" d="M320.5 495.5h110" data-cell-id="gYokRgOV7k1jreTETVjb-11"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-13">
+        <path fill="#D5E8D4" stroke="#82B366" d="M320.5 315.5h110v30h-110z"/>
+        <text x="375" y="334" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Pause</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-14">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 255.5h110v30h-110z"/>
+        <text x="375" y="274" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-18">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 135.5h110v120h-110z"/>
+        <text x="375" y="199" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">...</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-19">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 105.5h110v30h-110z"/>
+        <text x="375" y="124" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-20">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 75.5h110v30h-110z"/>
+        <text x="375" y="94" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-21">
+        <path fill="none" d="M420.5 60.5h50v30h-50z"/>
+        <text x="468" y="79" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-22">
+        <path fill="none" d="M420.5 90.5h50v30h-50z"/>
+        <text x="468" y="109" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.2s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-23">
+        <path fill="none" d="M420.5 120.5h50v30h-50z"/>
+        <text x="468" y="139" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.4s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-27">
+        <path fill="none" d="M420.5 240.5h50v30h-50z"/>
+        <text x="468" y="259" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">28.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-28">
+        <path fill="none" d="M420.5 270.5h50v30h-50z"/>
+        <text x="468" y="289" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">28.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-29">
+        <path fill="none" d="M420.5 480.5h50v30h-50z"/>
+        <text x="468" y="499" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">40.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-30">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 285.5h110v30h-110z"/>
+        <text x="375" y="304" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-31">
+        <path fill="none" d="M420.5 300.5h50v30h-50z"/>
+        <text x="468" y="319" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">29.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-32">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 45.5h110v30h-110z"/>
+        <text x="375" y="64" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-33">
+        <path fill="none" d="M420.5 30.5h50v30h-50z"/>
+        <text x="468" y="49" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">19.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-34">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M320.5 15.5h110v30h-110z"/>
+        <text x="375" y="34" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-35">
+        <path fill="none" d="M420.5.5h50v30h-50z"/>
+        <text x="468" y="19" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">19.6s</text>
+      </g>
+      <path fill="#FFE6CC" stroke="#D79B00" stroke-miterlimit="10" d="M395.5 468h8.5l-28.5 22-28.5-22h8.5v-95H347l28.5-22 28.5 22h-8.5Z" data-cell-id="gYokRgOV7k1jreTETVjb-38"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-43">
+        <path fill="none" d="M530.5 485.5h100v30h-100z"/>
+        <text x="532" y="505" fill="#C00" font-family="Helvetica" font-size="16">Reconnect</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-44">
+        <path fill="#F5F5F5" stroke="#666" stroke-miterlimit="10" d="M520.5 495h-20V94.01H490L510.5 76 531 94.01h-10.5Z"/>
+        <text x="510" y="288" fill="light-dark(#000000, #ffffff)" data-cell-id="gYokRgOV7k1jreTETVjb-45" font-family="Helvetica" font-size="11" text-anchor="middle" transform="rotate(-90 509.5 284.5)">20s of history, which includes the clock elapsed time</text>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-46">
+        <path d="M530.5 496h-24l-18.29-.37"/>
+        <path d="m493.91 492.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-48">
+        <path d="M529.5 75h-24l-18.29-.37"/>
+        <path d="m492.91 71.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-112">
+        <path fill="none" d="M345.5 493.5h40v30h-40z"/>
+        <text x="383" y="512" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">(2)</text>
+      </g>
+      <path fill="#F2F2F2" stroke="#CCC" stroke-dasharray="3 3" d="M110.51 832.51v120.62H.51V832.51z" data-cell-id="gYokRgOV7k1jreTETVjb-78"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-80">
+        <path fill="#D5E8D4" stroke="#82B366" d="M.5 802.5h110v30H.5z"/>
+        <text x="55" y="821" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Pause</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-81">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 742.5h110v30H.5z"/>
+        <text x="55" y="761" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-82">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 674.5h110v69H.5z"/>
+        <text x="55" y="712" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">...</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-83">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 644.5h110v30H.5z"/>
+        <text x="55" y="663" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-84">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 614.5h110v30H.5z"/>
+        <text x="55" y="633" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-85">
+        <path fill="none" d="M100.5 599.5h50v30h-50z"/>
+        <text x="148" y="618" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-86">
+        <path fill="none" d="M100.5 629.5h50v30h-50z"/>
+        <text x="148" y="648" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.2s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-87">
+        <path fill="none" d="M100.5 659.5h50v30h-50z"/>
+        <text x="148" y="678" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">20.4s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-88">
+        <path fill="none" d="M100.5 727.5h50v30h-50z"/>
+        <text x="148" y="746" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">31.2s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-89">
+        <path fill="none" d="M100.5 757.5h50v30h-50z"/>
+        <text x="148" y="776" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">31.4s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-90">
+        <path fill="none" d="M100.5 1020.5h50v30h-50z"/>
+        <text x="148" y="1039" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">40.0s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-91">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 772.5h110v30H.5z"/>
+        <text x="55" y="791" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-92">
+        <path fill="none" d="M100.5 787.5h50v30h-50z"/>
+        <text x="148" y="806" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">31.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-93">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 584.5h110v30H.5z"/>
+        <text x="55" y="603" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-94">
+        <path fill="none" d="M100.5 569.5h50v30h-50z"/>
+        <text x="148" y="588" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">19.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-95">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 554.5h110v30H.5z"/>
+        <text x="55" y="573" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-96">
+        <path fill="none" d="M100.5 540.5h50v30h-50z"/>
+        <text x="148" y="559" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">19.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-99">
+        <path fill="#F5F5F5" stroke="#666" stroke-miterlimit="10" d="M200.5 1035h-20V634.01H170L190.5 616l20.5 18.01h-10.5Z"/>
+        <text x="190" y="828" fill="light-dark(#000000, #ffffff)" data-cell-id="gYokRgOV7k1jreTETVjb-100" font-family="Helvetica" font-size="11" text-anchor="middle" transform="rotate(-90 189.5 824.5)">20s of history, which includes the paused period</text>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-101">
+        <path d="M210.5 1036h-24l-18.29-.37"/>
+        <path d="m173.91 1032.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g fill="none" stroke="#900" stroke-miterlimit="10" stroke-width="3" data-cell-id="gYokRgOV7k1jreTETVjb-103">
+        <path d="M209.5 615h-24l-18.29-.37"/>
+        <path d="m172.91 611.75-9.06 2.82 8.94 3.18"/>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-104">
+        <path fill="#D5E8D4" stroke="#82B366" d="M.5 945.5h110v29H.5z"/>
+        <text x="55" y="963" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Resume</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-105">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 974.5h110v30H.5z"/>
+        <text x="55" y="993" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-106">
+        <path fill="#DAE8FC" stroke="#6C8EBF" d="M.5 1004.5h110v30H.5z"/>
+        <text x="55" y="1023" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle">Audio</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-107">
+        <path fill="none" d="M100.5 990.5h50v30h-50z"/>
+        <text x="148" y="1009" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">39.8s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-108">
+        <path fill="none" d="M100.5 960.5h50v30h-50z"/>
+        <text x="148" y="979" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">39.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-109">
+        <path fill="none" d="M100.5 930.5h50v30h-50z"/>
+        <text x="148" y="949" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">39.6s</text>
+      </g>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-110">
+        <path fill="none" d="M210.5 1019.5h100v30h-100z"/>
+        <text x="212" y="1039" fill="#C00" font-family="Helvetica" font-size="16">Reconnect</text>
+      </g>
+      <path fill="none" stroke="light-dark(rgb(0, 0, 0), rgb(255, 255, 255))" stroke-miterlimit="10" stroke-width="6" d="M.5 1035.08h110" data-cell-id="gYokRgOV7k1jreTETVjb-79"/>
+      <g data-cell-id="gYokRgOV7k1jreTETVjb-111">
+        <path fill="none" d="M26.5 1032.5h40v30h-40z"/>
+        <text x="64" y="1051" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="end">(3)</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-1">
+        <path fill="none" d="M530.5 575.5h80v30h-80z"/>
+        <text x="570" y="595" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">Offered</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-2">
+        <path fill="none" d="M530.5 595.5h80v30h-80z"/>
+        <text x="570" y="615" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">position</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-3">
+        <path fill="none" d="M534.5 615.5h70v30h-70z"/>
+        <text x="569" y="635" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">PT15S</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-4">
+        <path fill="none" d="M209.5 35.5h80v30h-80z"/>
+        <text x="249" y="55" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">Offered</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-5">
+        <path fill="none" d="M209.5 55.5h80v30h-80z"/>
+        <text x="249" y="75" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">position</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-6">
+        <path fill="none" d="M213.5 75.5h70v30h-70z"/>
+        <text x="248" y="95" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">PT15S</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-7">
+        <path fill="none" d="M530.5 35.5h80v30h-80z"/>
+        <text x="570" y="55" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">Offered</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-8">
+        <path fill="none" d="M530.5 55.5h80v30h-80z"/>
+        <text x="570" y="75" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">position</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-9">
+        <path fill="none" d="M534.5 75.5h70v30h-70z"/>
+        <text x="569" y="95" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">PT20S</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-10">
+        <path fill="none" d="M208.5 575.5h80v30h-80z"/>
+        <text x="248" y="595" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">Offered</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-11">
+        <path fill="none" d="M208.5 595.5h80v30h-80z"/>
+        <text x="248" y="615" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">position</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-12">
+        <path fill="none" d="M212.5 615.5h70v30h-70z"/>
+        <text x="247" y="635" fill="#C00" font-family="Helvetica" font-size="16" text-anchor="middle">PT20S</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-13">
+        <path fill="none" d="M353.26 492.26V360.01h30v132.25z"/>
+        <text x="368" y="429" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle" transform="rotate(-90 367.755 425.63)">11s of elapsed time</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-14">
+        <path fill="none" d="M368.25 467.25v-85h30v85z"/>
+        <text x="383" y="428" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle" transform="rotate(-90 382.75 424.25)">on system clock</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-16">
+        <path fill="none" d="M32.26 367.01V233.76h30v133.25z"/>
+        <text x="47" y="303" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle" transform="rotate(-90 46.755 299.88)">25s of elapsed time</text>
+      </g>
+      <g data-cell-id="67qaSuL7s4ejtt4CZLqx-17">
+        <path fill="none" d="M47.25 343v-85h30v85z"/>
+        <text x="62" y="304" fill="light-dark(#000000, #ffffff)" font-family="Helvetica" font-size="12" text-anchor="middle" transform="rotate(-90 61.75 300)">on system clock</text>
+      </g>
+    </g>
+  </g>
+  <switch>
+    <a xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems" target="_blank" transform="translate(0 -5)">
+      <text x="50%" y="100%" font-size="10" text-anchor="middle">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>
