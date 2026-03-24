@@ -24,8 +24,6 @@ Genesys AudioHook estimates are derived from Deepgram Direct POC measurements ad
 
 The EB-Notifications gap remains constant (134-227ms) across all percentiles [1]. The Deepgram-to-Genesys gap widens at p99, where r2d2 endpointing produces outlier latencies.
 
-
-
 ### STT Confidence [1]
 Confidence is presented as metric indicating accuracy of transcription.
 
@@ -40,7 +38,7 @@ Confidence is independent of delivery path. Notifications and EventBridge carry 
 
 ### Genesys AudioHook Cost
 
-~$68K-$94K/month for Deepgram STT (enterprise discount likely 40-60% off) plus Genesys AudioHook Monitor licensing (contact Genesys sales). Full implementation research: [AudioHook Research](https://grainger.atlassian.net/wiki/spaces/CDA/pages/167125549104/AudioHook+Research) [8].
+~$68K-$94K/month for Deepgram STT [14] (enterprise discount likely 40-60% off) plus Genesys AudioHook Monitor licensing [15] (contact Genesys sales). Full implementation research: [AudioHook Research](https://grainger.atlassian.net/wiki/spaces/CDA/pages/167125549104/AudioHook+Research) [8].
 
 ---
 
@@ -52,7 +50,7 @@ Three independent capture paths run simultaneously on the same live Genesys call
 Live Genesys Call
     ├─→ Genesys → r2d2 STT → Notifications API (WebSocket) → notifications-spike
     ├─→ Genesys → r2d2 STT → EventBridge → SQS → sqs_consumer
-    └─→ BlackHole audio loopback → Deepgram Nova-3 STT → poc-deepgram
+    └─→ BlackHole audio loopback → Deepgram Nova-3 STT [13] → poc-deepgram
 ```
 
 Path C (Deepgram Direct) provides ground truth. True latency = `receivedAt - audio_wall_clock_end`, both `time.time()` on the same machine. No clock synchronization needed.
@@ -65,7 +63,7 @@ Utterances matched across systems using fuzzy text similarity (SequenceMatcher �
 
 ## Self-Reported vs True Latency
 
-Genesys self-reported latency understates true latency by 2.4x-4.4x [1]. Self-reported misses Stage 1 (audio capture transport) and zeros out the baseline via anchor-event timing.
+Genesys self-reported latency understates true latency by 2.7x-4.4x [1]. Self-reported misses Stage 1 (audio capture transport) and zeros out the baseline via anchor-event timing.
 
 | Percentile | Notifications True | Self-Reported | Ratio | EventBridge True | Self-Reported | Ratio |
 |------------|-------------------:|--------------:|------:|-----------------:|--------------:|------:|
@@ -172,6 +170,7 @@ During a 6-call test with 2 agents, the following issues were discovered. Full d
 | 1 | `MAX_CONCURRENT_CONVERSATIONS` defaulted to 1 — silently dropped alternating calls | 3 of 6 conversations lost | No |
 | 2 | Startup race condition — calls in progress before WebSocket connects are invisible | First conversation lost | No |
 | 3 | SQS consumer not started (operator error, but illustrates multi-process dependency) | All EB data missing for that run | N/A (operator) |
+| 4 | Missing `AWS_DEFAULT_REGION` environment variable — SQS consumer fails silently | All EB data missing for that run | N/A (operator) |
 | 5 | Status events without `transcripts` field crash consumer (poison message loop) | Consumer stuck until fix | Fixed (delete non-transcript messages) |
 | 6 | `_conversation_times()` stops at first agent participant — re-routed calls missed | Conversation captured by EB but not Notifications | No |
 | 7 | State machine stuck after missed call + agent re-ready (`connected=False ended=True` loop) | Conversation captured by EB for 10+ minutes while Notifications shows nothing | No |
@@ -183,6 +182,8 @@ Issues 6, 7, and 8 are architectural: the reactive subscribe/unsubscribe model r
 
 Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule captures all events org-wide. SQS retains messages up to 14 days during consumer downtime [12].
 
+Genesys states: *"The WebSocket implementation is designed for responsive UI applications. For server-based integrations, the AWS EventBridge integration is recommended."* [10]
+
 ---
 
 ## Complexity Comparison [10][11]
@@ -191,7 +192,7 @@ Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule
 |-----------|:-----------:|:-----------------:|:--------------------:|
 | Application code | ~80 lines | ~1,500+ lines | ~500-1,000 lines |
 | Genesys API calls/day | 0 | ~88,640 | 0 |
-| WebSocket connections | 0 | 3-4 | ~1,000 (one per call) |
+| WebSocket connections | 0 | 3-4 | ~1,000 (one per call) [15] |
 | Inbound bandwidth | ~5 Mbps | ~5 Mbps | ~256 Mbps |
 | Failure modes | 1 | 7+ | 2+ |
 | Recovery from downtime | SQS retains messages [12] | Recreate channels, resubscribe, recover | No recovery for missed audio |
@@ -203,7 +204,7 @@ Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule
 
 ## Latency Budget: Speech Ended → Agent Sees Suggestion [1]
 
-All three paths share Stages 1-3 (Genesys r2d2 STT + endpointing) and Stages 5-6 (LLM + render). They differ only in Stage 4 (delivery).
+Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing). AudioHook replaces r2d2 with Deepgram Nova-3 [13]. All three paths share Stages 5-6 (LLM + render). They differ in Stage 4 (delivery) and, for AudioHook, Stage 1-3 (STT engine).
 
 ### Notifications (WebSocket)
 
@@ -259,3 +260,6 @@ The delivery path (Stage 4) adds 325-343ms for EventBridge and ~50-250ms for Not
 | 10 | https://developer.genesys.cloud/notificationsalerts/notifications/ | Genesys Notifications API documentation (topic limits, channel limits, usage limitations) |
 | 11 | https://help.genesys.cloud/articles/about-the-amazon-eventbridge-integration/ | Genesys EventBridge integration documentation |
 | 12 | https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html | AWS SQS message retention limits (4 days default, 14 days max) |
+| 13 | https://developers.deepgram.com/docs/getting-started-with-live-streaming-audio | Deepgram Nova-3 streaming STT API documentation |
+| 14 | https://deepgram.com/pricing | Deepgram STT pricing (~$0.0043/min Nova-3 streaming) |
+| 15 | https://help.genesys.cloud/articles/audiohook-monitor-overview/ | Genesys AudioHook Monitor overview (architecture, limits, licensing) |
