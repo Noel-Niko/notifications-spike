@@ -6,6 +6,20 @@
 
 ---
 
+## Summary
+
+### True End-to-End Latency ([Aggregate Results](#aggregate-results))
+
+| Metric | Deepgram Direct (POC) | Genesys Self-Reported | Genesys Ground Truth |
+|--------|:---------------------:|:---------------------:|:--------------------:|
+| p50 | 1,248 ms | 432 ms | 1,712 ms |
+| p95 | 3,469 ms | 1,611 ms | 10,544 ms |
+| p99 | 4,338 ms | 2,751 ms | 16,472 ms |
+
+Self-reported latency understates true latency by 4.0x at median and 6.5x at p95 ([Why the p95 Is Dramatically Higher](#why-the-p95-is-dramatically-higher-than-the-median)). Endpointing batching during continuous speech drives tail latency. 93 matched pairs from 6 test calls.
+
+---
+
 ## Key Findings
 
 All three columns use data from the **same 6 test calls** (movie monologues played through live Genesys calls on March 18, 2026).

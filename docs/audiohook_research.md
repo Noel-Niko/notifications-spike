@@ -1,4 +1,4 @@
-# Genesys AudioHook: Implementation Research for 1,200 Agents / 40,000 Calls/Day
+# Genesys AudioHook: Implementation Research for 1,200 Agents / 40,000 Calls/Day / 6 minutes per call
 
 **Date**: March 23, 2026
 **Purpose**: Comprehensive research on implementing a Genesys AudioHook integration with third-party STT (e.g., Deepgram) for real-time transcription at scale.
@@ -18,7 +18,7 @@ At production scale (~800,000 utterances/day):
 | Genesys Notifications WS [49] | 7,310 ms | 3,301 ms | 2,452 ms | 1,369 ms | 3.3% | ~26,400 | 78% |
 | Genesys EventBridge SQS [49] | 7,470 ms | 3,435 ms | 2,679 ms | 1,570 ms | 3.2% | ~25,600 | 78% |
 
-Genesys AudioHook estimates are unvalidated -- derived from Deepgram Direct POC measurements adjusted for Genesys infrastructure overhead ([methodology](#deepgram-direct-poc-measurement-methodology-and-limitations-48-49)). Validation requires an end-to-end POC with real Genesys call audio.
+Genesys AudioHook estimates are unvalidated -- derived from Deepgram Direct POC measurements adjusted for Genesys infrastructure overhead ([methodology](#deepgram-direct-poc-measurement-methodology-and-limitations-48-49)). Previous analysis showed Genesys reported values to be significantly lower than testing observed ([experiment](https://grainger.atlassian.net/wiki/spaces/CDA/pages/167066828860/Genesys+Notifications+WebSocket+Latency+Experiment+Results)). Validation requires an end-to-end POC with real Genesys call audio.
 
 ### Cost ([Section 14](#14-cost-analysis-40000-callsday-6-min-average))
 

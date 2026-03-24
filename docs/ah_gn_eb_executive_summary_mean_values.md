@@ -7,6 +7,28 @@
 
 ---
 
+## Summary
+
+### Latency ([Results](#results))
+
+| Source | Median | p95 | p99 | N |
+|--------|:------:|:---:|:---:|:-:|
+| Deepgram Direct (POC) | 1,216 ms | 2,947 ms | 3,625 ms | 62 |
+| Genesys Notifications WS | 1,369 ms | 3,301 ms | 9,757 ms | 61 |
+| Genesys EventBridge SQS | 1,570 ms | 3,457 ms | 10,020 ms | 62 |
+
+EventBridge adds +201ms median over Notifications. The EB delivery hop totals 238ms median ([EventBridge 2-Hop Analysis](#eventbridge-2-hop-analysis)).
+
+### Confidence ([Confidence Scores](#confidence-scores))
+
+Deepgram: 98.3% median. Genesys r2d2: 80.7% median. 17 percentage point gap.
+
+### Recommendation ([Recommendation](#recommendation))
+
+Use EventBridge (SQS). 201ms overhead is 5-11% of total pipeline. Eliminates 1,000 topic limit, ~88,640 daily API calls, and 7+ failure modes. AudioHook + Deepgram is the upgrade path if r2d2 confidence proves insufficient.
+
+---
+
 ## Method of Analysis
 
 ### Three-Source Cross-System Correlation

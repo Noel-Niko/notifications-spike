@@ -4,6 +4,22 @@ Key arguments, findings, and evidence to incorporate into the final `docs/analys
 
 ---
 
+## Summary
+
+EventBridge is the recommended production path ([Recommendation Framework](#8-recommendation-framework)).
+
+| Constraint | Notifications API | EventBridge |
+|------------|:-----------------:|:-----------:|
+| Topic limit | 1,200 agents need ~2,000 topics (2x the 1,000 limit) | No topic management |
+| Failure modes | 7+ distinct modes requiring custom code | 1 (consumer crash -- SQS retains) |
+| Application code | ~1,500+ lines (estimated production) | ~80 lines (stateless consumer) |
+| Genesys API calls/day | ~88,640 | 0 |
+| Latency overhead | Baseline | +201ms median |
+
+Genesys recommends EventBridge for server-side integrations ([Section 1](#1-genesys-themselves-recommend-eventbridge-for-server-side-integrations)).
+
+---
+
 ## 1. Genesys Themselves Recommend EventBridge for Server-Side Integrations
 
 The very first paragraph of the Notifications API documentation states:

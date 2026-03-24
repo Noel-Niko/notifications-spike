@@ -7,6 +7,29 @@
 
 ---
 
+## Summary
+
+### Latency ([Results](#results))
+
+| Source | Median | p95 | p99 | N |
+|--------|:------:|:---:|:---:|:-:|
+| **Genesys AudioHook + Deepgram (est. from official docs)** | **~1,140 ms** | **~2,870 ms** | **~3,500 ms** | — |
+| Deepgram Direct (POC) | 1,216 ms | 2,947 ms | 3,625 ms | 62 |
+| Notifications API WS | 1,369 ms | 3,301 ms | 9,757 ms | 61 |
+| EventBridge SQS | 1,570 ms | 3,457 ms | 10,020 ms | 62 |
+
+Self-reported latency understates true latency by 3.96x-4.41x ([Self-Reported vs. True Latency](#self-reported-vs-true-latency)).
+
+### Confidence ([Confidence Scores](#confidence-scores))
+
+Deepgram: 98.3% median. Genesys r2d2: 80.7% median.
+
+### Production Constraints ([Production Constraints at Scale](#production-constraints-at-scale))
+
+Notifications API hard limit of 1,000 topics requires 2x capacity at 1,200 agents. EventBridge has no topic management.
+
+---
+
 ## Method of Analysis
 
 ### Three-Source Cross-System Correlation

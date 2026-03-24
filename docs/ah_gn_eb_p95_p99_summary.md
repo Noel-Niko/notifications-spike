@@ -7,6 +7,18 @@
 
 ---
 
+## Summary
+
+| Source | p99 | p95 | p50 | >5s rate | >5s/day | STT Confidence |
+|--------|:---:|:---:|:---:|:--------:|:-------:|:--------------:|
+| Deepgram Direct (POC) | 3,569 ms | 2,945 ms | 1,216 ms | 0.0% | 0 | 98% |
+| Genesys Notifications WS | 7,310 ms | 3,301 ms | 1,369 ms | 3.3% | ~26,400 | 78% |
+| Genesys EventBridge SQS | 7,470 ms | 3,435 ms | 1,570 ms | 3.2% | ~25,600 | 78% |
+
+EB delivery pipeline stays under 350ms even at p99 ([EventBridge 2-Hop Decomposition](#eventbridge-2-hop-decomposition-at-percentiles)). Tail latency originates in Genesys STT/endpointing, not the delivery path ([Tail Latency Deep Dive](#tail-latency-deep-dive-p90)).
+
+---
+
 ## Method
 
 Same three-source cross-system correlation as `cross_system_latency-02-EB-RESULTS.ipynb`. Path C (Deepgram Direct via BlackHole loopback -- audio streamed locally to Deepgram Nova-3, not through Genesys) provides ground-truth `audio_wall_clock_end`. True latency = `receivedAt - audio_wall_clock_end`, both `time.time()` on the same machine.
