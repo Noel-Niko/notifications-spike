@@ -108,17 +108,17 @@ EB-Notifications delta: +134ms to +227ms across percentiles [1].
 
 **SLA target**: All utterances delivered end-to-end (speech ended → agent sees suggestion) in under 2 seconds. This encompasses Stages 1-6: STT + endpointing + delivery + LLM inference + render.
 
-**SLA exceedance rate** is the percentage of utterances whose true latency exceeds a given threshold. Rates below are for **Stages 1-4 only** (speech ended → transcript received, before LLM inference). LLM inference (Stage 5) adds 500-2,000ms on top of these numbers. Rates are measured from the 61-62 matched pairs and projected to 800,000 utterances/day [1].
+**SLA exceedance rate** is the percentage of utterances whose true latency exceeds a given threshold. Rates below are for **Stages 1-4 only** (speech ended → transcript received, before LLM inference). LLM provider and MCP server call latency (Stage 5) are unknown — no provider has been selected and no benchmarks exist yet. These numbers represent the latency budget already consumed before LLM inference begins. Rates are measured from the 61-62 matched pairs and projected to 800,000 utterances/day [1].
 
 At 800,000 utterances/day:
 
-| Source | >2s | >2s/day | >3s | >3s/day | >5s | >5s/day |
-|--------|----:|--------:|----:|--------:|----:|--------:|
-| Deepgram Direct | 27.4% | ~219,200 | 4.8% | ~38,400 | 0.0% | 0 |
-| Genesys Notifications WS | 18.0% | ~144,000 | 6.6% | ~52,800 | 3.3% | ~26,400 |
-| Genesys EventBridge SQS | 19.4% | ~155,200 | 8.1% | ~64,800 | 3.2% | ~25,600 |
+| Source | ≤2s | >2s | >2s/day | ≤3s | >3s | >3s/day | ≤5s | >5s | >5s/day |
+|--------|----:|----:|--------:|----:|----:|--------:|----:|----:|--------:|
+| Deepgram Direct | 72.6% | 27.4% | ~219,200 | 95.2% | 4.8% | ~38,400 | 100% | 0.0% | 0 |
+| Genesys Notifications WS | 82.0% | 18.0% | ~144,000 | 93.4% | 6.6% | ~52,800 | 96.7% | 3.3% | ~26,400 |
+| Genesys EventBridge SQS | 80.6% | 19.4% | ~155,200 | 91.9% | 8.1% | ~64,800 | 96.8% | 3.2% | ~25,600 |
 
-At a 2s SLA target, Stages 1-4 alone exceed 2 seconds for 18-27% of utterances — before LLM inference begins. With LLM inference added (500-2,000ms), the 2s target is only achievable for utterances where Stages 1-4 complete in under ~1,500ms (approximately p50 and below for all paths).
+At a 2s SLA target, Stages 1-4 alone exceed 2 seconds for 18-27% of utterances — before LLM inference begins. LLM provider and MCP server call latency (Stage 5) are unknown at this time, so the remaining time budget available for inference cannot be quantified. Any LLM latency added to these numbers further reduces the percentage of utterances that can meet the 2s target.
 
 Tail events appear across multiple conversations. EventBridge tail events track Notifications tail events at the same timestamps with a consistent offset — the tail is caused by r2d2 STT endpointing, not the delivery path [1].
 
@@ -204,7 +204,7 @@ Genesys states: *"The WebSocket implementation is designed for responsive UI app
 
 ## Latency Budget: Speech Ended → Agent Sees Suggestion [1]
 
-Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing). AudioHook replaces r2d2 with Deepgram Nova-3 [13][17]. All three paths share Stages 5-6 (LLM + render). They differ in Stage 4 (delivery) and, for AudioHook, Stage 1-3 (STT engine).
+Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing). AudioHook replaces r2d2 with Deepgram Nova-3 [13][17]. All three paths share Stages 5-6 (LLM + render). They differ in Stage 4 (delivery) and, for AudioHook, Stage 1-3 (STT engine). **Stage 5 (LLM inference) is unknown** — no LLM provider has been selected and MCP server call latency has not been benchmarked. Totals below exclude Stage 5.
 
 ### Notifications (WebSocket)
 
@@ -212,10 +212,10 @@ Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing).
                                              p95            p99
 Stage 1-3: Genesys STT + endpointing     3,301 ms       7,310 ms
 Stage 4:   WS delivery                    ~50-200 ms     ~100-250 ms
-Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 5:   LLM inference                  unknown        unknown
 Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
 ────────────────────────────────────────────────────────────────────
-Total:                                    ~3,900-5,600 ms  ~7,960-9,660 ms
+Total (excl. Stage 5):                    ~3,401-3,601 ms  ~7,510-7,660 ms
 ```
 
 ### EventBridge (SQS)
@@ -224,10 +224,10 @@ Total:                                    ~3,900-5,600 ms  ~7,960-9,660 ms
                                              p95            p99
 Stage 1-3: Genesys STT + endpointing     3,435 ms       7,470 ms
 Stage 4:   EB delivery (Hop A + Hop B)      325 ms         343 ms
-Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 5:   LLM inference                  unknown        unknown
 Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
 ────────────────────────────────────────────────────────────────────
-Total:                                    ~4,310-5,860 ms  ~8,363-9,913 ms
+Total (excl. Stage 5):                    ~3,810-3,860 ms  ~7,863-7,913 ms
 ```
 
 ### AudioHook + Deepgram (estimated)
@@ -236,10 +236,10 @@ Total:                                    ~4,310-5,860 ms  ~8,363-9,913 ms
                                              p95            p99
 Stage 1-3: Deepgram STT + endpointing    2,945 ms       3,569 ms
 Stage 4:   In-process (no network hop)       ~0 ms          ~0 ms
-Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 5:   LLM inference                  unknown        unknown
 Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
 ────────────────────────────────────────────────────────────────────
-Total:                                    ~3,495-5,045 ms  ~4,119-5,669 ms
+Total (excl. Stage 5):                    ~2,995-3,045 ms  ~3,619-3,669 ms
 ```
 
 The delivery path (Stage 4) adds 325-343ms for EventBridge and ~50-250ms for Notifications. At p99, the dominant factor is Stage 1-3: Genesys r2d2 reaches 7,310-7,470ms while Deepgram reaches 3,569ms. The AudioHook path eliminates the r2d2 tail entirely.
