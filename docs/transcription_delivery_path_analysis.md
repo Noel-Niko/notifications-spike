@@ -144,7 +144,7 @@ All three paths deliver >80% of utterances within 2 seconds (Stages 1-4 only). D
 | WebSocket connections per channel | 1 | Second connection disconnects the first |
 | `GET /api/v2/conversations` | Returns current user's conversations only | Empty with `client_credentials` auth |
 
-### Capacity Math [5][10]
+### Capacity Math [10]
 
 ```
   1,200  agent conversation feed topics (static, one per agent)
@@ -153,7 +153,7 @@ All three paths deliver >80% of utterances within 2 seconds (Stages 1-4 only). D
 = 1,950-2,200  topics needed simultaneously → 2x the 1,000 limit
 ```
 
-### Workarounds Required for Production [5][10]
+### Workarounds Required for Production [10]
 
 | Workaround | What It Requires |
 |------------|-----------------|
@@ -163,7 +163,7 @@ All three paths deliver >80% of utterances within 2 seconds (Stages 1-4 only). D
 | Analytics-based recovery | Replace `GET /api/v2/conversations` (broken with `client_credentials`) with `POST /api/v2/analytics/conversations/details/query`. Requires 1,200 user ID predicates per query. ~8,640 additional API calls/day at 10s polling |
 | Multi-participant parsing | Iterate ALL agent participants per conversation, not just the first. Required to handle re-routed calls |
 
-### Issues Found During Testing [6]
+### Issues Found During Testing [7]
 
 During a 6-call test with 2 agents, the following issues were discovered. Full details: [Notifications Testing Learnings](https://grainger.atlassian.net/wiki/spaces/CDA/pages/edit-v2/167127121959?draftShareId=398399de-b566-42bb-b067-24953c838cc8) [7].
 
@@ -177,15 +177,15 @@ During a 6-call test with 2 agents, the following issues were discovered. Full d
 | 7 | State machine stuck after missed call + agent re-ready (`connected=False ended=True` loop) | Conversation captured by EB for 10+ minutes while Notifications shows nothing | No |
 | 8 | `recover_active_conversations()` returns nothing — `GET /api/v2/conversations` empty with `client_credentials` auth | Recovery function never worked. Startup recovery was a no-op | No |
 
-Issues 6, 7, and 8 are architectural: the reactive subscribe/unsubscribe model requires per-conversation state tracking that breaks under real-world call routing patterns [6]. EventBridge is unaffected by all of these because it has no per-conversation subscription, no state machine, and delivers all transcription events to a single SQS queue regardless of conversation lifecycle [11].
+Issues 6, 7, and 8 are architectural: the reactive subscribe/unsubscribe model requires per-conversation state tracking that breaks under real-world call routing patterns [7]. EventBridge is unaffected by all of these because it has no per-conversation subscription, no state machine, and delivers all transcription events to a single SQS queue regardless of conversation lifecycle [11].
 
 ### EventBridge Comparison [11]
 
-Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule captures all events org-wide. SQS retains messages up to 14 days during consumer downtime.
+Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule captures all events org-wide. SQS retains messages up to 14 days during consumer downtime [12].
 
 ---
 
-## Complexity Comparison [5]
+## Complexity Comparison [10][11]
 
 | Dimension | EventBridge | Notifications API | AudioHook + Deepgram |
 |-----------|:-----------:|:-----------------:|:--------------------:|
@@ -194,36 +194,54 @@ Zero per-agent subscriptions. Zero API calls during steady state. Single EB rule
 | WebSocket connections | 0 | 3-4 | ~1,000 (one per call) |
 | Inbound bandwidth | ~5 Mbps | ~5 Mbps | ~256 Mbps |
 | Failure modes | 1 | 7+ | 2+ |
-| Recovery from downtime | SQS retains messages | Recreate channels, resubscribe, recover | No recovery for missed audio |
+| Recovery from downtime | SQS retains messages [12] | Recreate channels, resubscribe, recover | No recovery for missed audio |
 | Additional cost | $0 | $0 | AudioHook license + Deepgram STT |
 
 ![STT Confidence: Matched Pairs vs All Transcripts](../analysis_results/cross_system_eb_p99/confidence_standalone.png)
 
 ---
 
-## Latency Budget (p95) [1]
+## Latency Budget: Speech Ended → Agent Sees Suggestion [1]
+
+All three paths share Stages 1-3 (Genesys r2d2 STT + endpointing) and Stages 5-6 (LLM + render). They differ only in Stage 4 (delivery).
+
+### Notifications (WebSocket)
 
 ```
-Stage 1-3: Genesys STT + endpointing        ~3,300-3,435 ms
-Stage 4:   Delivery to application            ~50-200 ms (WS) or ~325 ms (EB)
-Stage 5:   LLM inference                      ~500-2,000 ms
-Stage 6:   Render in agent UI                 ~50-100 ms
-─────────────────────────────────────────────────────────────
-Total at p95:                                 ~3,900-5,760 ms
+                                             p95            p99
+Stage 1-3: Genesys STT + endpointing     3,301 ms       7,310 ms
+Stage 4:   WS delivery                    ~50-200 ms     ~100-250 ms
+Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
+────────────────────────────────────────────────────────────────────
+Total:                                    ~3,900-5,600 ms  ~7,960-9,660 ms
 ```
 
-## Latency Budget (p99) [1]
+### EventBridge (SQS)
 
 ```
-Stage 1-3: Genesys STT + endpointing        ~7,310-7,470 ms
-Stage 4:   Delivery to application            ~100-250 ms (WS) or ~343 ms (EB)
-Stage 5:   LLM inference                      ~500-2,000 ms
-Stage 6:   Render in agent UI                 ~50-100 ms
-─────────────────────────────────────────────────────────────
-Total at p99:                                 ~7,960-9,960 ms
+                                             p95            p99
+Stage 1-3: Genesys STT + endpointing     3,435 ms       7,470 ms
+Stage 4:   EB delivery (Hop A + Hop B)      325 ms         343 ms
+Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
+────────────────────────────────────────────────────────────────────
+Total:                                    ~4,310-5,860 ms  ~8,363-9,913 ms
 ```
 
-At p99, Stages 1-3 consume 7,310-7,470ms before LLM inference begins. The delivery path (Stage 4) remains under 350ms even at p99 — the tail is entirely upstream in Genesys STT and endpointing.
+### AudioHook + Deepgram (estimated)
+
+```
+                                             p95            p99
+Stage 1-3: Deepgram STT + endpointing    2,945 ms       3,569 ms
+Stage 4:   In-process (no network hop)       ~0 ms          ~0 ms
+Stage 5:   LLM inference                  ~500-2,000 ms  ~500-2,000 ms
+Stage 6:   Render in agent UI             ~50-100 ms     ~50-100 ms
+────────────────────────────────────────────────────────────────────
+Total:                                    ~3,495-5,045 ms  ~4,119-5,669 ms
+```
+
+The delivery path (Stage 4) adds 325-343ms for EventBridge and ~50-250ms for Notifications. At p99, the dominant factor is Stage 1-3: Genesys r2d2 reaches 7,310-7,470ms while Deepgram reaches 3,569ms. The AudioHook path eliminates the r2d2 tail entirely.
 
 ---
 
@@ -235,10 +253,9 @@ At p99, Stages 1-3 consume 7,310-7,470ms before LLM inference begins. The delive
 | 2 | `notebooks/cross_system_latency-02-EB-RESULTS.ipynb` | Cross-system median/mean analysis |
 | 3 | `scripts/correlate_latency.py` | Utterance matching engine (fuzzy text similarity, SequenceMatcher ≥ 0.70, 15s window) |
 | 4 | `analysis_results/cross_system_eb/` and `analysis_results/cross_system_eb_p99/` | Exported charts and data (CSV, JSON, PNG) |
-| 5 | `docs/analysis_key_points.md` | Architectural constraints, capacity math, and complexity comparison |
-| 6 | `docs/notifications_testing_learnings.md` | Testing issues discovered during 6-call comparison (8 issues) |
 | 7 | https://grainger.atlassian.net/wiki/spaces/CDA/pages/edit-v2/167127121959?draftShareId=398399de-b566-42bb-b067-24953c838cc8 | Notifications Testing Learnings (Confluence) |
 | 8 | https://grainger.atlassian.net/wiki/spaces/CDA/pages/167125549104/AudioHook+Research | AudioHook implementation research (Confluence) |
 | 9 | https://grainger.atlassian.net/wiki/spaces/CDA/pages/167066828860/Genesys+Notifications+WebSocket+Latency+Experiment+Results | Genesys Notifications WebSocket Latency Experiment Results |
 | 10 | https://developer.genesys.cloud/notificationsalerts/notifications/ | Genesys Notifications API documentation (topic limits, channel limits, usage limitations) |
 | 11 | https://help.genesys.cloud/articles/about-the-amazon-eventbridge-integration/ | Genesys EventBridge integration documentation |
+| 12 | https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html | AWS SQS message retention limits (4 days default, 14 days max) |
