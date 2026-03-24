@@ -192,10 +192,10 @@ Genesys states: *"The WebSocket implementation is designed for responsive UI app
 |-----------|:-----------:|:-----------------:|:--------------------:|
 | Application code | ~80 lines | ~1,500+ lines | ~500-1,000 lines |
 | Genesys API calls/day | 0 | ~88,640 | 0 |
-| WebSocket connections | 0 | 3-4 | ~1,000 (one per call) [15] |
-| Inbound bandwidth | ~5 Mbps | ~5 Mbps | ~256 Mbps |
+| WebSocket connections | 0 | 3-4 | ~1,000 (one per call) [15][17] |
+| Inbound bandwidth | ~5 Mbps | ~5 Mbps | ~256 Mbps [16] |
 | Failure modes | 1 | 7+ | 2+ |
-| Recovery from downtime | SQS retains messages [12] | Recreate channels, resubscribe, recover | No recovery for missed audio |
+| Recovery from downtime | SQS retains messages [12] | Recreate channels, resubscribe, recover | Limited recovery (20s buffer, 5 retries) [16] |
 | Additional cost | $0 | $0 | AudioHook license + Deepgram STT |
 
 ![STT Confidence: Matched Pairs vs All Transcripts](../analysis_results/cross_system_eb_p99/confidence_standalone.png)
@@ -204,7 +204,7 @@ Genesys states: *"The WebSocket implementation is designed for responsive UI app
 
 ## Latency Budget: Speech Ended → Agent Sees Suggestion [1]
 
-Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing). AudioHook replaces r2d2 with Deepgram Nova-3 [13]. All three paths share Stages 5-6 (LLM + render). They differ in Stage 4 (delivery) and, for AudioHook, Stage 1-3 (STT engine).
+Notifications and EventBridge share Stages 1-3 (Genesys r2d2 STT + endpointing). AudioHook replaces r2d2 with Deepgram Nova-3 [13][17]. All three paths share Stages 5-6 (LLM + render). They differ in Stage 4 (delivery) and, for AudioHook, Stage 1-3 (STT engine).
 
 ### Notifications (WebSocket)
 
@@ -263,3 +263,5 @@ The delivery path (Stage 4) adds 325-343ms for EventBridge and ~50-250ms for Not
 | 13 | https://developers.deepgram.com/docs/getting-started-with-live-streaming-audio | Deepgram Nova-3 streaming STT API documentation |
 | 14 | https://deepgram.com/pricing | Deepgram STT pricing (~$0.0043/min Nova-3 streaming) |
 | 15 | https://help.genesys.cloud/articles/audiohook-monitor-overview/ | Genesys AudioHook Monitor overview (architecture, limits, licensing) |
+| 16 | https://developer.genesys.cloud/devapps/audiohook/protocol-reference | Genesys AudioHook Protocol Reference (message types, PCMU/8000Hz media format, reconnection with 20s history buffer and 5 retries, sequence numbering, open/close transactions) |
+| 17 | https://developer.genesys.cloud/devapps/audiohook/introduction | Genesys AudioHook Introduction (WebSocket architecture, per-participant session model, external/internal channel model, third-party STT integration use cases) |
