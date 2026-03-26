@@ -9,16 +9,51 @@
 
 ## Summary
 
-### Utterance Latency (end-to-end: speech ended → transcript received) [1]
+### Channel Comparison — Executive Decision Matrix
 
-| Source | p99 | p95 | p50 | >5s rate | >5s/day | STT Confidence |
-|--------|:---:|:---:|:---:|:--------:|:-------:|:--------------:|
-| **Genesys AudioHook + Deepgram (est. from official docs)** | **~3,500 ms** | **~2,870 ms** | **~1,140 ms** | **~0%** | **~0** | **98%** |
-| Deepgram Direct (measured) | 3,569 ms | 2,945 ms | 1,216 ms | 0.0% | 0 | 98% |
-| Genesys Notifications WS | 7,310 ms | 3,301 ms | 1,369 ms | 3.3% | ~26,400 | 78% |
-| Genesys EventBridge SQS | 7,470 ms | 3,435 ms | 1,570 ms | 3.2% | ~25,600 | 78% |
+#### Latency
 
-Genesys AudioHook estimates are derived from Deepgram Direct POC measurements adjusted for Genesys self-reported infrastructure overhead. Previous analysis showed Genesys reported values to be significantly lower than testing observed [9]. Validation requires an end-to-end POC with real Genesys call audio.
+| Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
+|--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
+| p99 | ~3,500 ms | 3,569 ms | 7,310 ms | 7,470 ms | [1] |
+| p95 | ~2,870 ms | 2,945 ms | 3,301 ms | 3,435 ms | [1] |
+| p50 | ~1,140 ms | 1,216 ms | 1,369 ms | 1,570 ms | [1] |
+
+#### SLA Exceedance
+
+Stages 1-4 only: speech ended → transcript received, before LLM inference.
+
+| Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
+|--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
+| >2s rate (Stages 1-4) | ~27.4% | 27.4% | 18.0% | 19.4% | [1] |
+| >2s/day (Stages 1-4) | ~219,200 | ~219,200 | ~144,000 | ~155,200 | [1] |
+| >3s rate (Stages 1-4) | ~4.8% | 4.8% | 6.6% | 8.1% | [1] |
+| >3s/day (Stages 1-4) | ~38,400 | ~38,400 | ~52,800 | ~64,800 | [1] |
+| >5s rate (Stages 1-4) | ~0% | 0.0% | 3.3% | 3.2% | [1] |
+| >5s/day (Stages 1-4) | ~0 | 0 | ~26,400 | ~25,600 | [1] |
+
+#### Accuracy
+
+| Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
+|--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
+| STT Confidence (median) | 98% | 98% | 78% | 78% | [1] |
+
+#### Cost
+
+| Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
+|--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
+| Monthly cost | ~$68-94K + AudioHook license | N/A (POC only) | $0 | $0 | [14][15] |
+
+#### Complexity
+
+| Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
+|--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
+| Application code | ~500-1,000 lines | N/A | ~1,500+ lines | ~80 lines | [10][11] |
+| Genesys API calls/day | 0 | N/A | ~88,640 | 0 | [10][11] |
+| WebSocket connections | ~1,000 (1/call) | N/A | 3-4 | 0 | [10][11][15][17] |
+| Failure modes | 2+ | N/A | 7+ | 1 | [10][11] |
+
+Genesys AudioHook estimates are derived from Deepgram Direct POC measurements adjusted for Genesys self-reported infrastructure overhead. Previous analysis showed Genesys reported values to be significantly lower than testing observed — by 2.7x-4.4x — [9]. Validation requires an end-to-end POC with real Genesys call audio.
 
 ![Percentile Bars](../analysis_results/cross_system_eb_p99/percentile_bars.png)
 
