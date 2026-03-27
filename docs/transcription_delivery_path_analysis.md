@@ -1,9 +1,9 @@
 # Transcription Delivery Path Analysis
 
-**Date**: March 23, 2026
-**Scope**: Latency and confidence comparison of four transcription delivery paths.
+**Date**: March 23, 2026 (latency/confidence), March 26, 2026 (WER accuracy)
+**Scope**: Latency, confidence, and transcription accuracy comparison of four transcription delivery paths.
 **Target System**: ~1,200 agents, ~40,000 calls/day, ~6-minute average call duration (~800,000 utterances/day).
-**Test Data**: 6 live test calls, 61-62 matched utterance pairs per path, independent ground-truth audio timing on a single machine [1].
+**Test Data**: 6 live test calls, 61-62 matched utterance pairs per path, independent ground-truth audio timing on a single machine [1]. WER measured against 6 manually verified ground truth transcriptions (1,699 reference words) [18].
 
 ---
 
@@ -37,6 +37,14 @@ Stages 1-4 only: speech ended → transcript received, before LLM inference.
 | Metric | AudioHook + Deepgram (est.) | Deepgram Direct (measured) | Notifications WS | EventBridge SQS | Ref |
 |--------|:---------------------------:|:--------------------------:|:-----------------:|:---------------:|:---:|
 | STT Confidence (median) | 98% | 98% | 78% | 78% | [1] |
+| Weighted WER (aligned) | ~23.8% | 23.8% | 34.8% | 34.3% | [18] |
+| Substitution errors | ~248 | 248 | 292 | 296 | [18] |
+| Deletion errors | ~118 | 118 | 274 | 259 | [18] |
+| Insertion errors | ~27 | 27 | 12 | 14 | [18] |
+| Text identity (Notif vs EB) | — | — | 100% | 100% | [18] |
+| Confidence→WER (within engine) | — | R²=0.56 (n.s.) | R²=0.02 (n.s.) | R²=0.02 (n.s.) | [18] |
+
+WER is computed against 6 manually reviewed and corrected ground truth transcriptions using `jiwer` [19]. Preprocessing includes sliding reference alignment (compensates for late recording start) and intro stripping (removes "Salesforce test call" audio artifact) [18][19]. A WER below 10% is generally considered production-quality; values above 20% indicate significant transcription errors [19]. Full methodology decisions and SRT review process documented in [19].
 
 #### Cost
 
@@ -60,7 +68,7 @@ Genesys AudioHook estimates are derived from Deepgram Direct POC measurements ad
 The EB-Notifications gap remains constant (134-227ms) across all percentiles [1]. The Deepgram-to-Genesys gap widens at p99, where r2d2 endpointing produces outlier latencies.
 
 ### STT Confidence [1]
-Confidence is presented as metric indicating accuracy of transcription.
+Confidence is presented as a metric indicating accuracy of transcription. WER analysis [18] provides a direct measurement of transcription accuracy against ground truth.
 
 | STT Engine | Median (Matched Pairs) | Median (All Transcripts) |
 |------------|:----------------------:|:------------------------:|
@@ -74,6 +82,36 @@ Confidence is independent of delivery path. Notifications and EventBridge carry 
 ### Genesys AudioHook Cost
 
 ~$68K-$94K/month for Deepgram STT [14] (enterprise discount likely 40-60% off) plus Genesys AudioHook Monitor licensing [15] (contact Genesys sales). Full implementation research: [AudioHook Research](https://grainger.atlassian.net/wiki/spaces/CDA/pages/167125549104/AudioHook+Research) [8].
+
+### WER Analysis (Transcription Accuracy) [18][19]
+
+Word Error Rate measures the percentage of words incorrectly transcribed, computed as `WER = (S + D + I) / N` where S = substitutions (wrong word), D = deletions (missing word), I = insertions (extra word), N = total reference words [19].
+
+WER was measured across 6 test call sessions against manually verified ground truth transcriptions (1,699 total reference words). Each session played a movie monologue through a live Genesys call, captured simultaneously by all three STT paths [18].
+
+| Movie | Deepgram | Notifications | EventBridge | Ref Words | SRT Type |
+|-------|:--------:|:-------------:|:-----------:|:---------:|:--------:|
+| Iron Man | 13.4% | 42.7% | 42.0% | 157 | manual |
+| Mockingbird | 21.7% | 41.4% | 41.4% | 227 | manual |
+| Cyrano | 23.3% | 27.6% | 27.6% | 447 | manual |
+| Maleficent | 24.3% | 29.6% | 29.6% | 145 | manual |
+| Glengarry | 26.6% | 35.0% | 33.4% | 514 | manual |
+| Shawshank | 27.9% | 41.0% | 41.0% | 209 | manual |
+| **Weighted Avg** | **23.8%** | **34.8%** | **34.3%** | **1,699** | |
+
+**Engine comparison** (Deepgram Nova-3 vs r2d2): Nova-3 outperforms r2d2 by ~11% weighted WER. The gap is consistent across all 6 movies [18].
+
+**Delivery path comparison** (Notifications vs EventBridge): WER difference is 0.5% (34.8% vs 34.3%), confirming the delivery path does not affect transcription quality. Both carry identical r2d2 output — text identity is 100% across all matched utterance pairs [18].
+
+**Error composition**: r2d2's primary weakness is deletions (44% of errors vs 26% for Nova-3), indicating it misses spoken words more frequently. Nova-3's errors are predominantly substitutions (64%), meaning it hears something but gets the wrong word [18].
+
+![Error Type Breakdown](../analysis_results/transcription_accuracy/error_type_breakdown.png)
+
+**Confidence as accuracy predictor** (within-engine only): STT confidence does not predict WER within either engine. For r2d2, R² = 1.5% (Spearman p = 0.93) — confidence explains none of the WER variance. For Nova-3, R² = 56.3% but not statistically significant (p = 0.09, n = 6). Cross-engine correlation is not reported because it conflates engine quality with confidence calibration [18].
+
+![Confidence vs Errors](../analysis_results/transcription_accuracy/confidence_vs_errors.png)
+
+**Preprocessing**: Raw WER is inflated by two test artifacts: (1) a "Salesforce test call" intro phrase in every recording creates spurious errors, and (2) recordings that started after the monologue began create artificial deletion streaks. Both are corrected via intro stripping and sliding reference alignment before WER computation. Full methodology: [19].
 
 ---
 
@@ -300,3 +338,5 @@ The delivery path (Stage 4) adds 325-343ms for EventBridge and ~50-250ms for Not
 | 15 | https://help.genesys.cloud/articles/audiohook-monitor-overview/ | Genesys AudioHook Monitor overview (architecture, limits, licensing) |
 | 16 | https://developer.genesys.cloud/devapps/audiohook/protocol-reference | Genesys AudioHook Protocol Reference (message types, PCMU/8000Hz media format, reconnection with 20s history buffer and 5 retries, sequence numbering, open/close transactions) |
 | 17 | https://developer.genesys.cloud/devapps/audiohook/introduction | Genesys AudioHook Introduction (WebSocket architecture, per-participant session model, external/internal channel model, third-party STT integration use cases) |
+| 18 | `notebooks/transcription_accuracy-04-WER-ANALYSIS.ipynb` | WER analysis: weighted WER per channel, error type breakdown (S/D/I), word-level alignment inspection, keyword anchor verification |
+| 19 | `docs/wer_analysis.md` | WER methodology, interpretation benchmarks, and source references |

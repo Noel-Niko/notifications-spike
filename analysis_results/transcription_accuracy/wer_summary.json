@@ -1,0 +1,227 @@
+{
+  "focus": "session_level_wer_analysis",
+  "movies": [
+    "Cyrano",
+    "Glengarry",
+    "Iron Man",
+    "Maleficent",
+    "Mockingbird",
+    "Shawshank"
+  ],
+  "channels": [
+    "Deepgram",
+    "Notifications",
+    "EventBridge"
+  ],
+  "wer_by_channel": {
+    "Deepgram": {
+      "mean_wer": 0.2259,
+      "median_wer": 0.2376,
+      "std_wer": 0.0497,
+      "min_wer": 0.1338,
+      "max_wer": 0.2679,
+      "weighted_wer": 0.2361,
+      "n_sessions": 6,
+      "total_ref_words": 1652,
+      "mean_confidence": 0.9212
+    },
+    "Notifications": {
+      "mean_wer": 0.3623,
+      "median_wer": 0.3797,
+      "std_wer": 0.0651,
+      "min_wer": 0.2758,
+      "max_wer": 0.4268,
+      "weighted_wer": 0.3486,
+      "n_sessions": 6,
+      "total_ref_words": 1661,
+      "mean_confidence": 0.7559
+    },
+    "EventBridge": {
+      "mean_wer": 0.3586,
+      "median_wer": 0.3718,
+      "std_wer": 0.0648,
+      "min_wer": 0.2758,
+      "max_wer": 0.4204,
+      "weighted_wer": 0.3432,
+      "n_sessions": 6,
+      "total_ref_words": 1661,
+      "mean_confidence": 0.7539
+    }
+  },
+  "wer_by_movie": {
+    "Cyrano": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.2325,
+        "substitutions": 75,
+        "deletions": 22,
+        "insertions": 6,
+        "ref_words": 443,
+        "confidence": 0.9076
+      },
+      "Notifications": {
+        "wer": 0.2758,
+        "substitutions": 74,
+        "deletions": 48,
+        "insertions": 1,
+        "ref_words": 446,
+        "confidence": 0.785
+      },
+      "EventBridge": {
+        "wer": 0.2758,
+        "substitutions": 74,
+        "deletions": 48,
+        "insertions": 1,
+        "ref_words": 446,
+        "confidence": 0.785
+      }
+    },
+    "Glengarry": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.266,
+        "substitutions": 69,
+        "deletions": 59,
+        "insertions": 5,
+        "ref_words": 500,
+        "confidence": 0.9287
+      },
+      "Notifications": {
+        "wer": 0.3498,
+        "substitutions": 76,
+        "deletions": 99,
+        "insertions": 2,
+        "ref_words": 506,
+        "confidence": 0.7748
+      },
+      "EventBridge": {
+        "wer": 0.334,
+        "substitutions": 78,
+        "deletions": 88,
+        "insertions": 3,
+        "ref_words": 506,
+        "confidence": 0.7771
+      }
+    },
+    "Iron Man": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.1338,
+        "substitutions": 9,
+        "deletions": 7,
+        "insertions": 5,
+        "ref_words": 157,
+        "confidence": 0.9632
+      },
+      "Notifications": {
+        "wer": 0.4268,
+        "substitutions": 21,
+        "deletions": 45,
+        "insertions": 1,
+        "ref_words": 157,
+        "confidence": 0.8012
+      },
+      "EventBridge": {
+        "wer": 0.4204,
+        "substitutions": 23,
+        "deletions": 41,
+        "insertions": 2,
+        "ref_words": 157,
+        "confidence": 0.7869
+      }
+    },
+    "Maleficent": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.2426,
+        "substitutions": 24,
+        "deletions": 5,
+        "insertions": 4,
+        "ref_words": 136,
+        "confidence": 0.9312
+      },
+      "Notifications": {
+        "wer": 0.2963,
+        "substitutions": 25,
+        "deletions": 12,
+        "insertions": 3,
+        "ref_words": 135,
+        "confidence": 0.7216
+      },
+      "EventBridge": {
+        "wer": 0.2963,
+        "substitutions": 25,
+        "deletions": 12,
+        "insertions": 3,
+        "ref_words": 135,
+        "confidence": 0.7216
+      }
+    },
+    "Mockingbird": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.2126,
+        "substitutions": 35,
+        "deletions": 5,
+        "insertions": 4,
+        "ref_words": 207,
+        "confidence": 0.923
+      },
+      "Notifications": {
+        "wer": 0.4095,
+        "substitutions": 46,
+        "deletions": 37,
+        "insertions": 3,
+        "ref_words": 210,
+        "confidence": 0.739
+      },
+      "EventBridge": {
+        "wer": 0.4095,
+        "substitutions": 46,
+        "deletions": 37,
+        "insertions": 3,
+        "ref_words": 210,
+        "confidence": 0.739
+      }
+    },
+    "Shawshank": {
+      "srt_type": "manual",
+      "Deepgram": {
+        "wer": 0.2679,
+        "substitutions": 36,
+        "deletions": 19,
+        "insertions": 1,
+        "ref_words": 209,
+        "confidence": 0.8737
+      },
+      "Notifications": {
+        "wer": 0.4155,
+        "substitutions": 49,
+        "deletions": 35,
+        "insertions": 2,
+        "ref_words": 207,
+        "confidence": 0.7136
+      },
+      "EventBridge": {
+        "wer": 0.4155,
+        "substitutions": 49,
+        "deletions": 35,
+        "insertions": 2,
+        "ref_words": 207,
+        "confidence": 0.7136
+      }
+    }
+  },
+  "dropped_utterances": {
+    "total": 2,
+    "by_missing_from": {
+      "Notifications": 2
+    }
+  },
+  "text_identity": {
+    "total_pairs": 143,
+    "identical": 143,
+    "different": 0,
+    "identity_rate": 1.0
+  }
+}

@@ -1,0 +1,1540 @@
+movie	channel	confidence	session_wer	error_type	reference_word	hypothesis_word
+Iron Man	Deepgram	0.9632	0.1338	SUB	mr	mister
+Iron Man	Deepgram	0.9632	0.1338	SUB	you	its
+Iron Man	Deepgram	0.9632	0.1338	DEL	uh	
+Iron Man	Deepgram	0.9632	0.1338	SUB	the	your
+Iron Man	Deepgram	0.9632	0.1338	DEL	on	
+Iron Man	Deepgram	0.9632	0.1338	DEL	the	
+Iron Man	Deepgram	0.9632	0.1338	SUB	and	on
+Iron Man	Deepgram	0.9632	0.1338	SUB	mr	mister
+Iron Man	Deepgram	0.9632	0.1338	SUB	shark	strauss
+Iron Man	Deepgram	0.9632	0.1338	SUB	but	if
+Iron Man	Deepgram	0.9632	0.1338	DEL	do	
+Iron Man	Deepgram	0.9632	0.1338	SUB	expect	expected
+Iron Man	Deepgram	0.9632	0.1338	DEL	us	
+Iron Man	Deepgram	0.9632	0.1338	INS		that
+Iron Man	Deepgram	0.9632	0.1338	INS		when
+Iron Man	Deepgram	0.9632	0.1338	SUB	to	you
+Iron Man	Deepgram	0.9632	0.1338	INS		mm
+Iron Man	Deepgram	0.9632	0.1338	INS		mm
+Iron Man	Deepgram	0.9632	0.1338	DEL	uh	
+Iron Man	Deepgram	0.9632	0.1338	INS		i
+Iron Man	Deepgram	0.9632	0.1338	DEL	uh	
+Iron Man	Notifications	0.8012	0.4268	SUB	mr	mister
+Iron Man	Notifications	0.8012	0.4268	SUB	uh	its
+Iron Man	Notifications	0.8012	0.4268	SUB	was	trying
+Iron Man	Notifications	0.8012	0.4268	SUB	in	to
+Iron Man	Notifications	0.8012	0.4268	SUB	front	do
+Iron Man	Notifications	0.8012	0.4268	SUB	of	it
+Iron Man	Notifications	0.8012	0.4268	DEL	you	
+Iron Man	Notifications	0.8012	0.4268	DEL	i	
+Iron Man	Notifications	0.8012	0.4268	SUB	ill	out
+Iron Man	Notifications	0.8012	0.4268	DEL	stick	
+Iron Man	Notifications	0.8012	0.4268	SUB	the	your
+Iron Man	Notifications	0.8012	0.4268	SUB	cards	card
+Iron Man	Notifications	0.8012	0.4268	INS		there
+Iron Man	Notifications	0.8012	0.4268	SUB	theres	has
+Iron Man	Notifications	0.8012	0.4268	DEL	on	
+Iron Man	Notifications	0.8012	0.4268	DEL	the	
+Iron Man	Notifications	0.8012	0.4268	DEL	freeway	
+Iron Man	Notifications	0.8012	0.4268	DEL	and	
+Iron Man	Notifications	0.8012	0.4268	DEL	the	
+Iron Man	Notifications	0.8012	0.4268	DEL	rooftop	
+Iron Man	Notifications	0.8012	0.4268	DEL	im	
+Iron Man	Notifications	0.8012	0.4268	DEL	sorry	
+Iron Man	Notifications	0.8012	0.4268	DEL	mr	
+Iron Man	Notifications	0.8012	0.4268	DEL	shark	
+Iron Man	Notifications	0.8012	0.4268	DEL	but	
+Iron Man	Notifications	0.8012	0.4268	DEL	do	
+Iron Man	Notifications	0.8012	0.4268	DEL	you	
+Iron Man	Notifications	0.8012	0.4268	DEL	honestly	
+Iron Man	Notifications	0.8012	0.4268	DEL	expect	
+Iron Man	Notifications	0.8012	0.4268	DEL	us	
+Iron Man	Notifications	0.8012	0.4268	SUB	bodyguard	body
+Iron Man	Notifications	0.8012	0.4268	SUB	in	guard
+Iron Man	Notifications	0.8012	0.4268	DEL	a	
+Iron Man	Notifications	0.8012	0.4268	DEL	suit	
+Iron Man	Notifications	0.8012	0.4268	DEL	that	
+Iron Man	Notifications	0.8012	0.4268	SUB	i	that
+Iron Man	Notifications	0.8012	0.4268	SUB	know	my
+Iron Man	Notifications	0.8012	0.4268	SUB	that	modem
+Iron Man	Notifications	0.8012	0.4268	SUB	its	is
+Iron Man	Notifications	0.8012	0.4268	DEL	to	
+Iron Man	Notifications	0.8012	0.4268	DEL	im	
+Iron Man	Notifications	0.8012	0.4268	DEL	a	
+Iron Man	Notifications	0.8012	0.4268	DEL	superhero	
+Iron Man	Notifications	0.8012	0.4268	SUB	never	am
+Iron Man	Notifications	0.8012	0.4268	DEL	said	
+Iron Man	Notifications	0.8012	0.4268	DEL	youre	
+Iron Man	Notifications	0.8012	0.4268	SUB	didnt	huh
+Iron Man	Notifications	0.8012	0.4268	DEL	well	
+Iron Man	Notifications	0.8012	0.4268	DEL	good	
+Iron Man	Notifications	0.8012	0.4268	DEL	because	
+Iron Man	Notifications	0.8012	0.4268	DEL	that	
+Iron Man	Notifications	0.8012	0.4268	DEL	would	
+Iron Man	Notifications	0.8012	0.4268	DEL	be	
+Iron Man	Notifications	0.8012	0.4268	DEL	outlandish	
+Iron Man	Notifications	0.8012	0.4268	DEL	and	
+Iron Man	Notifications	0.8012	0.4268	DEL	uh	
+Iron Man	Notifications	0.8012	0.4268	DEL	i	
+Iron Man	Notifications	0.8012	0.4268	DEL	the	
+Iron Man	Notifications	0.8012	0.4268	DEL	uh	
+Iron Man	Notifications	0.8012	0.4268	SUB	list	listed
+Iron Man	Notifications	0.8012	0.4268	DEL	of	
+Iron Man	Notifications	0.8012	0.4268	SUB	truth	true
+Iron Man	Notifications	0.8012	0.4268	SUB	is	dish
+Iron Man	Notifications	0.8012	0.4268	DEL	i	
+Iron Man	Notifications	0.8012	0.4268	DEL	am	
+Iron Man	Notifications	0.8012	0.4268	DEL	iron	
+Iron Man	Notifications	0.8012	0.4268	DEL	man	
+Iron Man	EventBridge	0.7869	0.4204	SUB	mr	mister
+Iron Man	EventBridge	0.7869	0.4204	SUB	uh	its
+Iron Man	EventBridge	0.7869	0.4204	SUB	was	trying
+Iron Man	EventBridge	0.7869	0.4204	SUB	in	to
+Iron Man	EventBridge	0.7869	0.4204	SUB	front	do
+Iron Man	EventBridge	0.7869	0.4204	SUB	of	it
+Iron Man	EventBridge	0.7869	0.4204	DEL	you	
+Iron Man	EventBridge	0.7869	0.4204	DEL	i	
+Iron Man	EventBridge	0.7869	0.4204	SUB	ill	out
+Iron Man	EventBridge	0.7869	0.4204	DEL	stick	
+Iron Man	EventBridge	0.7869	0.4204	SUB	the	your
+Iron Man	EventBridge	0.7869	0.4204	SUB	cards	card
+Iron Man	EventBridge	0.7869	0.4204	INS		there
+Iron Man	EventBridge	0.7869	0.4204	SUB	theres	has
+Iron Man	EventBridge	0.7869	0.4204	DEL	on	
+Iron Man	EventBridge	0.7869	0.4204	DEL	the	
+Iron Man	EventBridge	0.7869	0.4204	DEL	freeway	
+Iron Man	EventBridge	0.7869	0.4204	DEL	and	
+Iron Man	EventBridge	0.7869	0.4204	DEL	the	
+Iron Man	EventBridge	0.7869	0.4204	DEL	rooftop	
+Iron Man	EventBridge	0.7869	0.4204	DEL	im	
+Iron Man	EventBridge	0.7869	0.4204	DEL	sorry	
+Iron Man	EventBridge	0.7869	0.4204	DEL	mr	
+Iron Man	EventBridge	0.7869	0.4204	DEL	shark	
+Iron Man	EventBridge	0.7869	0.4204	DEL	but	
+Iron Man	EventBridge	0.7869	0.4204	DEL	do	
+Iron Man	EventBridge	0.7869	0.4204	DEL	you	
+Iron Man	EventBridge	0.7869	0.4204	DEL	honestly	
+Iron Man	EventBridge	0.7869	0.4204	DEL	expect	
+Iron Man	EventBridge	0.7869	0.4204	DEL	us	
+Iron Man	EventBridge	0.7869	0.4204	SUB	bodyguard	body
+Iron Man	EventBridge	0.7869	0.4204	SUB	in	guard
+Iron Man	EventBridge	0.7869	0.4204	DEL	a	
+Iron Man	EventBridge	0.7869	0.4204	DEL	suit	
+Iron Man	EventBridge	0.7869	0.4204	DEL	that	
+Iron Man	EventBridge	0.7869	0.4204	SUB	i	that
+Iron Man	EventBridge	0.7869	0.4204	SUB	know	my
+Iron Man	EventBridge	0.7869	0.4204	SUB	that	modem
+Iron Man	EventBridge	0.7869	0.4204	SUB	its	is
+Iron Man	EventBridge	0.7869	0.4204	DEL	to	
+Iron Man	EventBridge	0.7869	0.4204	DEL	im	
+Iron Man	EventBridge	0.7869	0.4204	DEL	a	
+Iron Man	EventBridge	0.7869	0.4204	DEL	superhero	
+Iron Man	EventBridge	0.7869	0.4204	SUB	never	am
+Iron Man	EventBridge	0.7869	0.4204	DEL	said	
+Iron Man	EventBridge	0.7869	0.4204	DEL	youre	
+Iron Man	EventBridge	0.7869	0.4204	SUB	didnt	huh
+Iron Man	EventBridge	0.7869	0.4204	DEL	well	
+Iron Man	EventBridge	0.7869	0.4204	DEL	good	
+Iron Man	EventBridge	0.7869	0.4204	DEL	because	
+Iron Man	EventBridge	0.7869	0.4204	DEL	that	
+Iron Man	EventBridge	0.7869	0.4204	DEL	would	
+Iron Man	EventBridge	0.7869	0.4204	DEL	be	
+Iron Man	EventBridge	0.7869	0.4204	DEL	outlandish	
+Iron Man	EventBridge	0.7869	0.4204	DEL	and	
+Iron Man	EventBridge	0.7869	0.4204	DEL	uh	
+Iron Man	EventBridge	0.7869	0.4204	DEL	i	
+Iron Man	EventBridge	0.7869	0.4204	DEL	the	
+Iron Man	EventBridge	0.7869	0.4204	DEL	uh	
+Iron Man	EventBridge	0.7869	0.4204	SUB	list	listed
+Iron Man	EventBridge	0.7869	0.4204	DEL	of	
+Iron Man	EventBridge	0.7869	0.4204	SUB	truth	true
+Iron Man	EventBridge	0.7869	0.4204	SUB	is	dish
+Iron Man	EventBridge	0.7869	0.4204	INS		a
+Iron Man	EventBridge	0.7869	0.4204	SUB	iron	hard
+Iron Man	EventBridge	0.7869	0.4204	SUB	man	mat
+Shawshank	Deepgram	0.8737	0.2679	SUB	down	that
+Shawshank	Deepgram	0.8737	0.2679	SUB	ellis	is
+Shawshank	Deepgram	0.8737	0.2679	SUB	boyd	the
+Shawshank	Deepgram	0.8737	0.2679	SUB	redding	board
+Shawshank	Deepgram	0.8737	0.2679	SUB	your	ready
+Shawshank	Deepgram	0.8737	0.2679	SUB	files	if
+Shawshank	Deepgram	0.8737	0.2679	SUB	say	ill
+Shawshank	Deepgram	0.8737	0.2679	SUB	youve	save
+Shawshank	Deepgram	0.8737	0.2679	SUB	rehabilitated	rehabilitating
+Shawshank	Deepgram	0.8737	0.2679	DEL	you	
+Shawshank	Deepgram	0.8737	0.2679	SUB	it	that
+Shawshank	Deepgram	0.8737	0.2679	SUB	you	youre
+Shawshank	Deepgram	0.8737	0.2679	SUB	think	doing
+Shawshank	Deepgram	0.8737	0.2679	SUB	it	sorry
+Shawshank	Deepgram	0.8737	0.2679	DEL	means	
+Shawshank	Deepgram	0.8737	0.2679	DEL	sonny	
+Shawshank	Deepgram	0.8737	0.2679	DEL	that	
+Shawshank	Deepgram	0.8737	0.2679	DEL	and	
+Shawshank	Deepgram	0.8737	0.2679	SUB	want	wanna
+Shawshank	Deepgram	0.8737	0.2679	DEL	to	
+Shawshank	Deepgram	0.8737	0.2679	SUB	well	alright
+Shawshank	Deepgram	0.8737	0.2679	SUB	are	but
+Shawshank	Deepgram	0.8737	0.2679	DEL	you	
+Shawshank	Deepgram	0.8737	0.2679	DEL	theres	
+Shawshank	Deepgram	0.8737	0.2679	DEL	i	
+Shawshank	Deepgram	0.8737	0.2679	DEL	on	
+Shawshank	Deepgram	0.8737	0.2679	SUB	then	yeah
+Shawshank	Deepgram	0.8737	0.2679	DEL	a	
+Shawshank	Deepgram	0.8737	0.2679	DEL	young	
+Shawshank	Deepgram	0.8737	0.2679	SUB	want	wanna
+Shawshank	Deepgram	0.8737	0.2679	DEL	to	
+Shawshank	Deepgram	0.8737	0.2679	SUB	want	wanna
+Shawshank	Deepgram	0.8737	0.2679	DEL	to	
+Shawshank	Deepgram	0.8737	0.2679	SUB	to	and
+Shawshank	Deepgram	0.8737	0.2679	SUB	sense	sass
+Shawshank	Deepgram	0.8737	0.2679	SUB	tell	i
+Shawshank	Deepgram	0.8737	0.2679	SUB	him	dont
+Shawshank	Deepgram	0.8737	0.2679	SUB	the	know
+Shawshank	Deepgram	0.8737	0.2679	SUB	way	where
+Shawshank	Deepgram	0.8737	0.2679	SUB	but	okay
+Shawshank	Deepgram	0.8737	0.2679	SUB	i	thats
+Shawshank	Deepgram	0.8737	0.2679	DEL	cant	
+Shawshank	Deepgram	0.8737	0.2679	DEL	that	
+Shawshank	Deepgram	0.8737	0.2679	DEL	and	
+Shawshank	Deepgram	0.8737	0.2679	SUB	got	gotta
+Shawshank	Deepgram	0.8737	0.2679	DEL	to	
+Shawshank	Deepgram	0.8737	0.2679	INS		forms
+Shawshank	Deepgram	0.8737	0.2679	SUB	form	on
+Shawshank	Deepgram	0.8737	0.2679	SUB	sonny	me
+Shawshank	Deepgram	0.8737	0.2679	SUB	because	thats
+Shawshank	Deepgram	0.8737	0.2679	SUB	i	the
+Shawshank	Deepgram	0.8737	0.2679	SUB	tell	telling
+Shawshank	Deepgram	0.8737	0.2679	DEL	you	
+Shawshank	Deepgram	0.8737	0.2679	SUB	give	get
+Shawshank	Deepgram	0.8737	0.2679	SUB	a	this
+Shawshank	Deepgram	0.8737	0.2679	SUB	shit	yet
+Shawshank	Notifications	0.7136	0.4155	SUB	boyd	yeah
+Shawshank	Notifications	0.7136	0.4155	SUB	redding	alistair
+Shawshank	Notifications	0.7136	0.4155	SUB	your	if
+Shawshank	Notifications	0.7136	0.4155	SUB	files	ill
+Shawshank	Notifications	0.7136	0.4155	SUB	life	lifesaf
+Shawshank	Notifications	0.7136	0.4155	DEL	sentence	
+Shawshank	Notifications	0.7136	0.4155	DEL	you	
+Shawshank	Notifications	0.7136	0.4155	INS		you
+Shawshank	Notifications	0.7136	0.4155	SUB	rehabilitated	dont
+Shawshank	Notifications	0.7136	0.4155	SUB	now	no
+Shawshank	Notifications	0.7136	0.4155	SUB	that	what
+Shawshank	Notifications	0.7136	0.4155	SUB	means	i
+Shawshank	Notifications	0.7136	0.4155	SUB	well	mean
+Shawshank	Notifications	0.7136	0.4155	DEL	it	
+Shawshank	Notifications	0.7136	0.4155	DEL	means	
+Shawshank	Notifications	0.7136	0.4155	SUB	society	so
+Shawshank	Notifications	0.7136	0.4155	DEL	i	
+Shawshank	Notifications	0.7136	0.4155	DEL	know	
+Shawshank	Notifications	0.7136	0.4155	DEL	what	
+Shawshank	Notifications	0.7136	0.4155	DEL	you	
+Shawshank	Notifications	0.7136	0.4155	DEL	think	
+Shawshank	Notifications	0.7136	0.4155	DEL	it	
+Shawshank	Notifications	0.7136	0.4155	DEL	means	
+Shawshank	Notifications	0.7136	0.4155	DEL	sonny	
+Shawshank	Notifications	0.7136	0.4155	SUB	word	wood
+Shawshank	Notifications	0.7136	0.4155	DEL	a	
+Shawshank	Notifications	0.7136	0.4155	SUB	word	were
+Shawshank	Notifications	0.7136	0.4155	DEL	that	
+Shawshank	Notifications	0.7136	0.4155	SUB	fellas	fellows
+Shawshank	Notifications	0.7136	0.4155	SUB	and	abbott
+Shawshank	Notifications	0.7136	0.4155	SUB	have	ja
+Shawshank	Notifications	0.7136	0.4155	DEL	a	
+Shawshank	Notifications	0.7136	0.4155	DEL	job	
+Shawshank	Notifications	0.7136	0.4155	SUB	well	hi
+Shawshank	Notifications	0.7136	0.4155	SUB	are	but
+Shawshank	Notifications	0.7136	0.4155	DEL	you	
+Shawshank	Notifications	0.7136	0.4155	DEL	theres	
+Shawshank	Notifications	0.7136	0.4155	SUB	i	that
+Shawshank	Notifications	0.7136	0.4155	SUB	look	looks
+Shawshank	Notifications	0.7136	0.4155	SUB	back	like
+Shawshank	Notifications	0.7136	0.4155	DEL	on	
+Shawshank	Notifications	0.7136	0.4155	SUB	was	want
+Shawshank	Notifications	0.7136	0.4155	SUB	then	to
+Shawshank	Notifications	0.7136	0.4155	SUB	kid	kids
+Shawshank	Notifications	0.7136	0.4155	SUB	who	have
+Shawshank	Notifications	0.7136	0.4155	INS		to
+Shawshank	Notifications	0.7136	0.4155	SUB	want	wanna
+Shawshank	Notifications	0.7136	0.4155	DEL	to	
+Shawshank	Notifications	0.7136	0.4155	DEL	talk	
+Shawshank	Notifications	0.7136	0.4155	DEL	to	
+Shawshank	Notifications	0.7136	0.4155	DEL	him	
+Shawshank	Notifications	0.7136	0.4155	DEL	i	
+Shawshank	Notifications	0.7136	0.4155	DEL	want	
+Shawshank	Notifications	0.7136	0.4155	DEL	to	
+Shawshank	Notifications	0.7136	0.4155	SUB	talk	cost
+Shawshank	Notifications	0.7136	0.4155	SUB	some	this
+Shawshank	Notifications	0.7136	0.4155	SUB	sense	last
+Shawshank	Notifications	0.7136	0.4155	SUB	to	doing
+Shawshank	Notifications	0.7136	0.4155	SUB	him	it
+Shawshank	Notifications	0.7136	0.4155	SUB	tell	turn
+Shawshank	Notifications	0.7136	0.4155	DEL	him	
+Shawshank	Notifications	0.7136	0.4155	SUB	but	okay
+Shawshank	Notifications	0.7136	0.4155	SUB	i	as
+Shawshank	Notifications	0.7136	0.4155	DEL	cant	
+Shawshank	Notifications	0.7136	0.4155	DEL	that	
+Shawshank	Notifications	0.7136	0.4155	DEL	and	
+Shawshank	Notifications	0.7136	0.4155	SUB	thats	this
+Shawshank	Notifications	0.7136	0.4155	SUB	i	okay
+Shawshank	Notifications	0.7136	0.4155	SUB	got	yeah
+Shawshank	Notifications	0.7136	0.4155	SUB	to	ive
+Shawshank	Notifications	0.7136	0.4155	SUB	live	done
+Shawshank	Notifications	0.7136	0.4155	SUB	with	a
+Shawshank	Notifications	0.7136	0.4155	SUB	that	paper
+Shawshank	Notifications	0.7136	0.4155	DEL	rehabilitated	
+Shawshank	Notifications	0.7136	0.4155	DEL	its	
+Shawshank	Notifications	0.7136	0.4155	SUB	a	the
+Shawshank	Notifications	0.7136	0.4155	SUB	bullshit	bullship
+Shawshank	Notifications	0.7136	0.4155	SUB	form	phone
+Shawshank	Notifications	0.7136	0.4155	SUB	sonny	sunny
+Shawshank	Notifications	0.7136	0.4155	SUB	because	the
+Shawshank	Notifications	0.7136	0.4155	SUB	i	tone
+Shawshank	Notifications	0.7136	0.4155	SUB	tell	of
+Shawshank	Notifications	0.7136	0.4155	DEL	you	
+Shawshank	Notifications	0.7136	0.4155	DEL	the	
+Shawshank	Notifications	0.7136	0.4155	SUB	give	get
+Shawshank	Notifications	0.7136	0.4155	DEL	shit	
+Shawshank	EventBridge	0.7136	0.4155	SUB	boyd	yeah
+Shawshank	EventBridge	0.7136	0.4155	SUB	redding	alistair
+Shawshank	EventBridge	0.7136	0.4155	SUB	your	if
+Shawshank	EventBridge	0.7136	0.4155	SUB	files	ill
+Shawshank	EventBridge	0.7136	0.4155	SUB	life	lifesaf
+Shawshank	EventBridge	0.7136	0.4155	DEL	sentence	
+Shawshank	EventBridge	0.7136	0.4155	DEL	you	
+Shawshank	EventBridge	0.7136	0.4155	INS		you
+Shawshank	EventBridge	0.7136	0.4155	SUB	rehabilitated	dont
+Shawshank	EventBridge	0.7136	0.4155	SUB	now	no
+Shawshank	EventBridge	0.7136	0.4155	SUB	that	what
+Shawshank	EventBridge	0.7136	0.4155	SUB	means	i
+Shawshank	EventBridge	0.7136	0.4155	SUB	well	mean
+Shawshank	EventBridge	0.7136	0.4155	DEL	it	
+Shawshank	EventBridge	0.7136	0.4155	DEL	means	
+Shawshank	EventBridge	0.7136	0.4155	SUB	society	so
+Shawshank	EventBridge	0.7136	0.4155	DEL	i	
+Shawshank	EventBridge	0.7136	0.4155	DEL	know	
+Shawshank	EventBridge	0.7136	0.4155	DEL	what	
+Shawshank	EventBridge	0.7136	0.4155	DEL	you	
+Shawshank	EventBridge	0.7136	0.4155	DEL	think	
+Shawshank	EventBridge	0.7136	0.4155	DEL	it	
+Shawshank	EventBridge	0.7136	0.4155	DEL	means	
+Shawshank	EventBridge	0.7136	0.4155	DEL	sonny	
+Shawshank	EventBridge	0.7136	0.4155	SUB	word	wood
+Shawshank	EventBridge	0.7136	0.4155	DEL	a	
+Shawshank	EventBridge	0.7136	0.4155	SUB	word	were
+Shawshank	EventBridge	0.7136	0.4155	DEL	that	
+Shawshank	EventBridge	0.7136	0.4155	SUB	fellas	fellows
+Shawshank	EventBridge	0.7136	0.4155	SUB	and	abbott
+Shawshank	EventBridge	0.7136	0.4155	SUB	have	ja
+Shawshank	EventBridge	0.7136	0.4155	DEL	a	
+Shawshank	EventBridge	0.7136	0.4155	DEL	job	
+Shawshank	EventBridge	0.7136	0.4155	SUB	well	hi
+Shawshank	EventBridge	0.7136	0.4155	SUB	are	but
+Shawshank	EventBridge	0.7136	0.4155	DEL	you	
+Shawshank	EventBridge	0.7136	0.4155	DEL	theres	
+Shawshank	EventBridge	0.7136	0.4155	SUB	i	that
+Shawshank	EventBridge	0.7136	0.4155	SUB	look	looks
+Shawshank	EventBridge	0.7136	0.4155	SUB	back	like
+Shawshank	EventBridge	0.7136	0.4155	DEL	on	
+Shawshank	EventBridge	0.7136	0.4155	SUB	was	want
+Shawshank	EventBridge	0.7136	0.4155	SUB	then	to
+Shawshank	EventBridge	0.7136	0.4155	SUB	kid	kids
+Shawshank	EventBridge	0.7136	0.4155	SUB	who	have
+Shawshank	EventBridge	0.7136	0.4155	INS		to
+Shawshank	EventBridge	0.7136	0.4155	SUB	want	wanna
+Shawshank	EventBridge	0.7136	0.4155	DEL	to	
+Shawshank	EventBridge	0.7136	0.4155	DEL	talk	
+Shawshank	EventBridge	0.7136	0.4155	DEL	to	
+Shawshank	EventBridge	0.7136	0.4155	DEL	him	
+Shawshank	EventBridge	0.7136	0.4155	DEL	i	
+Shawshank	EventBridge	0.7136	0.4155	DEL	want	
+Shawshank	EventBridge	0.7136	0.4155	DEL	to	
+Shawshank	EventBridge	0.7136	0.4155	SUB	talk	cost
+Shawshank	EventBridge	0.7136	0.4155	SUB	some	this
+Shawshank	EventBridge	0.7136	0.4155	SUB	sense	last
+Shawshank	EventBridge	0.7136	0.4155	SUB	to	doing
+Shawshank	EventBridge	0.7136	0.4155	SUB	him	it
+Shawshank	EventBridge	0.7136	0.4155	SUB	tell	turn
+Shawshank	EventBridge	0.7136	0.4155	DEL	him	
+Shawshank	EventBridge	0.7136	0.4155	SUB	but	okay
+Shawshank	EventBridge	0.7136	0.4155	SUB	i	as
+Shawshank	EventBridge	0.7136	0.4155	DEL	cant	
+Shawshank	EventBridge	0.7136	0.4155	DEL	that	
+Shawshank	EventBridge	0.7136	0.4155	DEL	and	
+Shawshank	EventBridge	0.7136	0.4155	SUB	thats	this
+Shawshank	EventBridge	0.7136	0.4155	SUB	i	okay
+Shawshank	EventBridge	0.7136	0.4155	SUB	got	yeah
+Shawshank	EventBridge	0.7136	0.4155	SUB	to	ive
+Shawshank	EventBridge	0.7136	0.4155	SUB	live	done
+Shawshank	EventBridge	0.7136	0.4155	SUB	with	a
+Shawshank	EventBridge	0.7136	0.4155	SUB	that	paper
+Shawshank	EventBridge	0.7136	0.4155	DEL	rehabilitated	
+Shawshank	EventBridge	0.7136	0.4155	DEL	its	
+Shawshank	EventBridge	0.7136	0.4155	SUB	a	the
+Shawshank	EventBridge	0.7136	0.4155	SUB	bullshit	bullship
+Shawshank	EventBridge	0.7136	0.4155	SUB	form	phone
+Shawshank	EventBridge	0.7136	0.4155	SUB	sonny	sunny
+Shawshank	EventBridge	0.7136	0.4155	SUB	because	the
+Shawshank	EventBridge	0.7136	0.4155	SUB	i	tone
+Shawshank	EventBridge	0.7136	0.4155	SUB	tell	of
+Shawshank	EventBridge	0.7136	0.4155	DEL	you	
+Shawshank	EventBridge	0.7136	0.4155	DEL	the	
+Shawshank	EventBridge	0.7136	0.4155	SUB	give	get
+Shawshank	EventBridge	0.7136	0.4155	DEL	shit	
+Mockingbird	Deepgram	0.923	0.2126	SUB	strong	tom
+Mockingbird	Deepgram	0.923	0.2126	SUB	mattered	message
+Mockingbird	Deepgram	0.923	0.2126	SUB	broke	took
+Mockingbird	Deepgram	0.923	0.2126	SUB	but	and
+Mockingbird	Deepgram	0.923	0.2126	SUB	afterwards	asses
+Mockingbird	Deepgram	0.923	0.2126	SUB	the	request
+Mockingbird	Deepgram	0.923	0.2126	SUB	witnesses	is
+Mockingbird	Deepgram	0.923	0.2126	SUB	sheriff	sheriffs
+Mockingbird	Deepgram	0.923	0.2126	SUB	of	american
+Mockingbird	Deepgram	0.923	0.2126	SUB	maycomb	and
+Mockingbird	Deepgram	0.923	0.2126	DEL	county	
+Mockingbird	Deepgram	0.923	0.2126	DEL	have	
+Mockingbird	Deepgram	0.923	0.2126	SUB	you	the
+Mockingbird	Deepgram	0.923	0.2126	SUB	gentlemen	attendant
+Mockingbird	Deepgram	0.923	0.2126	SUB	in	and
+Mockingbird	Deepgram	0.923	0.2126	INS		brad
+Mockingbird	Deepgram	0.923	0.2126	SUB	their	just
+Mockingbird	Deepgram	0.923	0.2126	SUB	testimony	normally
+Mockingbird	Deepgram	0.923	0.2126	SUB	all	only
+Mockingbird	Deepgram	0.923	0.2126	SUB	negroes	driven
+Mockingbird	Deepgram	0.923	0.2126	SUB	lie	by
+Mockingbird	Deepgram	0.923	0.2126	SUB	all	only
+Mockingbird	Deepgram	0.923	0.2126	SUB	negroes	grizzled
+Mockingbird	Deepgram	0.923	0.2126	DEL	are	
+Mockingbird	Deepgram	0.923	0.2126	INS		not
+Mockingbird	Deepgram	0.923	0.2126	SUB	that	of
+Mockingbird	Deepgram	0.923	0.2126	SUB	minds	mines
+Mockingbird	Deepgram	0.923	0.2126	SUB	of	but
+Mockingbird	Deepgram	0.923	0.2126	SUB	their	they
+Mockingbird	Deepgram	0.923	0.2126	SUB	caliber	are
+Mockingbird	Deepgram	0.923	0.2126	SUB	and	im
+Mockingbird	Deepgram	0.923	0.2126	DEL	a	
+Mockingbird	Deepgram	0.923	0.2126	SUB	negro	nature
+Mockingbird	Deepgram	0.923	0.2126	SUB	temerity	terminology
+Mockingbird	Deepgram	0.923	0.2126	SUB	in	and
+Mockingbird	Deepgram	0.923	0.2126	SUB	men	believes
+Mockingbird	Deepgram	0.923	0.2126	SUB	are	it
+Mockingbird	Deepgram	0.923	0.2126	SUB	created	then
+Mockingbird	Deepgram	0.923	0.2126	INS		i
+Mockingbird	Deepgram	0.923	0.2126	SUB	im	have
+Mockingbird	Deepgram	0.923	0.2126	INS		idea
+Mockingbird	Deepgram	0.923	0.2126	SUB	idealist	this
+Mockingbird	Deepgram	0.923	0.2126	DEL	of	
+Mockingbird	Deepgram	0.923	0.2126	SUB	ideal	idea
+Mockingbird	Notifications	0.739	0.4095	SUB	uncle	angra
+Mockingbird	Notifications	0.739	0.4095	SUB	man	male
+Mockingbird	Notifications	0.739	0.4095	SUB	mattered	matter
+Mockingbird	Notifications	0.739	0.4095	SUB	broke	okay
+Mockingbird	Notifications	0.739	0.4095	SUB	it	huh
+Mockingbird	Notifications	0.739	0.4095	SUB	but	can
+Mockingbird	Notifications	0.739	0.4095	SUB	it	crash
+Mockingbird	Notifications	0.739	0.4095	SUB	came	them
+Mockingbird	Notifications	0.739	0.4095	DEL	crashing	
+Mockingbird	Notifications	0.739	0.4095	DEL	her	
+Mockingbird	Notifications	0.739	0.4095	DEL	afterwards	
+Mockingbird	Notifications	0.739	0.4095	DEL	with	
+Mockingbird	Notifications	0.739	0.4095	SUB	of	encounter
+Mockingbird	Notifications	0.739	0.4095	SUB	maycomb	and
+Mockingbird	Notifications	0.739	0.4095	DEL	county	
+Mockingbird	Notifications	0.739	0.4095	DEL	have	
+Mockingbird	Notifications	0.739	0.4095	DEL	you	
+Mockingbird	Notifications	0.739	0.4095	DEL	gentlemen	
+Mockingbird	Notifications	0.739	0.4095	DEL	to	
+Mockingbird	Notifications	0.739	0.4095	DEL	in	
+Mockingbird	Notifications	0.739	0.4095	SUB	confidence	the
+Mockingbird	Notifications	0.739	0.4095	SUB	that	customer
+Mockingbird	Notifications	0.739	0.4095	DEL	their	
+Mockingbird	Notifications	0.739	0.4095	DEL	testimony	
+Mockingbird	Notifications	0.739	0.4095	DEL	confident	
+Mockingbird	Notifications	0.739	0.4095	DEL	that	
+Mockingbird	Notifications	0.739	0.4095	DEL	would	
+Mockingbird	Notifications	0.739	0.4095	SUB	the	only
+Mockingbird	Notifications	0.739	0.4095	DEL	evil	
+Mockingbird	Notifications	0.739	0.4095	DEL	assumption	
+Mockingbird	Notifications	0.739	0.4095	DEL	that	
+Mockingbird	Notifications	0.739	0.4095	DEL	all	
+Mockingbird	Notifications	0.739	0.4095	DEL	negroes	
+Mockingbird	Notifications	0.739	0.4095	DEL	lie	
+Mockingbird	Notifications	0.739	0.4095	DEL	all	
+Mockingbird	Notifications	0.739	0.4095	DEL	negroes	
+Mockingbird	Notifications	0.739	0.4095	DEL	are	
+Mockingbird	Notifications	0.739	0.4095	SUB	all	oh
+Mockingbird	Notifications	0.739	0.4095	SUB	negro	nibra
+Mockingbird	Notifications	0.739	0.4095	SUB	men	bend
+Mockingbird	Notifications	0.739	0.4095	SUB	are	that
+Mockingbird	Notifications	0.739	0.4095	DEL	not	
+Mockingbird	Notifications	0.739	0.4095	SUB	women	winner
+Mockingbird	Notifications	0.739	0.4095	SUB	that	of
+Mockingbird	Notifications	0.739	0.4095	INS		of
+Mockingbird	Notifications	0.739	0.4095	SUB	minds	modems
+Mockingbird	Notifications	0.739	0.4095	SUB	their	the
+Mockingbird	Notifications	0.739	0.4095	SUB	caliber	cal
+Mockingbird	Notifications	0.739	0.4095	DEL	a	
+Mockingbird	Notifications	0.739	0.4095	DEL	lie	
+Mockingbird	Notifications	0.739	0.4095	SUB	and	im
+Mockingbird	Notifications	0.739	0.4095	SUB	a	require
+Mockingbird	Notifications	0.739	0.4095	DEL	quiet	
+Mockingbird	Notifications	0.739	0.4095	DEL	humble	
+Mockingbird	Notifications	0.739	0.4095	SUB	negro	meter
+Mockingbird	Notifications	0.739	0.4095	SUB	unmitigated	unheated
+Mockingbird	Notifications	0.739	0.4095	SUB	temerity	ten
+Mockingbird	Notifications	0.739	0.4095	SUB	to	years
+Mockingbird	Notifications	0.739	0.4095	SUB	a	all
+Mockingbird	Notifications	0.739	0.4095	SUB	white	right
+Mockingbird	Notifications	0.739	0.4095	DEL	woman	
+Mockingbird	Notifications	0.739	0.4095	SUB	white	what
+Mockingbird	Notifications	0.739	0.4095	DEL	peoples	
+Mockingbird	Notifications	0.739	0.4095	SUB	defendant	disremant
+Mockingbird	Notifications	0.739	0.4095	DEL	but	
+Mockingbird	Notifications	0.739	0.4095	INS		court
+Mockingbird	Notifications	0.739	0.4095	SUB	courtroom	room
+Mockingbird	Notifications	0.739	0.4095	INS		i
+Mockingbird	Notifications	0.739	0.4095	SUB	now	hope
+Mockingbird	Notifications	0.739	0.4095	SUB	gentlemen	gentleman
+Mockingbird	Notifications	0.739	0.4095	SUB	our	court
+Mockingbird	Notifications	0.739	0.4095	SUB	are	of
+Mockingbird	Notifications	0.739	0.4095	SUB	levelers	level
+Mockingbird	Notifications	0.739	0.4095	SUB	in	house
+Mockingbird	Notifications	0.739	0.4095	SUB	all	oh
+Mockingbird	Notifications	0.739	0.4095	SUB	men	no
+Mockingbird	Notifications	0.739	0.4095	SUB	are	idea
+Mockingbird	Notifications	0.739	0.4095	SUB	created	listed
+Mockingbird	Notifications	0.739	0.4095	DEL	equal	
+Mockingbird	Notifications	0.739	0.4095	DEL	im	
+Mockingbird	Notifications	0.739	0.4095	DEL	no	
+Mockingbird	Notifications	0.739	0.4095	DEL	idealist	
+Mockingbird	Notifications	0.739	0.4095	SUB	courts	court
+Mockingbird	Notifications	0.739	0.4095	DEL	of	
+Mockingbird	Notifications	0.739	0.4095	SUB	ideal	idea
+Mockingbird	Notifications	0.739	0.4095	SUB	reality	real
+Mockingbird	EventBridge	0.739	0.4095	SUB	uncle	angra
+Mockingbird	EventBridge	0.739	0.4095	SUB	man	male
+Mockingbird	EventBridge	0.739	0.4095	SUB	mattered	matter
+Mockingbird	EventBridge	0.739	0.4095	SUB	broke	okay
+Mockingbird	EventBridge	0.739	0.4095	SUB	it	huh
+Mockingbird	EventBridge	0.739	0.4095	SUB	but	can
+Mockingbird	EventBridge	0.739	0.4095	SUB	it	crash
+Mockingbird	EventBridge	0.739	0.4095	SUB	came	them
+Mockingbird	EventBridge	0.739	0.4095	DEL	crashing	
+Mockingbird	EventBridge	0.739	0.4095	DEL	her	
+Mockingbird	EventBridge	0.739	0.4095	DEL	afterwards	
+Mockingbird	EventBridge	0.739	0.4095	DEL	with	
+Mockingbird	EventBridge	0.739	0.4095	SUB	of	encounter
+Mockingbird	EventBridge	0.739	0.4095	SUB	maycomb	and
+Mockingbird	EventBridge	0.739	0.4095	DEL	county	
+Mockingbird	EventBridge	0.739	0.4095	DEL	have	
+Mockingbird	EventBridge	0.739	0.4095	DEL	you	
+Mockingbird	EventBridge	0.739	0.4095	DEL	gentlemen	
+Mockingbird	EventBridge	0.739	0.4095	DEL	to	
+Mockingbird	EventBridge	0.739	0.4095	DEL	in	
+Mockingbird	EventBridge	0.739	0.4095	SUB	confidence	the
+Mockingbird	EventBridge	0.739	0.4095	SUB	that	customer
+Mockingbird	EventBridge	0.739	0.4095	DEL	their	
+Mockingbird	EventBridge	0.739	0.4095	DEL	testimony	
+Mockingbird	EventBridge	0.739	0.4095	DEL	confident	
+Mockingbird	EventBridge	0.739	0.4095	DEL	that	
+Mockingbird	EventBridge	0.739	0.4095	DEL	would	
+Mockingbird	EventBridge	0.739	0.4095	SUB	the	only
+Mockingbird	EventBridge	0.739	0.4095	DEL	evil	
+Mockingbird	EventBridge	0.739	0.4095	DEL	assumption	
+Mockingbird	EventBridge	0.739	0.4095	DEL	that	
+Mockingbird	EventBridge	0.739	0.4095	DEL	all	
+Mockingbird	EventBridge	0.739	0.4095	DEL	negroes	
+Mockingbird	EventBridge	0.739	0.4095	DEL	lie	
+Mockingbird	EventBridge	0.739	0.4095	DEL	all	
+Mockingbird	EventBridge	0.739	0.4095	DEL	negroes	
+Mockingbird	EventBridge	0.739	0.4095	DEL	are	
+Mockingbird	EventBridge	0.739	0.4095	SUB	all	oh
+Mockingbird	EventBridge	0.739	0.4095	SUB	negro	nibra
+Mockingbird	EventBridge	0.739	0.4095	SUB	men	bend
+Mockingbird	EventBridge	0.739	0.4095	SUB	are	that
+Mockingbird	EventBridge	0.739	0.4095	DEL	not	
+Mockingbird	EventBridge	0.739	0.4095	SUB	women	winner
+Mockingbird	EventBridge	0.739	0.4095	SUB	that	of
+Mockingbird	EventBridge	0.739	0.4095	INS		of
+Mockingbird	EventBridge	0.739	0.4095	SUB	minds	modems
+Mockingbird	EventBridge	0.739	0.4095	SUB	their	the
+Mockingbird	EventBridge	0.739	0.4095	SUB	caliber	cal
+Mockingbird	EventBridge	0.739	0.4095	DEL	a	
+Mockingbird	EventBridge	0.739	0.4095	DEL	lie	
+Mockingbird	EventBridge	0.739	0.4095	SUB	and	im
+Mockingbird	EventBridge	0.739	0.4095	SUB	a	require
+Mockingbird	EventBridge	0.739	0.4095	DEL	quiet	
+Mockingbird	EventBridge	0.739	0.4095	DEL	humble	
+Mockingbird	EventBridge	0.739	0.4095	SUB	negro	meter
+Mockingbird	EventBridge	0.739	0.4095	SUB	unmitigated	unheated
+Mockingbird	EventBridge	0.739	0.4095	SUB	temerity	ten
+Mockingbird	EventBridge	0.739	0.4095	SUB	to	years
+Mockingbird	EventBridge	0.739	0.4095	SUB	a	all
+Mockingbird	EventBridge	0.739	0.4095	SUB	white	right
+Mockingbird	EventBridge	0.739	0.4095	DEL	woman	
+Mockingbird	EventBridge	0.739	0.4095	SUB	white	what
+Mockingbird	EventBridge	0.739	0.4095	DEL	peoples	
+Mockingbird	EventBridge	0.739	0.4095	SUB	defendant	disremant
+Mockingbird	EventBridge	0.739	0.4095	DEL	but	
+Mockingbird	EventBridge	0.739	0.4095	INS		court
+Mockingbird	EventBridge	0.739	0.4095	SUB	courtroom	room
+Mockingbird	EventBridge	0.739	0.4095	INS		i
+Mockingbird	EventBridge	0.739	0.4095	SUB	now	hope
+Mockingbird	EventBridge	0.739	0.4095	SUB	gentlemen	gentleman
+Mockingbird	EventBridge	0.739	0.4095	SUB	our	court
+Mockingbird	EventBridge	0.739	0.4095	SUB	are	of
+Mockingbird	EventBridge	0.739	0.4095	SUB	levelers	level
+Mockingbird	EventBridge	0.739	0.4095	SUB	in	house
+Mockingbird	EventBridge	0.739	0.4095	SUB	all	oh
+Mockingbird	EventBridge	0.739	0.4095	SUB	men	no
+Mockingbird	EventBridge	0.739	0.4095	SUB	are	idea
+Mockingbird	EventBridge	0.739	0.4095	SUB	created	listed
+Mockingbird	EventBridge	0.739	0.4095	DEL	equal	
+Mockingbird	EventBridge	0.739	0.4095	DEL	im	
+Mockingbird	EventBridge	0.739	0.4095	DEL	no	
+Mockingbird	EventBridge	0.739	0.4095	DEL	idealist	
+Mockingbird	EventBridge	0.739	0.4095	SUB	courts	court
+Mockingbird	EventBridge	0.739	0.4095	DEL	of	
+Mockingbird	EventBridge	0.739	0.4095	SUB	ideal	idea
+Mockingbird	EventBridge	0.739	0.4095	SUB	reality	real
+Glengarry	Deepgram	0.9287	0.266	SUB	to	for
+Glengarry	Deepgram	0.9287	0.266	SUB	prize	price
+Glengarry	Deepgram	0.9287	0.266	DEL	a	
+Glengarry	Deepgram	0.9287	0.266	SUB	want	wants
+Glengarry	Deepgram	0.9287	0.266	SUB	to	the
+Glengarry	Deepgram	0.9287	0.266	DEL	see	
+Glengarry	Deepgram	0.9287	0.266	SUB	prize	price
+Glengarry	Deepgram	0.9287	0.266	SUB	prize	price
+Glengarry	Deepgram	0.9287	0.266	DEL	a	
+Glengarry	Deepgram	0.9287	0.266	SUB	steak	stick
+Glengarry	Deepgram	0.9287	0.266	DEL	knives	
+Glengarry	Deepgram	0.9287	0.266	SUB	prize	price
+Glengarry	Deepgram	0.9287	0.266	SUB	you	your
+Glengarry	Deepgram	0.9287	0.266	SUB	fired	fire
+Glengarry	Deepgram	0.9287	0.266	DEL	they	
+Glengarry	Deepgram	0.9287	0.266	DEL	get	
+Glengarry	Deepgram	0.9287	0.266	DEL	the	
+Glengarry	Deepgram	0.9287	0.266	SUB	you	last
+Glengarry	Deepgram	0.9287	0.266	SUB	laughing	name
+Glengarry	Deepgram	0.9287	0.266	SUB	you	natalie
+Glengarry	Deepgram	0.9287	0.266	SUB	got	mitch
+Glengarry	Deepgram	0.9287	0.266	SUB	leads	and
+Glengarry	Deepgram	0.9287	0.266	DEL	mitch	
+Glengarry	Deepgram	0.9287	0.266	SUB	given	giving
+Glengarry	Deepgram	0.9287	0.266	SUB	cuz	because
+Glengarry	Deepgram	0.9287	0.266	SUB	leads	leaves
+Glengarry	Deepgram	0.9287	0.266	SUB	leads	leaves
+Glengarry	Deepgram	0.9287	0.266	SUB	fuckin	fucking
+Glengarry	Deepgram	0.9287	0.266	SUB	leads	leaves
+Glengarry	Deepgram	0.9287	0.266	INS		a
+Glengarry	Deepgram	0.9287	0.266	SUB	weak	week
+Glengarry	Deepgram	0.9287	0.266	SUB	whats	touch
+Glengarry	Deepgram	0.9287	0.266	SUB	name	hand
+Glengarry	Deepgram	0.9287	0.266	SUB	cuz	because
+Glengarry	Deepgram	0.9287	0.266	SUB	eighty	eightyzero
+Glengarry	Deepgram	0.9287	0.266	DEL	thousand	
+Glengarry	Deepgram	0.9287	0.266	DEL	dollar	
+Glengarry	Deepgram	0.9287	0.266	SUB	wanting	one
+Glengarry	Deepgram	0.9287	0.266	SUB	and	team
+Glengarry	Deepgram	0.9287	0.266	SUB	you	to
+Glengarry	Deepgram	0.9287	0.266	SUB	mans	mens
+Glengarry	Deepgram	0.9287	0.266	DEL	then	
+Glengarry	Deepgram	0.9287	0.266	DEL	go	
+Glengarry	Deepgram	0.9287	0.266	DEL	home	
+Glengarry	Deepgram	0.9287	0.266	DEL	and	
+Glengarry	Deepgram	0.9287	0.266	DEL	tell	
+Glengarry	Deepgram	0.9287	0.266	DEL	your	
+Glengarry	Deepgram	0.9287	0.266	DEL	wife	
+Glengarry	Deepgram	0.9287	0.266	DEL	your	
+Glengarry	Deepgram	0.9287	0.266	DEL	troubles	
+Glengarry	Deepgram	0.9287	0.266	SUB	fuckin	fucking
+Glengarry	Deepgram	0.9287	0.266	SUB	faggots	faggot
+Glengarry	Deepgram	0.9287	0.266	SUB	be	b
+Glengarry	Deepgram	0.9287	0.266	SUB	a	aida
+Glengarry	Deepgram	0.9287	0.266	DEL	i	
+Glengarry	Deepgram	0.9287	0.266	DEL	d	
+Glengarry	Deepgram	0.9287	0.266	DEL	a	
+Glengarry	Deepgram	0.9287	0.266	SUB	cuz	because
+Glengarry	Deepgram	0.9287	0.266	SUB	fuck	fucked
+Glengarry	Deepgram	0.9287	0.266	SUB	or	all
+Glengarry	Deepgram	0.9287	0.266	SUB	walk	walks
+Glengarry	Deepgram	0.9287	0.266	DEL	or	
+Glengarry	Deepgram	0.9287	0.266	SUB	an	aida
+Glengarry	Deepgram	0.9287	0.266	DEL	action	
+Glengarry	Deepgram	0.9287	0.266	DEL	a	
+Glengarry	Deepgram	0.9287	0.266	DEL	i	
+Glengarry	Deepgram	0.9287	0.266	DEL	d	
+Glengarry	Deepgram	0.9287	0.266	DEL	a	
+Glengarry	Deepgram	0.9287	0.266	SUB	you	youve
+Glengarry	Deepgram	0.9287	0.266	SUB	think	been
+Glengarry	Deepgram	0.9287	0.266	DEL	they	
+Glengarry	Deepgram	0.9287	0.266	SUB	lest	unless
+Glengarry	Deepgram	0.9287	0.266	DEL	are	
+Glengarry	Deepgram	0.9287	0.266	DEL	you	
+Glengarry	Deepgram	0.9287	0.266	DEL	man	
+Glengarry	Deepgram	0.9287	0.266	DEL	enough	
+Glengarry	Deepgram	0.9287	0.266	DEL	to	
+Glengarry	Deepgram	0.9287	0.266	DEL	take	
+Glengarry	Deepgram	0.9287	0.266	DEL	it	
+Glengarry	Deepgram	0.9287	0.266	INS		i
+Glengarry	Deepgram	0.9287	0.266	INS		dont
+Glengarry	Deepgram	0.9287	0.266	INS		hear
+Glengarry	Deepgram	0.9287	0.266	DEL	youre	
+Glengarry	Deepgram	0.9287	0.266	SUB	here	and
+Glengarry	Deepgram	0.9287	0.266	DEL	such	
+Glengarry	Deepgram	0.9287	0.266	SUB	bums	problems
+Glengarry	Deepgram	0.9287	0.266	SUB	you	do
+Glengarry	Deepgram	0.9287	0.266	DEL	see	
+Glengarry	Deepgram	0.9287	0.266	SUB	watch	one
+Glengarry	Deepgram	0.9287	0.266	DEL	you	
+Glengarry	Deepgram	0.9287	0.266	SUB	watch	one
+Glengarry	Deepgram	0.9287	0.266	SUB	seventy	and
+Glengarry	Deepgram	0.9287	0.266	SUB	thousand	seventyzero
+Glengarry	Deepgram	0.9287	0.266	DEL	dollars	
+Glengarry	Deepgram	0.9287	0.266	DEL	make	
+Glengarry	Deepgram	0.9287	0.266	SUB	youre	doing
+Glengarry	Deepgram	0.9287	0.266	SUB	a	any
+Glengarry	Deepgram	0.9287	0.266	DEL	shit	
+Glengarry	Deepgram	0.9287	0.266	SUB	you	wanna
+Glengarry	Deepgram	0.9287	0.266	DEL	want	
+Glengarry	Deepgram	0.9287	0.266	DEL	to	
+Glengarry	Deepgram	0.9287	0.266	INS		closed
+Glengarry	Deepgram	0.9287	0.266	SUB	close	do
+Glengarry	Deepgram	0.9287	0.266	SUB	cock	copsucker
+Glengarry	Deepgram	0.9287	0.266	DEL	sucker	
+Glengarry	Deepgram	0.9287	0.266	SUB	on	out
+Glengarry	Deepgram	0.9287	0.266	SUB	a	of
+Glengarry	Deepgram	0.9287	0.266	SUB	sit	six
+Glengarry	Deepgram	0.9287	0.266	SUB	you	why
+Glengarry	Deepgram	0.9287	0.266	SUB	dont	is
+Glengarry	Deepgram	0.9287	0.266	SUB	like	peace
+Glengarry	Deepgram	0.9287	0.266	DEL	it	
+Glengarry	Deepgram	0.9287	0.266	DEL	leave	
+Glengarry	Deepgram	0.9287	0.266	SUB	fifteen	fifteenzero
+Glengarry	Deepgram	0.9287	0.266	DEL	thousand	
+Glengarry	Deepgram	0.9287	0.266	DEL	dollars	
+Glengarry	Deepgram	0.9287	0.266	SUB	go	dont
+Glengarry	Deepgram	0.9287	0.266	DEL	and	
+Glengarry	Deepgram	0.9287	0.266	DEL	you	
+Glengarry	Deepgram	0.9287	0.266	SUB	bitches	sick
+Glengarry	Deepgram	0.9287	0.266	SUB	get	man
+Glengarry	Deepgram	0.9287	0.266	DEL	mad	
+Glengarry	Deepgram	0.9287	0.266	SUB	brass	grass
+Glengarry	Deepgram	0.9287	0.266	SUB	to	dont
+Glengarry	Deepgram	0.9287	0.266	DEL	sell	
+Glengarry	Deepgram	0.9287	0.266	DEL	real	
+Glengarry	Deepgram	0.9287	0.266	DEL	estate	
+Glengarry	Deepgram	0.9287	0.266	DEL	go	
+Glengarry	Deepgram	0.9287	0.266	DEL	and	
+Glengarry	Deepgram	0.9287	0.266	DEL	the	
+Glengarry	Deepgram	0.9287	0.266	SUB	i	think
+Glengarry	Deepgram	0.9287	0.266	SUB	got	it
+Glengarry	Deepgram	0.9287	0.266	SUB	no	does
+Glengarry	Notifications	0.7748	0.3498	SUB	because	cause
+Glengarry	Notifications	0.7748	0.3498	DEL	as	
+Glengarry	Notifications	0.7748	0.3498	SUB	prize	price
+Glengarry	Notifications	0.7748	0.3498	SUB	is	cadillac
+Glengarry	Notifications	0.7748	0.3498	SUB	a	over
+Glengarry	Notifications	0.7748	0.3498	SUB	cadillac	rider
+Glengarry	Notifications	0.7748	0.3498	DEL	eldorado	
+Glengarry	Notifications	0.7748	0.3498	SUB	want	wants
+Glengarry	Notifications	0.7748	0.3498	SUB	to	a
+Glengarry	Notifications	0.7748	0.3498	DEL	see	
+Glengarry	Notifications	0.7748	0.3498	SUB	prize	price
+Glengarry	Notifications	0.7748	0.3498	SUB	a	finish
+Glengarry	Notifications	0.7748	0.3498	SUB	set	thing
+Glengarry	Notifications	0.7748	0.3498	DEL	of	
+Glengarry	Notifications	0.7748	0.3498	DEL	steak	
+Glengarry	Notifications	0.7748	0.3498	DEL	knives	
+Glengarry	Notifications	0.7748	0.3498	SUB	prize	price
+Glengarry	Notifications	0.7748	0.3498	SUB	you	your
+Glengarry	Notifications	0.7748	0.3498	SUB	fired	price
+Glengarry	Notifications	0.7748	0.3498	SUB	they	fiction
+Glengarry	Notifications	0.7748	0.3498	DEL	get	
+Glengarry	Notifications	0.7748	0.3498	DEL	the	
+Glengarry	Notifications	0.7748	0.3498	DEL	picture	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	SUB	you	that
+Glengarry	Notifications	0.7748	0.3498	SUB	got	leaves
+Glengarry	Notifications	0.7748	0.3498	SUB	leads	mission
+Glengarry	Notifications	0.7748	0.3498	DEL	mitch	
+Glengarry	Notifications	0.7748	0.3498	SUB	given	giving
+Glengarry	Notifications	0.7748	0.3498	SUB	pal	pile
+Glengarry	Notifications	0.7748	0.3498	SUB	cuz	because
+Glengarry	Notifications	0.7748	0.3498	SUB	leads	leaves
+Glengarry	Notifications	0.7748	0.3498	DEL	weak	
+Glengarry	Notifications	0.7748	0.3498	DEL	fuckin	
+Glengarry	Notifications	0.7748	0.3498	DEL	leads	
+Glengarry	Notifications	0.7748	0.3498	DEL	are	
+Glengarry	Notifications	0.7748	0.3498	DEL	weak	
+Glengarry	Notifications	0.7748	0.3498	DEL	youre	
+Glengarry	Notifications	0.7748	0.3498	DEL	weak	
+Glengarry	Notifications	0.7748	0.3498	SUB	whats	such
+Glengarry	Notifications	0.7748	0.3498	SUB	your	a
+Glengarry	Notifications	0.7748	0.3498	SUB	fuck	up
+Glengarry	Notifications	0.7748	0.3498	SUB	cuz	cause
+Glengarry	Notifications	0.7748	0.3498	INS		hun
+Glengarry	Notifications	0.7748	0.3498	SUB	hyundai	day
+Glengarry	Notifications	0.7748	0.3498	SUB	wanting	warranty
+Glengarry	Notifications	0.7748	0.3498	SUB	and	if
+Glengarry	Notifications	0.7748	0.3498	SUB	mans	mens
+Glengarry	Notifications	0.7748	0.3498	SUB	then	by
+Glengarry	Notifications	0.7748	0.3498	DEL	go	
+Glengarry	Notifications	0.7748	0.3498	DEL	home	
+Glengarry	Notifications	0.7748	0.3498	DEL	and	
+Glengarry	Notifications	0.7748	0.3498	DEL	tell	
+Glengarry	Notifications	0.7748	0.3498	DEL	your	
+Glengarry	Notifications	0.7748	0.3498	DEL	wife	
+Glengarry	Notifications	0.7748	0.3498	DEL	your	
+Glengarry	Notifications	0.7748	0.3498	SUB	dotted	dotting
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	SUB	fuckin	fucking
+Glengarry	Notifications	0.7748	0.3498	SUB	faggots	bad
+Glengarry	Notifications	0.7748	0.3498	SUB	be	b
+Glengarry	Notifications	0.7748	0.3498	SUB	cuz	cause
+Glengarry	Notifications	0.7748	0.3498	SUB	fuck	buck
+Glengarry	Notifications	0.7748	0.3498	SUB	or	all
+Glengarry	Notifications	0.7748	0.3498	DEL	an	
+Glengarry	Notifications	0.7748	0.3498	DEL	action	
+Glengarry	Notifications	0.7748	0.3498	SUB	you	youve
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	think	
+Glengarry	Notifications	0.7748	0.3498	DEL	they	
+Glengarry	Notifications	0.7748	0.3498	DEL	a	
+Glengarry	Notifications	0.7748	0.3498	SUB	lest	unless
+Glengarry	Notifications	0.7748	0.3498	DEL	are	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	man	
+Glengarry	Notifications	0.7748	0.3498	DEL	enough	
+Glengarry	Notifications	0.7748	0.3498	DEL	to	
+Glengarry	Notifications	0.7748	0.3498	DEL	take	
+Glengarry	Notifications	0.7748	0.3498	DEL	it	
+Glengarry	Notifications	0.7748	0.3498	SUB	the	a
+Glengarry	Notifications	0.7748	0.3498	SUB	pal	i
+Glengarry	Notifications	0.7748	0.3498	SUB	you	dont
+Glengarry	Notifications	0.7748	0.3498	SUB	boss	hear
+Glengarry	Notifications	0.7748	0.3498	SUB	youre	the
+Glengarry	Notifications	0.7748	0.3498	SUB	youre	you
+Glengarry	Notifications	0.7748	0.3498	SUB	here	and
+Glengarry	Notifications	0.7748	0.3498	SUB	with	to
+Glengarry	Notifications	0.7748	0.3498	SUB	such	problem
+Glengarry	Notifications	0.7748	0.3498	SUB	a	his
+Glengarry	Notifications	0.7748	0.3498	SUB	bunch	wife
+Glengarry	Notifications	0.7748	0.3498	DEL	of	
+Glengarry	Notifications	0.7748	0.3498	DEL	bums	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	see	
+Glengarry	Notifications	0.7748	0.3498	DEL	this	
+Glengarry	Notifications	0.7748	0.3498	DEL	watch	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	see	
+Glengarry	Notifications	0.7748	0.3498	DEL	this	
+Glengarry	Notifications	0.7748	0.3498	DEL	watch	
+Glengarry	Notifications	0.7748	0.3498	DEL	yeah	
+Glengarry	Notifications	0.7748	0.3498	SUB	watch	whats
+Glengarry	Notifications	0.7748	0.3498	SUB	costs	cost
+Glengarry	Notifications	0.7748	0.3498	DEL	make	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	SUB	pal	how
+Glengarry	Notifications	0.7748	0.3498	INS		the
+Glengarry	Notifications	0.7748	0.3498	SUB	who	way
+Glengarry	Notifications	0.7748	0.3498	SUB	am	do
+Glengarry	Notifications	0.7748	0.3498	DEL	and	
+Glengarry	Notifications	0.7748	0.3498	DEL	youre	
+Glengarry	Notifications	0.7748	0.3498	SUB	nice	hi
+Glengarry	Notifications	0.7748	0.3498	SUB	guy	sky
+Glengarry	Notifications	0.7748	0.3498	SUB	a	me
+Glengarry	Notifications	0.7748	0.3498	SUB	shit	his
+Glengarry	Notifications	0.7748	0.3498	DEL	good	
+Glengarry	Notifications	0.7748	0.3498	SUB	fuck	stopped
+Glengarry	Notifications	0.7748	0.3498	SUB	kids	kid
+Glengarry	Notifications	0.7748	0.3498	SUB	want	wanna
+Glengarry	Notifications	0.7748	0.3498	DEL	to	
+Glengarry	Notifications	0.7748	0.3498	SUB	think	take
+Glengarry	Notifications	0.7748	0.3498	DEL	this	
+Glengarry	Notifications	0.7748	0.3498	DEL	is	
+Glengarry	Notifications	0.7748	0.3498	SUB	cock	cough
+Glengarry	Notifications	0.7748	0.3498	SUB	sucker	something
+Glengarry	Notifications	0.7748	0.3498	SUB	sit	sick
+Glengarry	Notifications	0.7748	0.3498	SUB	you	might
+Glengarry	Notifications	0.7748	0.3498	SUB	dont	be
+Glengarry	Notifications	0.7748	0.3498	DEL	like	
+Glengarry	Notifications	0.7748	0.3498	DEL	it	
+Glengarry	Notifications	0.7748	0.3498	DEL	leave	
+Glengarry	Notifications	0.7748	0.3498	SUB	can	yeah
+Glengarry	Notifications	0.7748	0.3498	SUB	you	dont
+Glengarry	Notifications	0.7748	0.3498	DEL	go	
+Glengarry	Notifications	0.7748	0.3498	DEL	and	
+Glengarry	Notifications	0.7748	0.3498	SUB	get	hit
+Glengarry	Notifications	0.7748	0.3498	SUB	you	supply
+Glengarry	Notifications	0.7748	0.3498	DEL	son	
+Glengarry	Notifications	0.7748	0.3498	DEL	of	
+Glengarry	Notifications	0.7748	0.3498	DEL	a	
+Glengarry	Notifications	0.7748	0.3498	DEL	bitches	
+Glengarry	Notifications	0.7748	0.3498	DEL	get	
+Glengarry	Notifications	0.7748	0.3498	DEL	mad	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	know	
+Glengarry	Notifications	0.7748	0.3498	DEL	what	
+Glengarry	Notifications	0.7748	0.3498	DEL	it	
+Glengarry	Notifications	0.7748	0.3498	SUB	to	grass
+Glengarry	Notifications	0.7748	0.3498	DEL	sell	
+Glengarry	Notifications	0.7748	0.3498	DEL	real	
+Glengarry	Notifications	0.7748	0.3498	DEL	estate	
+Glengarry	Notifications	0.7748	0.3498	DEL	it	
+Glengarry	Notifications	0.7748	0.3498	DEL	takes	
+Glengarry	Notifications	0.7748	0.3498	DEL	brass	
+Glengarry	Notifications	0.7748	0.3498	SUB	to	dont
+Glengarry	Notifications	0.7748	0.3498	DEL	sell	
+Glengarry	Notifications	0.7748	0.3498	DEL	real	
+Glengarry	Notifications	0.7748	0.3498	DEL	estate	
+Glengarry	Notifications	0.7748	0.3498	DEL	go	
+Glengarry	Notifications	0.7748	0.3498	DEL	and	
+Glengarry	Notifications	0.7748	0.3498	SUB	likewise	like
+Glengarry	Notifications	0.7748	0.3498	SUB	gents	chan
+Glengarry	Notifications	0.7748	0.3498	DEL	the	
+Glengarry	Notifications	0.7748	0.3498	DEL	moneys	
+Glengarry	Notifications	0.7748	0.3498	DEL	out	
+Glengarry	Notifications	0.7748	0.3498	DEL	there	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	pick	
+Glengarry	Notifications	0.7748	0.3498	DEL	it	
+Glengarry	Notifications	0.7748	0.3498	DEL	up	
+Glengarry	Notifications	0.7748	0.3498	DEL	its	
+Glengarry	Notifications	0.7748	0.3498	DEL	yours	
+Glengarry	Notifications	0.7748	0.3498	DEL	you	
+Glengarry	Notifications	0.7748	0.3498	DEL	dont	
+Glengarry	Notifications	0.7748	0.3498	DEL	i	
+Glengarry	Notifications	0.7748	0.3498	DEL	got	
+Glengarry	Notifications	0.7748	0.3498	DEL	no	
+Glengarry	EventBridge	0.7771	0.334	SUB	because	cause
+Glengarry	EventBridge	0.7771	0.334	DEL	as	
+Glengarry	EventBridge	0.7771	0.334	SUB	prize	price
+Glengarry	EventBridge	0.7771	0.334	SUB	is	cadillac
+Glengarry	EventBridge	0.7771	0.334	SUB	a	over
+Glengarry	EventBridge	0.7771	0.334	SUB	cadillac	rider
+Glengarry	EventBridge	0.7771	0.334	DEL	eldorado	
+Glengarry	EventBridge	0.7771	0.334	SUB	want	wants
+Glengarry	EventBridge	0.7771	0.334	SUB	to	a
+Glengarry	EventBridge	0.7771	0.334	DEL	see	
+Glengarry	EventBridge	0.7771	0.334	SUB	prize	price
+Glengarry	EventBridge	0.7771	0.334	SUB	a	finish
+Glengarry	EventBridge	0.7771	0.334	SUB	set	thing
+Glengarry	EventBridge	0.7771	0.334	DEL	of	
+Glengarry	EventBridge	0.7771	0.334	DEL	steak	
+Glengarry	EventBridge	0.7771	0.334	DEL	knives	
+Glengarry	EventBridge	0.7771	0.334	SUB	prize	price
+Glengarry	EventBridge	0.7771	0.334	SUB	you	your
+Glengarry	EventBridge	0.7771	0.334	SUB	fired	price
+Glengarry	EventBridge	0.7771	0.334	SUB	they	fiction
+Glengarry	EventBridge	0.7771	0.334	DEL	get	
+Glengarry	EventBridge	0.7771	0.334	DEL	the	
+Glengarry	EventBridge	0.7771	0.334	DEL	picture	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	SUB	you	that
+Glengarry	EventBridge	0.7771	0.334	SUB	got	leaves
+Glengarry	EventBridge	0.7771	0.334	SUB	leads	mission
+Glengarry	EventBridge	0.7771	0.334	DEL	mitch	
+Glengarry	EventBridge	0.7771	0.334	SUB	given	giving
+Glengarry	EventBridge	0.7771	0.334	SUB	pal	pile
+Glengarry	EventBridge	0.7771	0.334	SUB	cuz	because
+Glengarry	EventBridge	0.7771	0.334	SUB	leads	leaves
+Glengarry	EventBridge	0.7771	0.334	DEL	weak	
+Glengarry	EventBridge	0.7771	0.334	DEL	fuckin	
+Glengarry	EventBridge	0.7771	0.334	DEL	leads	
+Glengarry	EventBridge	0.7771	0.334	DEL	are	
+Glengarry	EventBridge	0.7771	0.334	DEL	weak	
+Glengarry	EventBridge	0.7771	0.334	DEL	youre	
+Glengarry	EventBridge	0.7771	0.334	DEL	weak	
+Glengarry	EventBridge	0.7771	0.334	SUB	whats	such
+Glengarry	EventBridge	0.7771	0.334	SUB	your	a
+Glengarry	EventBridge	0.7771	0.334	SUB	fuck	up
+Glengarry	EventBridge	0.7771	0.334	SUB	cuz	cause
+Glengarry	EventBridge	0.7771	0.334	INS		hun
+Glengarry	EventBridge	0.7771	0.334	SUB	hyundai	day
+Glengarry	EventBridge	0.7771	0.334	SUB	wanting	warranty
+Glengarry	EventBridge	0.7771	0.334	SUB	and	if
+Glengarry	EventBridge	0.7771	0.334	SUB	mans	mens
+Glengarry	EventBridge	0.7771	0.334	SUB	then	by
+Glengarry	EventBridge	0.7771	0.334	DEL	go	
+Glengarry	EventBridge	0.7771	0.334	DEL	home	
+Glengarry	EventBridge	0.7771	0.334	DEL	and	
+Glengarry	EventBridge	0.7771	0.334	DEL	tell	
+Glengarry	EventBridge	0.7771	0.334	DEL	your	
+Glengarry	EventBridge	0.7771	0.334	DEL	wife	
+Glengarry	EventBridge	0.7771	0.334	DEL	your	
+Glengarry	EventBridge	0.7771	0.334	SUB	dotted	dotting
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	SUB	fuckin	fucking
+Glengarry	EventBridge	0.7771	0.334	SUB	faggots	bad
+Glengarry	EventBridge	0.7771	0.334	SUB	be	b
+Glengarry	EventBridge	0.7771	0.334	SUB	cuz	cause
+Glengarry	EventBridge	0.7771	0.334	SUB	fuck	buck
+Glengarry	EventBridge	0.7771	0.334	SUB	or	all
+Glengarry	EventBridge	0.7771	0.334	DEL	an	
+Glengarry	EventBridge	0.7771	0.334	DEL	action	
+Glengarry	EventBridge	0.7771	0.334	SUB	you	youve
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	DEL	think	
+Glengarry	EventBridge	0.7771	0.334	DEL	they	
+Glengarry	EventBridge	0.7771	0.334	DEL	a	
+Glengarry	EventBridge	0.7771	0.334	SUB	lest	unless
+Glengarry	EventBridge	0.7771	0.334	DEL	are	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	DEL	man	
+Glengarry	EventBridge	0.7771	0.334	DEL	enough	
+Glengarry	EventBridge	0.7771	0.334	DEL	to	
+Glengarry	EventBridge	0.7771	0.334	DEL	take	
+Glengarry	EventBridge	0.7771	0.334	DEL	it	
+Glengarry	EventBridge	0.7771	0.334	SUB	the	a
+Glengarry	EventBridge	0.7771	0.334	SUB	pal	i
+Glengarry	EventBridge	0.7771	0.334	SUB	you	dont
+Glengarry	EventBridge	0.7771	0.334	SUB	boss	hear
+Glengarry	EventBridge	0.7771	0.334	SUB	youre	the
+Glengarry	EventBridge	0.7771	0.334	SUB	youre	you
+Glengarry	EventBridge	0.7771	0.334	SUB	here	and
+Glengarry	EventBridge	0.7771	0.334	SUB	with	to
+Glengarry	EventBridge	0.7771	0.334	SUB	such	problem
+Glengarry	EventBridge	0.7771	0.334	SUB	a	his
+Glengarry	EventBridge	0.7771	0.334	SUB	bunch	wife
+Glengarry	EventBridge	0.7771	0.334	DEL	of	
+Glengarry	EventBridge	0.7771	0.334	DEL	bums	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	DEL	see	
+Glengarry	EventBridge	0.7771	0.334	DEL	this	
+Glengarry	EventBridge	0.7771	0.334	DEL	watch	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	DEL	see	
+Glengarry	EventBridge	0.7771	0.334	DEL	this	
+Glengarry	EventBridge	0.7771	0.334	DEL	watch	
+Glengarry	EventBridge	0.7771	0.334	DEL	yeah	
+Glengarry	EventBridge	0.7771	0.334	SUB	watch	whats
+Glengarry	EventBridge	0.7771	0.334	SUB	costs	cost
+Glengarry	EventBridge	0.7771	0.334	DEL	make	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	SUB	pal	how
+Glengarry	EventBridge	0.7771	0.334	INS		the
+Glengarry	EventBridge	0.7771	0.334	SUB	who	way
+Glengarry	EventBridge	0.7771	0.334	SUB	am	do
+Glengarry	EventBridge	0.7771	0.334	DEL	and	
+Glengarry	EventBridge	0.7771	0.334	DEL	youre	
+Glengarry	EventBridge	0.7771	0.334	SUB	nice	hi
+Glengarry	EventBridge	0.7771	0.334	SUB	guy	sky
+Glengarry	EventBridge	0.7771	0.334	SUB	a	me
+Glengarry	EventBridge	0.7771	0.334	SUB	shit	his
+Glengarry	EventBridge	0.7771	0.334	DEL	good	
+Glengarry	EventBridge	0.7771	0.334	SUB	fuck	stopped
+Glengarry	EventBridge	0.7771	0.334	SUB	kids	kid
+Glengarry	EventBridge	0.7771	0.334	SUB	want	wanna
+Glengarry	EventBridge	0.7771	0.334	DEL	to	
+Glengarry	EventBridge	0.7771	0.334	SUB	think	take
+Glengarry	EventBridge	0.7771	0.334	DEL	this	
+Glengarry	EventBridge	0.7771	0.334	DEL	is	
+Glengarry	EventBridge	0.7771	0.334	SUB	cock	cough
+Glengarry	EventBridge	0.7771	0.334	SUB	sucker	something
+Glengarry	EventBridge	0.7771	0.334	SUB	sit	sick
+Glengarry	EventBridge	0.7771	0.334	SUB	you	might
+Glengarry	EventBridge	0.7771	0.334	SUB	dont	be
+Glengarry	EventBridge	0.7771	0.334	DEL	like	
+Glengarry	EventBridge	0.7771	0.334	DEL	it	
+Glengarry	EventBridge	0.7771	0.334	DEL	leave	
+Glengarry	EventBridge	0.7771	0.334	SUB	can	yeah
+Glengarry	EventBridge	0.7771	0.334	SUB	you	dont
+Glengarry	EventBridge	0.7771	0.334	DEL	go	
+Glengarry	EventBridge	0.7771	0.334	DEL	and	
+Glengarry	EventBridge	0.7771	0.334	SUB	get	hit
+Glengarry	EventBridge	0.7771	0.334	SUB	you	supply
+Glengarry	EventBridge	0.7771	0.334	DEL	son	
+Glengarry	EventBridge	0.7771	0.334	DEL	of	
+Glengarry	EventBridge	0.7771	0.334	DEL	a	
+Glengarry	EventBridge	0.7771	0.334	DEL	bitches	
+Glengarry	EventBridge	0.7771	0.334	DEL	get	
+Glengarry	EventBridge	0.7771	0.334	DEL	mad	
+Glengarry	EventBridge	0.7771	0.334	DEL	you	
+Glengarry	EventBridge	0.7771	0.334	DEL	know	
+Glengarry	EventBridge	0.7771	0.334	DEL	what	
+Glengarry	EventBridge	0.7771	0.334	DEL	it	
+Glengarry	EventBridge	0.7771	0.334	SUB	to	grass
+Glengarry	EventBridge	0.7771	0.334	DEL	sell	
+Glengarry	EventBridge	0.7771	0.334	DEL	real	
+Glengarry	EventBridge	0.7771	0.334	DEL	estate	
+Glengarry	EventBridge	0.7771	0.334	DEL	it	
+Glengarry	EventBridge	0.7771	0.334	DEL	takes	
+Glengarry	EventBridge	0.7771	0.334	DEL	brass	
+Glengarry	EventBridge	0.7771	0.334	SUB	to	dont
+Glengarry	EventBridge	0.7771	0.334	DEL	sell	
+Glengarry	EventBridge	0.7771	0.334	DEL	real	
+Glengarry	EventBridge	0.7771	0.334	DEL	estate	
+Glengarry	EventBridge	0.7771	0.334	DEL	go	
+Glengarry	EventBridge	0.7771	0.334	DEL	and	
+Glengarry	EventBridge	0.7771	0.334	SUB	likewise	like
+Glengarry	EventBridge	0.7771	0.334	SUB	gents	chan
+Glengarry	EventBridge	0.7771	0.334	DEL	the	
+Glengarry	EventBridge	0.7771	0.334	INS		as
+Glengarry	EventBridge	0.7771	0.334	SUB	its	sure
+Glengarry	EventBridge	0.7771	0.334	SUB	yours	if
+Glengarry	EventBridge	0.7771	0.334	DEL	i	
+Glengarry	EventBridge	0.7771	0.334	DEL	got	
+Glengarry	EventBridge	0.7771	0.334	DEL	no	
+Cyrano	Deepgram	0.9076	0.2325	SUB	are	hey
+Cyrano	Deepgram	0.9076	0.2325	SUB	you	youre
+Cyrano	Deepgram	0.9076	0.2325	INS		mouth
+Cyrano	Deepgram	0.9076	0.2325	SUB	nose	say
+Cyrano	Deepgram	0.9076	0.2325	INS		so
+Cyrano	Deepgram	0.9076	0.2325	SUB	does	im
+Cyrano	Deepgram	0.9076	0.2325	SUB	it	gonna
+Cyrano	Deepgram	0.9076	0.2325	SUB	astonish	stamish
+Cyrano	Deepgram	0.9076	0.2325	SUB	well	not
+Cyrano	Deepgram	0.9076	0.2325	SUB	no	i
+Cyrano	Deepgram	0.9076	0.2325	SUB	but	know
+Cyrano	Deepgram	0.9076	0.2325	DEL	no	
+Cyrano	Deepgram	0.9076	0.2325	SUB	and	well
+Cyrano	Deepgram	0.9076	0.2325	SUB	why	find
+Cyrano	Deepgram	0.9076	0.2325	SUB	not	out
+Cyrano	Deepgram	0.9076	0.2325	DEL	but	
+Cyrano	Deepgram	0.9076	0.2325	SUB	does	let
+Cyrano	Deepgram	0.9076	0.2325	SUB	it	his
+Cyrano	Deepgram	0.9076	0.2325	SUB	un	unwholesome
+Cyrano	Deepgram	0.9076	0.2325	SUB	wholesome	i
+Cyrano	Deepgram	0.9076	0.2325	SUB	by	know
+Cyrano	Deepgram	0.9076	0.2325	SUB	no	me
+Cyrano	Deepgram	0.9076	0.2325	SUB	means	or
+Cyrano	Deepgram	0.9076	0.2325	SUB	large	lie
+Cyrano	Deepgram	0.9076	0.2325	INS		intimate
+Cyrano	Deepgram	0.9076	0.2325	SUB	infinitesimal	testable
+Cyrano	Deepgram	0.9076	0.2325	SUB	absurdity	authority
+Cyrano	Deepgram	0.9076	0.2325	INS		my
+Cyrano	Deepgram	0.9076	0.2325	SUB	magnificent	grip
+Cyrano	Deepgram	0.9076	0.2325	SUB	pug	bug
+Cyrano	Deepgram	0.9076	0.2325	SUB	know	now
+Cyrano	Deepgram	0.9076	0.2325	SUB	this	the
+Cyrano	Deepgram	0.9076	0.2325	SUB	nose	snows
+Cyrano	Deepgram	0.9076	0.2325	SUB	indicates	imbecates
+Cyrano	Deepgram	0.9076	0.2325	SUB	genial	genius
+Cyrano	Deepgram	0.9076	0.2325	SUB	courteous	virtuous
+Cyrano	Deepgram	0.9076	0.2325	DEL	viril	
+Cyrano	Deepgram	0.9076	0.2325	SUB	whilst	by
+Cyrano	Deepgram	0.9076	0.2325	SUB	face	taste
+Cyrano	Deepgram	0.9076	0.2325	SUB	blank	bland
+Cyrano	Deepgram	0.9076	0.2325	SUB	as	a
+Cyrano	Deepgram	0.9076	0.2325	SUB	nose	no
+Cyrano	Deepgram	0.9076	0.2325	SUB	in	the
+Cyrano	Deepgram	0.9076	0.2325	SUB	as	of
+Cyrano	Deepgram	0.9076	0.2325	DEL	oh	
+Cyrano	Deepgram	0.9076	0.2325	DEL	presently	
+Cyrano	Deepgram	0.9076	0.2325	SUB	tiresome	tired
+Cyrano	Deepgram	0.9076	0.2325	SUB	if	thank
+Cyrano	Deepgram	0.9076	0.2325	SUB	will	for
+Cyrano	Deepgram	0.9076	0.2325	SUB	allow	allowing
+Cyrano	Deepgram	0.9076	0.2325	SUB	monsieur	mister
+Cyrano	Deepgram	0.9076	0.2325	SUB	your	youre
+Cyrano	Deepgram	0.9076	0.2325	SUB	nose	no
+Cyrano	Deepgram	0.9076	0.2325	SUB	ah	oh
+Cyrano	Deepgram	0.9076	0.2325	SUB	why	finally
+Cyrano	Deepgram	0.9076	0.2325	INS		address
+Cyrano	Deepgram	0.9076	0.2325	SUB	aggressive	it
+Cyrano	Deepgram	0.9076	0.2325	SUB	id	i
+Cyrano	Deepgram	0.9076	0.2325	SUB	amputate	amputated
+Cyrano	Deepgram	0.9076	0.2325	SUB	practical	tactical
+Cyrano	Deepgram	0.9076	0.2325	SUB	is	just
+Cyrano	Deepgram	0.9076	0.2325	SUB	rock	rut
+Cyrano	Deepgram	0.9076	0.2325	SUB	crag	bag
+Cyrano	Deepgram	0.9076	0.2325	DEL	cape	
+Cyrano	Deepgram	0.9076	0.2325	SUB	cape	tape
+Cyrano	Deepgram	0.9076	0.2325	SUB	kindly	finally
+Cyrano	Deepgram	0.9076	0.2325	SUB	ah	ill
+Cyrano	Deepgram	0.9076	0.2325	SUB	do	be
+Cyrano	Deepgram	0.9076	0.2325	SUB	you	with
+Cyrano	Deepgram	0.9076	0.2325	DEL	love	
+Cyrano	Deepgram	0.9076	0.2325	SUB	birds	bird
+Cyrano	Deepgram	0.9076	0.2325	SUB	on	up
+Cyrano	Deepgram	0.9076	0.2325	INS		a
+Cyrano	Deepgram	0.9076	0.2325	DEL	eh	
+Cyrano	Deepgram	0.9076	0.2325	SUB	but	on
+Cyrano	Deepgram	0.9076	0.2325	SUB	perfumer	consumer
+Cyrano	Deepgram	0.9076	0.2325	SUB	prominence	the
+Cyrano	Deepgram	0.9076	0.2325	SUB	literary	misery
+Cyrano	Deepgram	0.9076	0.2325	SUB	the	for
+Cyrano	Deepgram	0.9076	0.2325	SUB	nose	those
+Cyrano	Deepgram	0.9076	0.2325	SUB	these	please
+Cyrano	Deepgram	0.9076	0.2325	SUB	some	sung
+Cyrano	Deepgram	0.9076	0.2325	SUB	or	out
+Cyrano	Deepgram	0.9076	0.2325	SUB	a	of
+Cyrano	Deepgram	0.9076	0.2325	SUB	wit	whips
+Cyrano	Deepgram	0.9076	0.2325	SUB	wit	which
+Cyrano	Deepgram	0.9076	0.2325	SUB	of	a
+Cyrano	Deepgram	0.9076	0.2325	SUB	letters	letter
+Cyrano	Deepgram	0.9076	0.2325	SUB	ass	dont
+Cyrano	Deepgram	0.9076	0.2325	DEL	dolt	
+Cyrano	Deepgram	0.9076	0.2325	DEL	bumpkin	
+Cyrano	Deepgram	0.9076	0.2325	DEL	fool	
+Cyrano	Deepgram	0.9076	0.2325	DEL	how	
+Cyrano	Deepgram	0.9076	0.2325	DEL	do	
+Cyrano	Deepgram	0.9076	0.2325	DEL	you	
+Cyrano	Deepgram	0.9076	0.2325	DEL	do	
+Cyrano	Deepgram	0.9076	0.2325	DEL	and	
+Cyrano	Deepgram	0.9076	0.2325	DEL	i	
+Cyrano	Deepgram	0.9076	0.2325	DEL	cyrano	
+Cyrano	Deepgram	0.9076	0.2325	DEL	savinien	
+Cyrano	Deepgram	0.9076	0.2325	DEL	hercule	
+Cyrano	Deepgram	0.9076	0.2325	DEL	de	
+Cyrano	Deepgram	0.9076	0.2325	DEL	bergerac	
+Cyrano	Notifications	0.785	0.2758	SUB	nose	mouth
+Cyrano	Notifications	0.785	0.2758	SUB	not	just
+Cyrano	Notifications	0.785	0.2758	SUB	well	know
+Cyrano	Notifications	0.785	0.2758	DEL	no	
+Cyrano	Notifications	0.785	0.2758	DEL	but	
+Cyrano	Notifications	0.785	0.2758	DEL	no	
+Cyrano	Notifications	0.785	0.2758	SUB	and	find
+Cyrano	Notifications	0.785	0.2758	SUB	why	out
+Cyrano	Notifications	0.785	0.2758	SUB	not	with
+Cyrano	Notifications	0.785	0.2758	DEL	if	
+Cyrano	Notifications	0.785	0.2758	SUB	i	idea
+Cyrano	Notifications	0.785	0.2758	SUB	does	this
+Cyrano	Notifications	0.785	0.2758	DEL	it	
+Cyrano	Notifications	0.785	0.2758	SUB	un	unless
+Cyrano	Notifications	0.785	0.2758	SUB	wholesome	i
+Cyrano	Notifications	0.785	0.2758	SUB	by	know
+Cyrano	Notifications	0.785	0.2758	SUB	no	possible
+Cyrano	Notifications	0.785	0.2758	DEL	means	
+Cyrano	Notifications	0.785	0.2758	DEL	possibly	
+Cyrano	Notifications	0.785	0.2758	SUB	a	to
+Cyrano	Notifications	0.785	0.2758	SUB	trifle	trip
+Cyrano	Notifications	0.785	0.2758	DEL	large	
+Cyrano	Notifications	0.785	0.2758	DEL	tiny	
+Cyrano	Notifications	0.785	0.2758	DEL	infinitesimal	
+Cyrano	Notifications	0.785	0.2758	SUB	accuse	accused
+Cyrano	Notifications	0.785	0.2758	SUB	magnificent	magic
+Cyrano	Notifications	0.785	0.2758	SUB	for	but
+Cyrano	Notifications	0.785	0.2758	SUB	genial	g
+Cyrano	Notifications	0.785	0.2758	SUB	courteous	o
+Cyrano	Notifications	0.785	0.2758	SUB	viril	correct
+Cyrano	Notifications	0.785	0.2758	SUB	courageous	while
+Cyrano	Notifications	0.785	0.2758	DEL	whilst	
+Cyrano	Notifications	0.785	0.2758	SUB	as	a
+Cyrano	Notifications	0.785	0.2758	SUB	limp	limpstein
+Cyrano	Notifications	0.785	0.2758	DEL	spine	
+Cyrano	Notifications	0.785	0.2758	SUB	foot	footage
+Cyrano	Notifications	0.785	0.2758	DEL	oh	
+Cyrano	Notifications	0.785	0.2758	DEL	presently	
+Cyrano	Notifications	0.785	0.2758	DEL	this	
+Cyrano	Notifications	0.785	0.2758	SUB	tiresome	tired
+Cyrano	Notifications	0.785	0.2758	INS		okay
+Cyrano	Notifications	0.785	0.2758	SUB	will	well
+Cyrano	Notifications	0.785	0.2758	SUB	you	youll
+Cyrano	Notifications	0.785	0.2758	DEL	will	
+Cyrano	Notifications	0.785	0.2758	DEL	your	
+Cyrano	Notifications	0.785	0.2758	DEL	your	
+Cyrano	Notifications	0.785	0.2758	DEL	nose	
+Cyrano	Notifications	0.785	0.2758	SUB	rather	brother
+Cyrano	Notifications	0.785	0.2758	DEL	ah	
+Cyrano	Notifications	0.785	0.2758	SUB	young	youre
+Cyrano	Notifications	0.785	0.2758	SUB	sir	so
+Cyrano	Notifications	0.785	0.2758	SUB	why	funny
+Cyrano	Notifications	0.785	0.2758	SUB	thus	that
+Cyrano	Notifications	0.785	0.2758	SUB	aggressive	i
+Cyrano	Notifications	0.785	0.2758	SUB	sir	sort
+Cyrano	Notifications	0.785	0.2758	SUB	if	of
+Cyrano	Notifications	0.785	0.2758	SUB	that	got
+Cyrano	Notifications	0.785	0.2758	SUB	were	with
+Cyrano	Notifications	0.785	0.2758	SUB	id	i
+Cyrano	Notifications	0.785	0.2758	SUB	it	an
+Cyrano	Notifications	0.785	0.2758	SUB	amputate	amputated
+Cyrano	Notifications	0.785	0.2758	SUB	is	theres
+Cyrano	Notifications	0.785	0.2758	SUB	rock	rut
+Cyrano	Notifications	0.785	0.2758	SUB	crag	grag
+Cyrano	Notifications	0.785	0.2758	SUB	cape	cake
+Cyrano	Notifications	0.785	0.2758	SUB	a	okay
+Cyrano	Notifications	0.785	0.2758	DEL	cape	
+Cyrano	Notifications	0.785	0.2758	SUB	rather	robert
+Cyrano	Notifications	0.785	0.2758	SUB	inquisitive	inquiry
+Cyrano	Notifications	0.785	0.2758	SUB	ah	argue
+Cyrano	Notifications	0.785	0.2758	SUB	do	of
+Cyrano	Notifications	0.785	0.2758	DEL	you	
+Cyrano	Notifications	0.785	0.2758	DEL	love	
+Cyrano	Notifications	0.785	0.2758	SUB	birds	bird
+Cyrano	Notifications	0.785	0.2758	SUB	much	like
+Cyrano	Notifications	0.785	0.2758	SUB	you	to
+Cyrano	Notifications	0.785	0.2758	SUB	top	tough
+Cyrano	Notifications	0.785	0.2758	SUB	heavy	hairy
+Cyrano	Notifications	0.785	0.2758	SUB	darken	dark
+Cyrano	Notifications	0.785	0.2758	DEL	dramatic	
+Cyrano	Notifications	0.785	0.2758	DEL	when	
+Cyrano	Notifications	0.785	0.2758	DEL	it	
+Cyrano	Notifications	0.785	0.2758	DEL	eh	
+Cyrano	Notifications	0.785	0.2758	SUB	but	on
+Cyrano	Notifications	0.785	0.2758	SUB	perfumer	consumer
+Cyrano	Notifications	0.785	0.2758	SUB	sir	its
+Cyrano	Notifications	0.785	0.2758	SUB	in	a
+Cyrano	Notifications	0.785	0.2758	SUB	you	new
+Cyrano	Notifications	0.785	0.2758	SUB	a	amount
+Cyrano	Notifications	0.785	0.2758	DEL	man	
+Cyrano	Notifications	0.785	0.2758	DEL	prominence	
+Cyrano	Notifications	0.785	0.2758	SUB	the	fellow
+Cyrano	Notifications	0.785	0.2758	DEL	nose	
+Cyrano	Notifications	0.785	0.2758	SUB	sir	sod
+Cyrano	Notifications	0.785	0.2758	SUB	had	have
+Cyrano	Notifications	0.785	0.2758	SUB	tinge	tin
+Cyrano	Notifications	0.785	0.2758	SUB	of	jump
+Cyrano	Notifications	0.785	0.2758	SUB	or	out
+Cyrano	Notifications	0.785	0.2758	SUB	a	of
+Cyrano	Notifications	0.785	0.2758	SUB	wit	width
+Cyrano	Notifications	0.785	0.2758	SUB	color	colour
+Cyrano	Notifications	0.785	0.2758	SUB	discourse	discode
+Cyrano	Notifications	0.785	0.2758	SUB	wit	which
+Cyrano	Notifications	0.785	0.2758	DEL	atom	
+Cyrano	Notifications	0.785	0.2758	SUB	of	a
+Cyrano	Notifications	0.785	0.2758	SUB	letters	level
+Cyrano	Notifications	0.785	0.2758	DEL	s	
+Cyrano	Notifications	0.785	0.2758	DEL	s	
+Cyrano	Notifications	0.785	0.2758	DEL	ass	
+Cyrano	Notifications	0.785	0.2758	DEL	dolt	
+Cyrano	Notifications	0.785	0.2758	DEL	bumpkin	
+Cyrano	Notifications	0.785	0.2758	DEL	fool	
+Cyrano	Notifications	0.785	0.2758	DEL	how	
+Cyrano	Notifications	0.785	0.2758	DEL	do	
+Cyrano	Notifications	0.785	0.2758	DEL	you	
+Cyrano	Notifications	0.785	0.2758	DEL	do	
+Cyrano	Notifications	0.785	0.2758	DEL	and	
+Cyrano	Notifications	0.785	0.2758	DEL	i	
+Cyrano	Notifications	0.785	0.2758	DEL	cyrano	
+Cyrano	Notifications	0.785	0.2758	DEL	savinien	
+Cyrano	Notifications	0.785	0.2758	DEL	hercule	
+Cyrano	Notifications	0.785	0.2758	DEL	de	
+Cyrano	Notifications	0.785	0.2758	DEL	bergerac	
+Cyrano	EventBridge	0.785	0.2758	SUB	nose	mouth
+Cyrano	EventBridge	0.785	0.2758	SUB	not	just
+Cyrano	EventBridge	0.785	0.2758	SUB	well	know
+Cyrano	EventBridge	0.785	0.2758	DEL	no	
+Cyrano	EventBridge	0.785	0.2758	DEL	but	
+Cyrano	EventBridge	0.785	0.2758	DEL	no	
+Cyrano	EventBridge	0.785	0.2758	SUB	and	find
+Cyrano	EventBridge	0.785	0.2758	SUB	why	out
+Cyrano	EventBridge	0.785	0.2758	SUB	not	with
+Cyrano	EventBridge	0.785	0.2758	DEL	if	
+Cyrano	EventBridge	0.785	0.2758	SUB	i	idea
+Cyrano	EventBridge	0.785	0.2758	SUB	does	this
+Cyrano	EventBridge	0.785	0.2758	DEL	it	
+Cyrano	EventBridge	0.785	0.2758	SUB	un	unless
+Cyrano	EventBridge	0.785	0.2758	SUB	wholesome	i
+Cyrano	EventBridge	0.785	0.2758	SUB	by	know
+Cyrano	EventBridge	0.785	0.2758	SUB	no	possible
+Cyrano	EventBridge	0.785	0.2758	DEL	means	
+Cyrano	EventBridge	0.785	0.2758	DEL	possibly	
+Cyrano	EventBridge	0.785	0.2758	SUB	a	to
+Cyrano	EventBridge	0.785	0.2758	SUB	trifle	trip
+Cyrano	EventBridge	0.785	0.2758	DEL	large	
+Cyrano	EventBridge	0.785	0.2758	DEL	tiny	
+Cyrano	EventBridge	0.785	0.2758	DEL	infinitesimal	
+Cyrano	EventBridge	0.785	0.2758	SUB	accuse	accused
+Cyrano	EventBridge	0.785	0.2758	SUB	magnificent	magic
+Cyrano	EventBridge	0.785	0.2758	SUB	for	but
+Cyrano	EventBridge	0.785	0.2758	SUB	genial	g
+Cyrano	EventBridge	0.785	0.2758	SUB	courteous	o
+Cyrano	EventBridge	0.785	0.2758	SUB	viril	correct
+Cyrano	EventBridge	0.785	0.2758	SUB	courageous	while
+Cyrano	EventBridge	0.785	0.2758	DEL	whilst	
+Cyrano	EventBridge	0.785	0.2758	SUB	as	a
+Cyrano	EventBridge	0.785	0.2758	SUB	limp	limpstein
+Cyrano	EventBridge	0.785	0.2758	DEL	spine	
+Cyrano	EventBridge	0.785	0.2758	SUB	foot	footage
+Cyrano	EventBridge	0.785	0.2758	DEL	oh	
+Cyrano	EventBridge	0.785	0.2758	DEL	presently	
+Cyrano	EventBridge	0.785	0.2758	DEL	this	
+Cyrano	EventBridge	0.785	0.2758	SUB	tiresome	tired
+Cyrano	EventBridge	0.785	0.2758	INS		okay
+Cyrano	EventBridge	0.785	0.2758	SUB	will	well
+Cyrano	EventBridge	0.785	0.2758	SUB	you	youll
+Cyrano	EventBridge	0.785	0.2758	DEL	will	
+Cyrano	EventBridge	0.785	0.2758	DEL	your	
+Cyrano	EventBridge	0.785	0.2758	DEL	your	
+Cyrano	EventBridge	0.785	0.2758	DEL	nose	
+Cyrano	EventBridge	0.785	0.2758	SUB	rather	brother
+Cyrano	EventBridge	0.785	0.2758	DEL	ah	
+Cyrano	EventBridge	0.785	0.2758	SUB	young	youre
+Cyrano	EventBridge	0.785	0.2758	SUB	sir	so
+Cyrano	EventBridge	0.785	0.2758	SUB	why	funny
+Cyrano	EventBridge	0.785	0.2758	SUB	thus	that
+Cyrano	EventBridge	0.785	0.2758	SUB	aggressive	i
+Cyrano	EventBridge	0.785	0.2758	SUB	sir	sort
+Cyrano	EventBridge	0.785	0.2758	SUB	if	of
+Cyrano	EventBridge	0.785	0.2758	SUB	that	got
+Cyrano	EventBridge	0.785	0.2758	SUB	were	with
+Cyrano	EventBridge	0.785	0.2758	SUB	id	i
+Cyrano	EventBridge	0.785	0.2758	SUB	it	an
+Cyrano	EventBridge	0.785	0.2758	SUB	amputate	amputated
+Cyrano	EventBridge	0.785	0.2758	SUB	is	theres
+Cyrano	EventBridge	0.785	0.2758	SUB	rock	rut
+Cyrano	EventBridge	0.785	0.2758	SUB	crag	grag
+Cyrano	EventBridge	0.785	0.2758	SUB	cape	cake
+Cyrano	EventBridge	0.785	0.2758	SUB	a	okay
+Cyrano	EventBridge	0.785	0.2758	DEL	cape	
+Cyrano	EventBridge	0.785	0.2758	SUB	rather	robert
+Cyrano	EventBridge	0.785	0.2758	SUB	inquisitive	inquiry
+Cyrano	EventBridge	0.785	0.2758	SUB	ah	argue
+Cyrano	EventBridge	0.785	0.2758	SUB	do	of
+Cyrano	EventBridge	0.785	0.2758	DEL	you	
+Cyrano	EventBridge	0.785	0.2758	DEL	love	
+Cyrano	EventBridge	0.785	0.2758	SUB	birds	bird
+Cyrano	EventBridge	0.785	0.2758	SUB	much	like
+Cyrano	EventBridge	0.785	0.2758	SUB	you	to
+Cyrano	EventBridge	0.785	0.2758	SUB	top	tough
+Cyrano	EventBridge	0.785	0.2758	SUB	heavy	hairy
+Cyrano	EventBridge	0.785	0.2758	SUB	darken	dark
+Cyrano	EventBridge	0.785	0.2758	DEL	dramatic	
+Cyrano	EventBridge	0.785	0.2758	DEL	when	
+Cyrano	EventBridge	0.785	0.2758	DEL	it	
+Cyrano	EventBridge	0.785	0.2758	DEL	eh	
+Cyrano	EventBridge	0.785	0.2758	SUB	but	on
+Cyrano	EventBridge	0.785	0.2758	SUB	perfumer	consumer
+Cyrano	EventBridge	0.785	0.2758	SUB	sir	its
+Cyrano	EventBridge	0.785	0.2758	SUB	in	a
+Cyrano	EventBridge	0.785	0.2758	SUB	you	new
+Cyrano	EventBridge	0.785	0.2758	SUB	a	amount
+Cyrano	EventBridge	0.785	0.2758	DEL	man	
+Cyrano	EventBridge	0.785	0.2758	DEL	prominence	
+Cyrano	EventBridge	0.785	0.2758	SUB	the	fellow
+Cyrano	EventBridge	0.785	0.2758	DEL	nose	
+Cyrano	EventBridge	0.785	0.2758	SUB	sir	sod
+Cyrano	EventBridge	0.785	0.2758	SUB	had	have
+Cyrano	EventBridge	0.785	0.2758	SUB	tinge	tin
+Cyrano	EventBridge	0.785	0.2758	SUB	of	jump
+Cyrano	EventBridge	0.785	0.2758	SUB	or	out
+Cyrano	EventBridge	0.785	0.2758	SUB	a	of
+Cyrano	EventBridge	0.785	0.2758	SUB	wit	width
+Cyrano	EventBridge	0.785	0.2758	SUB	color	colour
+Cyrano	EventBridge	0.785	0.2758	SUB	discourse	discode
+Cyrano	EventBridge	0.785	0.2758	SUB	wit	which
+Cyrano	EventBridge	0.785	0.2758	DEL	atom	
+Cyrano	EventBridge	0.785	0.2758	SUB	of	a
+Cyrano	EventBridge	0.785	0.2758	SUB	letters	level
+Cyrano	EventBridge	0.785	0.2758	DEL	s	
+Cyrano	EventBridge	0.785	0.2758	DEL	s	
+Cyrano	EventBridge	0.785	0.2758	DEL	ass	
+Cyrano	EventBridge	0.785	0.2758	DEL	dolt	
+Cyrano	EventBridge	0.785	0.2758	DEL	bumpkin	
+Cyrano	EventBridge	0.785	0.2758	DEL	fool	
+Cyrano	EventBridge	0.785	0.2758	DEL	how	
+Cyrano	EventBridge	0.785	0.2758	DEL	do	
+Cyrano	EventBridge	0.785	0.2758	DEL	you	
+Cyrano	EventBridge	0.785	0.2758	DEL	do	
+Cyrano	EventBridge	0.785	0.2758	DEL	and	
+Cyrano	EventBridge	0.785	0.2758	DEL	i	
+Cyrano	EventBridge	0.785	0.2758	DEL	cyrano	
+Cyrano	EventBridge	0.785	0.2758	DEL	savinien	
+Cyrano	EventBridge	0.785	0.2758	DEL	hercule	
+Cyrano	EventBridge	0.785	0.2758	DEL	de	
+Cyrano	EventBridge	0.785	0.2758	DEL	bergerac	
+Maleficent	Deepgram	0.9312	0.2426	SUB	well	call
+Maleficent	Deepgram	0.9312	0.2426	SUB	quite	by
+Maleficent	Deepgram	0.9312	0.2426	SUB	a	the
+Maleficent	Deepgram	0.9312	0.2426	SUB	assembly	assemblage
+Maleficent	Deepgram	0.9312	0.2426	SUB	king	kingston
+Maleficent	Deepgram	0.9312	0.2426	DEL	stefan	
+Maleficent	Deepgram	0.9312	0.2426	DEL	oh	
+Maleficent	Deepgram	0.9312	0.2426	SUB	rabble	rattle
+Maleficent	Deepgram	0.9312	0.2426	SUB	thought	cant
+Maleficent	Deepgram	0.9312	0.2426	SUB	distressed	distract
+Maleficent	Deepgram	0.9312	0.2426	SUB	at	without
+Maleficent	Deepgram	0.9312	0.2426	DEL	not	
+Maleficent	Deepgram	0.9312	0.2426	SUB	wanted	want
+Maleficent	Deepgram	0.9312	0.2426	INS		nearly
+Maleficent	Deepgram	0.9312	0.2426	SUB	in	at
+Maleficent	Deepgram	0.9312	0.2426	INS		ashamed
+Maleficent	Deepgram	0.9312	0.2426	SUB	offended	of
+Maleficent	Deepgram	0.9312	0.2426	INS		extra
+Maleficent	Deepgram	0.9312	0.2426	SUB	excellency	fee
+Maleficent	Deepgram	0.9312	0.2426	INS		been
+Maleficent	Deepgram	0.9312	0.2426	SUB	beloved	loved
+Maleficent	Deepgram	0.9312	0.2426	SUB	who	good
+Maleficent	Deepgram	0.9312	0.2426	SUB	her	the
+Maleficent	Deepgram	0.9312	0.2426	SUB	but	father
+Maleficent	Deepgram	0.9312	0.2426	SUB	before	son
+Maleficent	Deepgram	0.9312	0.2426	SUB	the	said
+Maleficent	Deepgram	0.9312	0.2426	SUB	sun	from
+Maleficent	Deepgram	0.9312	0.2426	DEL	sets	
+Maleficent	Deepgram	0.9312	0.2426	DEL	on	
+Maleficent	Deepgram	0.9312	0.2426	SUB	a	of
+Maleficent	Deepgram	0.9312	0.2426	SUB	die	dying
+Maleficent	Deepgram	0.9312	0.2426	SUB	creature	victor
+Maleficent	Deepgram	0.9312	0.2426	SUB	fools	fool
+Maleficent	Notifications	0.7216	0.2963	SUB	quite	yes
+Maleficent	Notifications	0.7216	0.2963	SUB	a	either
+Maleficent	Notifications	0.7216	0.2963	INS		kingston
+Maleficent	Notifications	0.7216	0.2963	SUB	king	ry
+Maleficent	Notifications	0.7216	0.2963	SUB	stefan	l
+Maleficent	Notifications	0.7216	0.2963	SUB	royalty	t
+Maleficent	Notifications	0.7216	0.2963	SUB	oh	okay
+Maleficent	Notifications	0.7216	0.2963	DEL	oh	
+Maleficent	Notifications	0.7216	0.2963	DEL	great	
+Maleficent	Notifications	0.7216	0.2963	INS		the
+Maleficent	Notifications	0.7216	0.2963	SUB	distressed	strength
+Maleficent	Notifications	0.7216	0.2963	SUB	at	of
+Maleficent	Notifications	0.7216	0.2963	SUB	wanted	wanting
+Maleficent	Notifications	0.7216	0.2963	DEL	what	
+Maleficent	Notifications	0.7216	0.2963	INS		nearly
+Maleficent	Notifications	0.7216	0.2963	SUB	oversight	overside
+Maleficent	Notifications	0.7216	0.2963	SUB	in	on
+Maleficent	Notifications	0.7216	0.2963	DEL	your	
+Maleficent	Notifications	0.7216	0.2963	DEL	majesty	
+Maleficent	Notifications	0.7216	0.2963	SUB	bear	there
+Maleficent	Notifications	0.7216	0.2963	SUB	you	your
+Maleficent	Notifications	0.7216	0.2963	DEL	the	
+Maleficent	Notifications	0.7216	0.2963	SUB	beloved	below
+Maleficent	Notifications	0.7216	0.2963	SUB	who	good
+Maleficent	Notifications	0.7216	0.2963	SUB	her	the
+Maleficent	Notifications	0.7216	0.2963	SUB	but	father
+Maleficent	Notifications	0.7216	0.2963	SUB	before	son
+Maleficent	Notifications	0.7216	0.2963	SUB	the	said
+Maleficent	Notifications	0.7216	0.2963	DEL	sun	
+Maleficent	Notifications	0.7216	0.2963	DEL	sets	
+Maleficent	Notifications	0.7216	0.2963	SUB	shall	said
+Maleficent	Notifications	0.7216	0.2963	DEL	spindle	
+Maleficent	Notifications	0.7216	0.2963	DEL	a	
+Maleficent	Notifications	0.7216	0.2963	SUB	die	died
+Maleficent	Notifications	0.7216	0.2963	SUB	oh	low
+Maleficent	Notifications	0.7216	0.2963	DEL	no	
+Maleficent	Notifications	0.7216	0.2963	SUB	that	back
+Maleficent	Notifications	0.7216	0.2963	SUB	creature	rigger
+Maleficent	Notifications	0.7216	0.2963	SUB	you	to
+Maleficent	Notifications	0.7216	0.2963	DEL	fools	
+Maleficent	EventBridge	0.7216	0.2963	SUB	quite	yes
+Maleficent	EventBridge	0.7216	0.2963	SUB	a	either
+Maleficent	EventBridge	0.7216	0.2963	INS		kingston
+Maleficent	EventBridge	0.7216	0.2963	SUB	king	ry
+Maleficent	EventBridge	0.7216	0.2963	SUB	stefan	l
+Maleficent	EventBridge	0.7216	0.2963	SUB	royalty	t
+Maleficent	EventBridge	0.7216	0.2963	SUB	oh	okay
+Maleficent	EventBridge	0.7216	0.2963	DEL	oh	
+Maleficent	EventBridge	0.7216	0.2963	DEL	great	
+Maleficent	EventBridge	0.7216	0.2963	INS		the
+Maleficent	EventBridge	0.7216	0.2963	SUB	distressed	strength
+Maleficent	EventBridge	0.7216	0.2963	SUB	at	of
+Maleficent	EventBridge	0.7216	0.2963	SUB	wanted	wanting
+Maleficent	EventBridge	0.7216	0.2963	DEL	what	
+Maleficent	EventBridge	0.7216	0.2963	INS		nearly
+Maleficent	EventBridge	0.7216	0.2963	SUB	oversight	overside
+Maleficent	EventBridge	0.7216	0.2963	SUB	in	on
+Maleficent	EventBridge	0.7216	0.2963	DEL	your	
+Maleficent	EventBridge	0.7216	0.2963	DEL	majesty	
+Maleficent	EventBridge	0.7216	0.2963	SUB	bear	there
+Maleficent	EventBridge	0.7216	0.2963	SUB	you	your
+Maleficent	EventBridge	0.7216	0.2963	DEL	the	
+Maleficent	EventBridge	0.7216	0.2963	SUB	beloved	below
+Maleficent	EventBridge	0.7216	0.2963	SUB	who	good
+Maleficent	EventBridge	0.7216	0.2963	SUB	her	the
+Maleficent	EventBridge	0.7216	0.2963	SUB	but	father
+Maleficent	EventBridge	0.7216	0.2963	SUB	before	son
+Maleficent	EventBridge	0.7216	0.2963	SUB	the	said
+Maleficent	EventBridge	0.7216	0.2963	DEL	sun	
+Maleficent	EventBridge	0.7216	0.2963	DEL	sets	
+Maleficent	EventBridge	0.7216	0.2963	SUB	shall	said
+Maleficent	EventBridge	0.7216	0.2963	DEL	spindle	
+Maleficent	EventBridge	0.7216	0.2963	DEL	a	
+Maleficent	EventBridge	0.7216	0.2963	SUB	die	died
+Maleficent	EventBridge	0.7216	0.2963	SUB	oh	low
+Maleficent	EventBridge	0.7216	0.2963	DEL	no	
+Maleficent	EventBridge	0.7216	0.2963	SUB	that	back
+Maleficent	EventBridge	0.7216	0.2963	SUB	creature	rigger
+Maleficent	EventBridge	0.7216	0.2963	SUB	you	to
+Maleficent	EventBridge	0.7216	0.2963	DEL	fools	
